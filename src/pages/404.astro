@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+---
+<Base titre="Page introuvable">
+  <TitrePage surtitre="Erreur 404" titre="Cette page n'existe" accent="pas, ou plus" sous="Le lien est peut-être erroné, ou l'article a changé d'adresse.">
+    <div class="actions">
+      <a class="bouton" href="/">Retour à l'accueil</a>
+      <a class="bouton blanc" href="/recherche">Rechercher un article</a>
+    </div>
+  </TitrePage>
+</Base>
+
+<style>
+  .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+</style>

@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+import { getRubrique } from '../data/rubriques';
+import { articlesPublies, formatDateCourte, refDecision } from '../lib/utils';
+import { getCollection } from 'astro:content';
+
+// Petit index embarqué : suffisant pour quelques centaines d'articles
+const index = (await articlesPublies()).map((a) => ({
+  slug: a.id,
+  titre: a.data.titre,
+  chapo: a.data.chapo,
+  rubrique: getRubrique(a.data.rubrique).nom,
+  tags: a.data.etiquettes.join(' '),
+  date: formatDateCourte(a.data.date),
+  url: `articles/${a.id}`,
+}));
+// Décisions et définitions sont aussi cherchables
+for (const d of await getCollection('decisions')) {
+  index.push({ slug: d.id, titre: `${d.data.nom} (${d.data.date.getFullYear()})`, chapo: d.data.apport, rubrique: 'Jurisprudence', tags: `${refDecision(d)} ${d.data.themes.join(' ')}`, date: formatDateCourte(d.data.date), url: `jurisprudence/${d.id}` });
+}
+for (const g of await getCollection('glossaire')) {
+  index.push({ slug: g.id, titre: g.data.terme, chapo: g.data.definition, rubrique: 'Glossaire', tags: g.data.voir ?? '', date: '', url: `glossaire#${g.id}` });
+}
+---
+<Base titre="Recherche" description="Rechercher une analyse dans Lex Ludica.">
+  <TitrePage titre="Rechercher un" accent="article">
+    <form class="recherche" role="search" onsubmit="return false">
+      <label for="q" class="sr">Mots-clés</label>
+      <input id="q" type="search" placeholder="Émulation, Cryo, épuisement des droits…" autocomplete="off" />
+    </form>
+  </TitrePage>
+  <section class="bande">
+    <div class="cadre bloc">
+      <p class="compte" id="compte" aria-live="polite"></p>
+      <ul class="resultats" id="resultats"></ul>
+    </div>
+  </section>
+  <script type="application/json" id="index-recherche" set:html={JSON.stringify(index)} />
+</Base>
+
+<script>
+  type Entree = { slug: string; titre: string; chapo: string; rubrique: string; tags: string; date: string; url: string };
+  const index: Entree[] = JSON.parse(document.getElementById('index-recherche')!.textContent || '[]');
+  const champ = document.getElementById('q') as HTMLInputElement;
+  const liste = document.getElementById('resultats')!;
+  const compte = document.getElementById('compte')!;
+  const ext = location.pathname.endsWith('.html') ? '.html' : '';
+  const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const echap = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+  function afficher() {
+    const mots = norm(champ.value).split(/\s+/).filter(Boolean);
+    const res = index.filter((e) => {
+      const texte = norm(`${e.titre} ${e.chapo} ${e.rubrique} ${e.tags}`);
+      return mots.every((m) => texte.includes(m));
+    });
+    compte.textContent = mots.length
+      ? `${res.length} résultat${res.length > 1 ? 's' : ''} pour « ${champ.value.trim()} »`
+      : `${index.length} contenus : articles, décisions et définitions. Tapez un mot-clé pour filtrer.`;
+    liste.innerHTML = res.length
+      ? res.map((e) => `<li><a href="${e.url.includes('#') ? e.url.replace('#', ext + '#') : e.url + ext}"><span class="r-meta"><span class="tag sombre">${echap(e.rubrique)}</span>${e.date ? `<span class="date">${e.date}</span>` : ''}</span><span class="r-titre">${echap(e.titre)}</span><span class="r-chapo">${echap(e.chapo)}</span></a></li>`).join('')
+      : '<li class="aucun">Aucun article ne correspond. Essayez un mot plus court ou un autre thème.</li>';
+  }
+  champ.addEventListener('input', afficher);
+  afficher();
+</script>
+
+<style>
+  .recherche { margin-top: 1.4rem; max-width: 34rem; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  input { width: 100%; font: inherit; font-size: 1rem; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 3px; background: #ffffff; color: var(--ink); }
+  input:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+  .bloc { padding-block: 2rem 3rem; }
+  .compte { margin: 0 0 1.2rem; font-size: 0.85rem; color: var(--muted); }
+  .resultats { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; max-width: 46rem; }
+  .resultats :global(a) { display: grid; gap: 0.35rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); }
+  .resultats :global(a:hover) { border-color: var(--blue); }
+  .resultats :global(.r-meta) { display: flex; gap: 0.6rem; align-items: center; }
+  .resultats :global(.r-titre) { font-weight: 500; }
+  .resultats :global(.r-chapo) { font-size: 0.85rem; color: var(--muted); }
+  .resultats :global(.aucun) { color: var(--ink-soft); }
+</style>

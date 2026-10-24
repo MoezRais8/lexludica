@@ -1,0 +1,105 @@
+---
+import Logo from './Logo.astro';
+import FormNewsletter from './FormNewsletter.astro';
+import { tagsPied, reseaux } from '../data/rubriques';
+import { slugTag } from '../lib/utils';
+import { site } from '../data/site';
+
+const icones: Record<string, string> = {
+  LinkedIn: '<rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.8"/><path d="M10 9h3v1.6c.6-1 1.8-1.9 3.6-1.9 2.6 0 3.4 1.7 3.4 4.3V20h-3v-6.2c0-1.4-.4-2.4-1.8-2.4-1.5 0-2.2 1-2.2 2.5V20h-3z"/>',
+  Instagram: '<rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.8" cy="7.2" r="1.2"/>',
+  TikTok: '<path d="M14 4h3c.3 2 1.6 3.4 3.5 3.6v3c-1.4 0-2.5-.4-3.5-1v5.9A5.5 5.5 0 1 1 11.5 10v3.1a2.5 2.5 0 1 0 2.5 2.4z"/>',
+  X: '<path d="M5 4h4.2l3.4 4.7L16.6 4H19l-5.2 6.1L19.5 20h-4.2l-3.7-5.1L7.2 20H4.8l5.7-6.6z"/>',
+  Discord: '<path d="M18.6 6.4A15 15 0 0 0 15 5.3l-.5 1a13 13 0 0 0-5 0l-.5-1a15 15 0 0 0-3.6 1.1C3.2 10 2.6 13.5 2.9 17a15 15 0 0 0 4.5 2.3l1-1.6-1.5-.8.4-.3a10.7 10.7 0 0 0 9.4 0l.4.3-1.5.8 1 1.6a15 15 0 0 0 4.5-2.3c.4-4-.6-7.5-2.5-10.6zM9.3 14.8c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8 1.6.8 1.6 1.8-.7 1.8-1.6 1.8zm5.4 0c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8 1.6.8 1.6 1.8-.7 1.8-1.6 1.8z"/>',
+};
+---
+<footer class="pied">
+  <div class="bande">
+    <div class="cadre grille">
+      <div class="bloc-marque">
+        <Logo taille="1.6rem" />
+        <div class="liens">
+          <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/a-propos">Notre histoire</a></li>
+            <li><a href="/comite-editorial">Comité éditorial</a></li>
+            <li><a href="/proposer">Proposer un article</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+          <ul>
+            <li><a href="/articles">Tous les articles</a></li>
+            <li><a href="/dossiers">Dossiers</a></li>
+            <li><a href="/breves">Brèves</a></li>
+            <li><a href="/calendrier">Calendrier</a></li>
+            <li><a href="/medias">Médias</a></li>
+          </ul>
+          <ul>
+            <li><a href="/jurisprudence">Jurisprudence</a></li>
+            <li><a href="/glossaire">Glossaire</a></li>
+            <li><a href="/rubriques">Catégories</a></li>
+            <li><a href="/contributeurs">Auteurs</a></li>
+            <li><a href="/en">English</a></li>
+          </ul>
+        </div>
+        <ul class="reseaux" aria-label="Réseaux sociaux">
+          {reseaux.map((r) => (
+            <li>
+              {r.url ? (
+                <a href={r.url} target="_blank" rel="noopener" aria-label={r.nom}><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" set:html={icones[r.nom]} /></a>
+              ) : (
+                <span title={`${r.nom} : lien à renseigner`}><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" set:html={icones[r.nom]} /></span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="bloc-nl">
+        <p class="titre-nl">Inscrivez-vous à notre <em class="accent">newsletter</em></p>
+        <FormNewsletter id="nl-pied" />
+      </div>
+      <div class="bloc-tags">
+        {tagsPied.map((t) => <a class="tag sombre" href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}
+      </div>
+    </div>
+  </div>
+  <div class="barre-bas">
+    <div class="cadre bas">
+      <span>© 2026 <em class="accent">Lex Ludica</em> · Cercle Vidéoludique. Tous droits réservés.{site.issn && <> · ISSN {site.issn}</>}</span>
+      <span class="legal"><a href="/mentions-legales">Conditions d'utilisation</a> · <a href="/mentions-legales#confidentialite">Politique de confidentialité</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .grille {
+    display: grid;
+    grid-template-columns: 1.5fr 1.1fr 0.8fr;
+    gap: 2.5rem;
+    padding-block: 3rem 3rem;
+    align-items: start;
+  }
+  .liens { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; margin-top: 1.4rem; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+  .liens a { color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; }
+  .liens a:hover { color: var(--blue); }
+  .reseaux { display: flex; gap: 0.5rem; margin-top: 1.5rem; }
+  .reseaux a, .reseaux span {
+    width: 1.9rem; height: 1.9rem; display: grid; place-items: center;
+    background: #e1e1de; color: var(--ink); border-radius: 3px;
+  }
+  .reseaux span { opacity: 0.55; }
+  .reseaux a:hover { background: var(--blue); color: #ffffff; }
+  .reseaux svg { width: 0.95rem; height: 0.95rem; }
+  .titre-nl { font-size: 1.45rem; line-height: 1.15; margin: 0 0 1rem; }
+  .titre-nl .accent { font-size: 1.12em; }
+  .bloc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+  .barre-bas { background: var(--blue); color: rgba(255, 255, 255, 0.92); font-size: 0.78rem; }
+  .bas { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-block: 1rem calc(1rem + env(safe-area-inset-bottom, 0px)); }
+  .bas .accent { font-size: 1.1em; }
+  .legal a { color: inherit; }
+  @media (max-width: 900px) {
+    .grille { grid-template-columns: 1fr 1fr; }
+    .bloc-tags { grid-column: 1 / -1; justify-content: flex-start; }
+  }
+  @media (max-width: 560px) { .grille { grid-template-columns: 1fr; } }
+</style>

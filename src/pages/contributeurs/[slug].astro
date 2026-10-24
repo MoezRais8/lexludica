@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ListeOuVide from '../../components/ListeOuVide.astro';
+import { articlesPublies } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const auteurs = await getCollection('auteurs');
+  return auteurs.map((auteur) => ({ params: { slug: auteur.id }, props: { auteur } }));
+}
+const { auteur } = Astro.props;
+const { Content } = await render(auteur);
+const articles = (await articlesPublies()).filter((a) => a.data.auteurs.some((r) => r.id === auteur.id));
+---
+<Base titre={auteur.data.nom} description={`${auteur.data.nom}, ${auteur.data.role}. Ses analyses dans Lex Ludica.`}>
+  <section class="bande tete">
+    <div class="cadre interieur">
+      <span class="pastille" aria-hidden="true">{auteur.data.initiales}</span>
+      <div class="infos">
+        <p class="surtitre">Auteur {auteur.data.fictif && <span class="demo-flag">démo</span>}</p>
+        <h1>{auteur.data.nom}</h1>
+        <p class="role">{auteur.data.role}</p>
+        <div class="bio"><Content /></div>
+        <div class="disc">{auteur.data.disciplines.map((d) => <span class="tag">#{d.toLowerCase()}</span>)}</div>
+        {auteur.data.linkedin && <a href={auteur.data.linkedin} rel="noopener" target="_blank">Profil LinkedIn</a>}
+      </div>
+    </div>
+  </section>
+  <ListeOuVide articles={articles} messageVide="Ses premières analyses arrivent bientôt." />
+</Base>
+
+<style>
+  .tete { background: radial-gradient(ellipse 50% 100% at 6% 0%, #ece6db 0%, transparent 70%); }
+  .interieur { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.6rem; padding-block: 2.8rem 2.4rem; align-items: start; }
+  .pastille {
+    width: 5.5rem; height: 5.5rem; display: grid; place-items: center;
+    background: var(--blue); color: #ffffff; font-family: var(--serif); font-style: italic; font-size: 2.4rem; border-radius: 2px;
+  }
+  .surtitre { margin: 0 0 0.4rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; gap: 0.5rem; align-items: center; }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 400; letter-spacing: -0.025em; }
+  .role { font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--ink-soft); margin: 0.3rem 0 0.9rem; }
+  .bio { max-width: var(--lecture); color: var(--ink-soft); }
+  .bio :global(p) { margin: 0 0 0.8rem; }
+  .disc { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+  @media (max-width: 560px) {
+    .interieur { grid-template-columns: 1fr; }
+    .pastille { width: 4rem; height: 4rem; font-size: 1.8rem; }
+  }
+</style>

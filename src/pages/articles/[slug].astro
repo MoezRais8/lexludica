@@ -1,0 +1,334 @@
+---
+import { getCollection, getEntries, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CarteArticle from '../../components/CarteArticle.astro';
+import Visuel from '../../components/Visuel.astro';
+import BandeNewsletter from '../../components/BandeNewsletter.astro';
+import { getRubrique } from '../../data/rubriques';
+import { site } from '../../data/site';
+import { articlesPublies, auteursDe, biblio, citation, formatDate, refDecision, slugTag, tempsDeLecture } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const articles = await articlesPublies('toutes');
+  return articles.map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const d = article.data;
+const en = d.langue === 'en';
+// Libellés de l'interface selon la langue de l'article
+const t = en
+  ? { min: 'min read', par: 'By', et: 'and', maj: 'Updated', demo: 'Demo text', sommaire: 'Contents', citer: 'Cite this article', copier: 'Copy citation', bibtex: 'Copy BibTeX', ris: 'Download RIS (Zotero, EndNote)', imprimer: 'Print or save as PDF', decisions: 'Cases cited', dossier: 'Part of the series', autre: 'Lire en français', lies: 'Further reading', sujets: 'Topics' }
+  : { min: 'min de lecture', par: 'Par', et: 'et', maj: 'Mis à jour le', demo: 'Texte de démonstration', sommaire: 'Sommaire', citer: 'Citer cet article', copier: 'Copier la référence', bibtex: 'Copier en BibTeX', ris: 'Télécharger en RIS (Zotero, EndNote)', imprimer: 'Imprimer ou enregistrer en PDF', decisions: 'Décisions citées', dossier: 'Cet article fait partie du dossier', autre: 'Read in English', lies: 'À lire aussi', sujets: 'Sujets' };
+
+const { Content, headings } = await render(article);
+const auteurs = await auteursDe(article);
+const rubrique = getRubrique(d.rubrique);
+const sommaire = headings.filter((h) => h.depth === 2 && h.slug !== 'footnote-label');
+const tous = await articlesPublies(d.langue);
+const memeRubrique = tous.filter((a) => a.id !== article.id && a.data.rubrique === d.rubrique);
+const lies = [...memeRubrique, ...tous.filter((a) => a.id !== article.id && !memeRubrique.includes(a))].slice(0, 3);
+const ref = citation(article, auteurs);
+const decisions = d.decisions.length ? await getEntries(d.decisions) : [];
+const dossiers = (await getCollection('dossiers')).filter((x) => x.data.articles.some((r) => r.id === article.id));
+const url = `${site.url}/articles/${article.id}`;
+const { bibtex, noms, iso } = biblio(article, auteurs, url, site.issn);
+const glossaire = (await getCollection('glossaire')).map((g) => ({ id: g.id, terme: g.data.terme, definition: g.data.definition }));
+// Métadonnée COinS : permet à Zotero de détecter l'article depuis le navigateur
+const coins = new URLSearchParams({
+  ctx_ver: 'Z39.88-2004',
+  rft_val_fmt: 'info:ofi/fmt:kev:mtx:journal',
+  'rft.genre': 'article',
+  'rft.atitle': d.titre,
+  'rft.jtitle': 'Lex Ludica',
+  'rft.date': iso,
+  ...(site.issn ? { 'rft.issn': site.issn } : {}),
+  'rft.language': d.langue,
+  rft_id: url,
+});
+noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
+---
+<Base titre={d.titre} description={d.chapo} type="article" langue={d.langue} alternate={d.traduction ? `/articles/${d.traduction}` : undefined}>
+  <Fragment slot="head">
+    <meta name="citation_title" content={d.titre} />
+    {noms.map((n) => <meta name="citation_author" content={`${n.nom}, ${n.prenom}`} />)}
+    <meta name="citation_publication_date" content={iso.replaceAll('-', '/')} />
+    <meta name="citation_journal_title" content="Lex Ludica" />
+    <meta name="citation_publisher" content={site.editeur} />
+    <meta name="citation_language" content={d.langue} />
+    {site.issn && <meta name="citation_issn" content={site.issn} />}
+    <meta name="citation_fulltext_html_url" content={url} />
+    <meta property="article:published_time" content={d.date.toISOString()} />
+    {d.maj && <meta property="article:modified_time" content={d.maj.toISOString()} />}
+  </Fragment>
+  <span class="Z3988" title={coins.toString()}></span>
+  <article>
+    <header class="bande tete">
+      <div class="cadre grille-article">
+        <div class="col-texte">
+          <p class="infos">
+            <a class="tag sombre" href={`/rubriques/${rubrique.slug}`}>#{rubrique.nom.toLowerCase()}</a>
+            <time class="date" datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+            <span class="date">· {tempsDeLecture(article.body)} {t.min}</span>
+            {d.demo && <span class="demo-flag">{t.demo}</span>}
+            {d.traduction && <a class="langue-lien" href={`/articles/${d.traduction}`} hreflang={en ? 'fr' : 'en'}>{t.autre}</a>}
+          </p>
+          <h1>{d.titre}</h1>
+          <p class="chapo">{d.chapo}</p>
+          {d.maj && (
+            <p class="maj">
+              <strong>{t.maj} <time datetime={d.maj.toISOString()}>{formatDate(d.maj)}</time></strong>
+              {d.majNote && <span> · {d.majNote}</span>}
+            </p>
+          )}
+          <p class="signature">
+            <span class="pastille" aria-hidden="true">{auteurs[0]?.data.initiales}</span>
+            <span>{t.par} {auteurs.map((a, i) => <>{i > 0 && ` ${t.et} `}<a href={`/contributeurs/${a.id}`}>{a.data.nom}</a></>)}</span>
+          </p>
+        </div>
+      </div>
+      <div class="cadre visuel-article">
+        <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} ratio="21 / 9" />
+      </div>
+    </header>
+
+    <div class="bande">
+      <div class="cadre grille-article corps">
+        <aside class="marge" aria-label="Outils de lecture">
+          {sommaire.length > 1 && (
+            <nav class="sommaire" aria-label={t.sommaire}>
+              <p class="marge-titre">{t.sommaire}</p>
+              <ol>{sommaire.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+            </nav>
+          )}
+          <div class="citer">
+            <p class="marge-titre">{t.citer}</p>
+            <p class="ref" id="ref-citation">{ref}</p>
+            <pre class="bibtex" id="ref-bibtex" hidden>{bibtex}</pre>
+            <div class="actions">
+              <button type="button" class="copier" data-cible="ref-citation">{t.copier}</button>
+              <button type="button" class="action-sec" data-cible="ref-bibtex">{t.bibtex}</button>
+              <a class="action-sec" href={`/articles/${article.id}.ris`} download={`${article.id}.ris`}>{t.ris}</a>
+              <button type="button" class="action-sec" id="imprimer">{t.imprimer}</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="prose">
+          {dossiers.map((x) => (
+            <a class="encart-dossier" href={`/dossiers/${x.id}`}>
+              <span class="ed-sur">{t.dossier}</span>
+              <span class="ed-titre">{x.data.titre} {x.data.accent && <em class="accent">{x.data.accent}</em>}</span>
+              <span class="ed-pos">{x.data.articles.findIndex((r) => r.id === article.id) + 1} / {x.data.articles.length}</span>
+            </a>
+          ))}
+          <Content />
+          {decisions.length > 0 && (
+            <section class="decisions" aria-labelledby="dec-titre">
+              <p class="marge-titre" id="dec-titre">{t.decisions}</p>
+              <ul>
+                {decisions.map((x) => (
+                  <li>
+                    <a href={`/jurisprudence/${x.id}`}>
+                      <span class="dec-nom accent">{x.data.nom}</span>
+                      <span class="dec-ref">{refDecision(x)}</span>
+                      <span class="dec-apport">{x.data.apport}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {d.etiquettes.length > 0 && (
+            <ul class="etiquettes" aria-label={t.sujets}>
+              {d.etiquettes.map((e) => <li><a class="tag" href={`/etiquettes/${slugTag(e)}`}>#{e}</a></li>)}
+            </ul>
+          )}
+          <section class="auteurs" aria-label="Auteurs">
+            {auteurs.map((a) => (
+              <a class="auteur" href={`/contributeurs/${a.id}`}>
+                <span class="pastille grand" aria-hidden="true">{a.data.initiales}</span>
+                <span>
+                  <span class="a-nom">{a.data.nom}</span>
+                  <span class="a-role">{a.data.role}</span>
+                </span>
+              </a>
+            ))}
+          </section>
+          <p class="url-impression">{url}</p>
+        </div>
+      </div>
+    </div>
+  </article>
+  <script type="application/json" id="donnees-glossaire" set:html={JSON.stringify(glossaire)} />
+
+  <BandeNewsletter />
+
+  <section class="bande" aria-labelledby="lies">
+    <div class="cadre bloc">
+      <div class="tete-section"><h2 id="lies">{t.lies}</h2></div>
+      <div class="grille">{lies.map((a) => <CarteArticle article={a} />)}</div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Copie de la référence ou du BibTeX
+  document.querySelectorAll<HTMLButtonElement>('button[data-cible]').forEach((btn) => {
+    const libelle = btn.textContent;
+    btn.addEventListener('click', async () => {
+      const cible = document.getElementById(btn.dataset.cible ?? '');
+      if (!cible) return;
+      try {
+        await navigator.clipboard.writeText(cible.textContent ?? '');
+        btn.textContent = document.documentElement.lang === 'en' ? 'Copied' : 'Copié';
+      } catch {
+        cible.hidden = false;
+        const range = document.createRange();
+        range.selectNodeContents(cible);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+        btn.textContent = document.documentElement.lang === 'en' ? 'Selected, copy it' : 'Sélectionné, copiez-le';
+      }
+      setTimeout(() => (btn.textContent = libelle), 2500);
+    });
+  });
+  document.getElementById('imprimer')?.addEventListener('click', () => window.print());
+
+  // Infobulles du glossaire : tout lien vers /glossaire#terme affiche sa définition
+  type Def = { id: string; terme: string; definition: string };
+  const defs: Def[] = JSON.parse(document.getElementById('donnees-glossaire')?.textContent || '[]');
+  document.querySelectorAll<HTMLAnchorElement>('.prose a[href*="glossaire"]').forEach((lien, i) => {
+    const id = lien.getAttribute('href')?.split('#')[1];
+    const def = defs.find((x) => x.id === id);
+    if (!def) return;
+    lien.classList.add('glossaire');
+    const bulle = document.createElement('span');
+    bulle.className = 'bulle';
+    bulle.id = `bulle-${i}`;
+    bulle.setAttribute('role', 'tooltip');
+    bulle.innerHTML = `<strong></strong><span></span>`;
+    (bulle.firstChild as HTMLElement).textContent = def.terme;
+    (bulle.lastChild as HTMLElement).textContent = def.definition;
+    lien.setAttribute('aria-describedby', bulle.id);
+    lien.append(bulle);
+  });
+</script>
+
+<style>
+  .langue-lien { font-size: 0.75rem; font-weight: 500; color: var(--blue); }
+  .maj { margin: -0.4rem 0 1.2rem; font-size: 0.84rem; color: var(--ink-soft); background: #fff4dc; border-left: 3px solid var(--yellow); padding: 0.5rem 0.8rem; }
+  .maj strong { font-weight: 600; color: var(--on-yellow); }
+  .tete { background: radial-gradient(ellipse 50% 70% at 6% 0%, #ece6db 0%, transparent 70%); }
+  .grille-article { display: grid; grid-template-columns: 14rem minmax(0, var(--lecture)) 1fr; gap: 3rem; }
+  .col-texte { grid-column: 2; padding-block: 2.8rem 2rem; }
+  .infos { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; margin: 0 0 1.1rem; }
+  h1 { font-size: clamp(1.8rem, 3.8vw, 2.6rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.18; }
+  .chapo { font-family: var(--serif); font-style: italic; font-size: 1.4rem; line-height: 1.35; color: var(--ink-soft); margin: 1.1rem 0 1.4rem; }
+  .signature { display: flex; align-items: center; gap: 0.6rem; margin: 0; font-size: 0.88rem; color: var(--ink-soft); }
+  .signature a { color: var(--ink); font-weight: 500; text-decoration: none; }
+  .signature a:hover { color: var(--blue); }
+  .pastille {
+    width: 1.9rem; height: 1.9rem; display: grid; place-items: center; flex: none;
+    font-size: 0.68rem; font-weight: 600; background: var(--blue); color: #ffffff; border-radius: 2px;
+  }
+  .pastille.grand { width: 2.8rem; height: 2.8rem; font-size: 0.85rem; }
+  .visuel-article { padding-bottom: 2.4rem; }
+
+  .corps { padding-block: 2.6rem 3.2rem; }
+  .marge { grid-column: 1; display: flex; flex-direction: column; gap: 1.8rem; font-size: 0.84rem; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 5rem); align-self: start; max-height: calc(100vh - 6rem); overflow-y: auto; }
+  .prose { grid-column: 2; min-width: 0; }
+  .marge-titre { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.6rem; }
+  .sommaire ol { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.45rem; }
+  .sommaire a { color: var(--ink-soft); text-decoration: none; }
+  .sommaire a:hover { color: var(--blue); }
+  .citer { padding: 1rem; background: var(--surface); border: 1px solid var(--line); }
+  .ref { margin: 0 0 0.8rem; line-height: 1.5; color: var(--ink-soft); font-size: 0.8rem; }
+  .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; }
+  .action-sec { font: inherit; font-size: 0.75rem; background: none; border: 0; padding: 0; color: var(--blue); cursor: pointer; text-align: left; text-decoration: underline; text-underline-offset: 0.2em; }
+  .bibtex { white-space: pre-wrap; font-size: 0.68rem; background: #ffffff; border: 1px solid var(--line); padding: 0.5rem; margin: 0 0 0.6rem; overflow-x: auto; }
+  .encart-dossier { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; align-items: end; padding: 1rem 1.2rem; margin: 0 0 2rem; background: var(--yellow); color: var(--on-yellow); text-decoration: none; }
+  .encart-dossier:hover { filter: brightness(0.97); }
+  .ed-sur { grid-column: 1 / -1; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ed-titre { font-size: 1.15rem; line-height: 1.25; }
+  .ed-titre .accent { font-size: 1.1em; }
+  .ed-pos { font-family: var(--serif); font-style: italic; font-size: 1.6rem; line-height: 1; }
+  .decisions { margin-top: 2.4rem; }
+  .decisions ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+  .decisions li { margin: 0; }
+  .decisions a { display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.8rem; padding: 0.8rem 1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--blue); text-decoration: none; color: var(--ink); }
+  .decisions a:hover { border-color: var(--blue); }
+  .dec-nom { font-size: 1.3rem; line-height: 1.1; }
+  .dec-ref { font-size: 0.78rem; color: var(--ink-soft); align-self: center; }
+  .dec-apport { grid-column: 1 / -1; font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+  .prose :global(a.glossaire) { position: relative; color: inherit; text-decoration: underline dotted var(--blue); text-decoration-thickness: 2px; text-underline-offset: 0.25em; cursor: help; }
+  .prose :global(.bulle) {
+    position: absolute; left: 0; bottom: calc(100% + 0.5rem); z-index: 5; width: min(20rem, 80vw);
+    background: var(--ink); color: #ffffff; padding: 0.8rem 0.9rem; border-radius: 3px;
+    font-family: var(--sans); font-style: normal; font-weight: 400; font-size: 0.82rem; line-height: 1.5;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18); display: none; pointer-events: none;
+  }
+  @media (max-width: 700px) { .prose :global(.bulle) { position: fixed; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: auto; } }
+  .prose :global(.bulle strong) { display: block; color: var(--yellow); font-weight: 600; margin-bottom: 0.25rem; }
+  .prose :global(a.glossaire:hover .bulle), .prose :global(a.glossaire:focus .bulle) { display: block; }
+  .url-impression { display: none; }
+  .Z3988 { display: none; }
+
+  /* Version imprimable : le texte, les notes et l'adresse de l'article */
+  @media print {
+    :global(.entete), :global(.pied), :global(.bande-nl), .marge, .visuel-article, .auteurs, .etiquettes, #lies, :global(section[aria-labelledby="lies"]), .langue-lien, .encart-dossier { display: none !important; }
+    :global(body) { background: #ffffff; font-size: 11pt; }
+    :global(.bande), :global(.bande > .cadre) { border: 0 !important; }
+    .tete { background: none; }
+    .grille-article { display: block; max-width: none; }
+    .col-texte { padding: 0 0 1rem; }
+    .prose { font-size: 11pt; color: #000000; }
+    .prose :global(a) { color: #000000; text-decoration: none; }
+    .prose :global(.bulle) { display: none; }
+    .url-impression { display: block; margin-top: 2rem; font-size: 9pt; color: #555555; }
+  }
+
+  .copier { font: inherit; font-size: 0.75rem; font-weight: 500; cursor: pointer; background: var(--yellow); color: var(--on-yellow); border: 0; border-radius: 3px; padding: 0.45rem 0.8rem; }
+  .copier:hover { filter: brightness(0.95); }
+
+  .prose { font-size: 1.05rem; line-height: 1.75; color: #232425; }
+  .prose :global(p) { margin: 0 0 1.25rem; }
+  .prose :global(h2) { font-size: 1.55rem; font-weight: 500; margin: 2.4rem 0 0.9rem; scroll-margin-top: 5rem; color: var(--ink); }
+  .prose :global(h3) { font-size: 1.2rem; font-weight: 500; margin: 1.8rem 0 0.7rem; }
+  .prose :global(blockquote) {
+    margin: 2rem 0; padding: 1.2rem 1.4rem;
+    background: var(--surface); border-left: 4px solid var(--yellow);
+    font-family: var(--serif); font-style: italic; font-size: 1.55rem; line-height: 1.3; color: var(--ink);
+  }
+  .prose :global(blockquote p) { margin: 0; }
+  .prose :global(ul), .prose :global(ol) { padding-left: 1.3rem; margin: 0 0 1.25rem; }
+  .prose :global(li) { margin-bottom: 0.35rem; }
+  .prose :global(strong) { font-weight: 600; color: var(--ink); }
+  .prose :global(code) { font-family: var(--sans); font-size: 0.82em; font-weight: 500; background: var(--tag-bg); color: var(--tag-fg); padding: 0.15em 0.45em; border-radius: 3px; }
+  .prose :global(sup a) { text-decoration: none; font-size: 0.8em; font-weight: 600; padding-inline: 0.1em; }
+  .prose :global(.footnotes) { margin-top: 2.6rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.86rem; line-height: 1.6; color: var(--ink-soft); }
+  .prose :global(.footnotes h2) { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.8rem; }
+  .prose :global(.footnotes p) { margin: 0 0 0.4rem; }
+  .prose :global([data-footnote-backref]) { text-decoration: none; }
+
+  .etiquettes { list-style: none; padding: 0; margin: 2.4rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .etiquettes li { margin: 0; }
+  .auteurs { margin-top: 2rem; display: grid; gap: 0.8rem; }
+  .auteur { display: flex; gap: 0.9rem; align-items: center; padding: 1rem 1.1rem; background: var(--card); text-decoration: none; color: var(--ink); }
+  .auteur:hover .a-nom { color: var(--blue); }
+  .a-nom { display: block; font-weight: 500; }
+  .a-role { display: block; font-size: 0.84rem; color: var(--muted); }
+  .bloc { padding-block: 2.6rem 3rem; }
+  .grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 1.4rem; }
+
+  @media (max-width: 1060px) {
+    .grille-article { grid-template-columns: minmax(0, 1fr); max-width: calc(var(--lecture) + 5rem); }
+    .col-texte, .marge, .prose { grid-column: 1; }
+    .marge { order: 2; position: static; max-height: none; overflow: visible; }
+    .sommaire { display: none; }
+    .visuel-article { max-width: calc(var(--lecture) + 5rem); }
+  }
+  @media (max-width: 900px) { .grille { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .grille { grid-template-columns: 1fr; } }
+</style>

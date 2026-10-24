@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+
+const termes = (await getCollection('glossaire')).sort((a, b) => a.data.terme.localeCompare(b.data.terme, 'fr'));
+const lettre = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '')[0].toUpperCase().replace('Œ', 'O');
+const lettres = [...new Set(termes.map((t) => lettre(t.data.terme)))];
+---
+<Base titre="Glossaire" description="Les notions juridiques et techniques du jeu vidéo expliquées simplement.">
+  <TitrePage titre="Le" accent="glossaire" sous="Les notions qui reviennent dans nos analyses, expliquées simplement. Dans les articles, les mots soulignés en pointillé affichent leur définition au survol.">
+    <nav class="alphabet" aria-label="Aller à la lettre">
+      {lettres.map((l) => <a href={`#lettre-${l}`}>{l}</a>)}
+    </nav>
+  </TitrePage>
+  <section class="bande">
+    <div class="cadre bloc">
+      {lettres.map((l) => (
+        <div class="groupe" id={`lettre-${l}`}>
+          <p class="lettre accent" aria-hidden="true">{l}</p>
+          <dl>
+            {termes.filter((t) => lettre(t.data.terme) === l).map((t) => (
+              <div class="entree" id={t.id}>
+                <dt>{t.data.terme}</dt>
+                <dd>
+                  <p>{t.data.definition}</p>
+                  {t.data.voir && <p class="voir">Voir : {t.data.voir}</p>}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .alphabet { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 1.4rem; }
+  .alphabet a { width: 2rem; height: 2rem; display: grid; place-items: center; background: var(--blue); color: #ffffff; text-decoration: none; font-weight: 500; font-size: 0.85rem; border-radius: 2px; }
+  .alphabet a:hover { background: var(--yellow); color: var(--on-yellow); }
+  .bloc { padding-block: 2.4rem 3rem; display: grid; gap: 2rem; }
+  .groupe { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; scroll-margin-top: 5rem; }
+  .lettre { font-size: 3.2rem; line-height: 1; margin: 0; color: var(--blue); }
+  dl { margin: 0; display: grid; gap: 0.8rem; max-width: 50rem; }
+  .entree { background: var(--surface); border: 1px solid var(--line); padding: 1rem 1.2rem; scroll-margin-top: 5rem; }
+  .entree:target { border-color: var(--yellow); box-shadow: 0 0 0 3px var(--yellow); }
+  dt { font-weight: 600; font-size: 1.02rem; }
+  dd { margin: 0.4rem 0 0; }
+  dd p { margin: 0; color: var(--ink-soft); line-height: 1.6; font-size: 0.94rem; }
+  .voir { margin-top: 0.5rem !important; font-size: 0.8rem !important; color: var(--muted) !important; }
+  @media (max-width: 520px) { .groupe { grid-template-columns: 1fr; gap: 0.4rem; } .lettre { font-size: 2.4rem; } }
+</style>

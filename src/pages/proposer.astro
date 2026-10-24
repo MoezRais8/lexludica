@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+import { rubriques } from '../data/rubriques';
+import { site } from '../data/site';
+// Consignes de démonstration : à remplacer par la charte des contributeurs de la revue.
+---
+<Base titre="Proposer un article" description="Comment proposer une analyse à Lex Ludica : formats, exigences et procédure de relecture.">
+  <TitrePage titre="Proposer un" accent="article" sous="Lex Ludica accueille les analyses de chercheurs, praticiens et professionnels du jeu vidéo. Voici ce que nous attendons et comment se déroule la relecture." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="colonnes">
+        <div class="texte">
+          <h2>Ce que nous <em class="accent">publions</em></h2>
+          <ul class="formats">
+            <li><strong>Analyse</strong> : 1 200 à 2 500 mots, une question précise traitée avec la rigueur d'une discipline.</li>
+            <li><strong>Regards croisés</strong> : deux auteurs de disciplines différentes sur un même sujet.</li>
+            <li><strong>Commentaire de décision</strong> : 800 à 1 500 mots, relié à la base de jurisprudence.</li>
+            <li><strong>Brève</strong> : quelques lignes sur une actualité, avec sa source.</li>
+          </ul>
+
+          <h2>Nos <em class="accent">exigences</em></h2>
+          <ul>
+            <li>Un angle clair, annoncé dès le chapô.</li>
+            <li>Des sources vérifiables, citées en notes de bas de page selon les usages de votre discipline.</li>
+            <li>Un texte accessible à un lecteur cultivé qui n'est pas spécialiste.</li>
+            <li>Un texte inédit, ou dont vous détenez les droits de publication.</li>
+          </ul>
+
+          <h2>Comment ça <em class="accent">se passe</em></h2>
+          <ol class="etapes">
+            <li><span class="n">1</span><span><strong>Proposition</strong> : un résumé de quelques lignes, la rubrique visée et votre parcours.</span></li>
+            <li><span class="n">2</span><span><strong>Validation de l'angle</strong> par la rédaction, sous une semaine environ.</span></li>
+            <li><span class="n">3</span><span><strong>Rédaction</strong> dans l'espace contributeur, à votre rythme.</span></li>
+            <li><span class="n">4</span><span><strong>Relecture</strong> par un membre du comité éditorial de la discipline concernée.</span></li>
+            <li><span class="n">5</span><span><strong>Publication</strong> après accord sur la version finale et signature de la cession de droits.</span></li>
+          </ol>
+          <p class="lien-comite">La procédure complète est décrite sur la page <a href="/comite-editorial">Comité éditorial</a>.</p>
+        </div>
+
+        <aside class="encart">
+          <p class="e-titre">Envoyer une <em class="accent">proposition</em></p>
+          <p>Écrivez à la rédaction en précisant la rubrique visée :</p>
+          <p class="adresse">{site.email}</p>
+          <p class="e-sous">Rubriques</p>
+          <div class="rubs">{rubriques.map((r) => <a class="tag" href={`/rubriques/${r.slug}`}>{r.nom}</a>)}</div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .colonnes { display: grid; grid-template-columns: minmax(0, var(--lecture)) minmax(0, 20rem); gap: 3rem; align-items: start; }
+  .texte { line-height: 1.7; color: #232425; }
+  h2 { font-size: 1.5rem; font-weight: 400; margin: 2rem 0 0.8rem; }
+  h2:first-child { margin-top: 0; }
+  h2 .accent { font-size: 1.12em; }
+  ul { padding-left: 1.2rem; margin: 0; display: grid; gap: 0.5rem; }
+  strong { font-weight: 600; }
+  .etapes { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+  .etapes li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.8rem; align-items: start; background: var(--surface); border: 1px solid var(--line); padding: 0.8rem 1rem; }
+  .n { width: 2.4rem; height: 2.4rem; display: grid; place-items: center; background: var(--blue); color: #ffffff; font-family: var(--serif); font-style: italic; font-size: 1.3rem; }
+  .lien-comite { margin-top: 1rem; font-size: 0.9rem; color: var(--ink-soft); }
+  .encart { position: sticky; top: 5rem; background: var(--yellow); color: var(--on-yellow); padding: 1.5rem; }
+  .encart p { margin: 0 0 0.6rem; }
+  .e-titre { font-size: 1.45rem; line-height: 1.15; }
+  .e-titre .accent { font-size: 1.12em; }
+  .adresse { font-weight: 600; font-size: 1.05rem; user-select: all; background: #ffffff; padding: 0.5rem 0.7rem; display: inline-block; }
+  .e-sous { margin-top: 1rem !important; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .rubs { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .rubs .tag { background: rgba(255, 255, 255, 0.6); color: var(--on-yellow); }
+  @media (max-width: 860px) { .colonnes { grid-template-columns: 1fr; } .encart { position: static; } }
+</style>

@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TitrePage from '../../components/TitrePage.astro';
+import Visuel from '../../components/Visuel.astro';
+import { getRubrique } from '../../data/rubriques';
+
+const dossiers = (await getCollection('dossiers')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<Base titre="Dossiers" description="Les dossiers thématiques de Lex Ludica : des parcours de lecture en plusieurs articles.">
+  <TitrePage titre="Les" accent="dossiers" sous="Des parcours de lecture : plusieurs analyses réunies autour d'une question, dans l'ordre où les lire." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="liste">
+        {dossiers.map((d) => (
+          <a class="dossier" href={`/dossiers/${d.id}`}>
+            <Visuel slug={d.id} rubrique={d.data.rubrique} ratio="16 / 9" />
+            <span class="corps">
+              <span class="meta"><span class="tag sombre">{getRubrique(d.data.rubrique).nom}</span><span class="date">{d.data.articles.length} articles</span></span>
+              <span class="titre">{d.data.titre} {d.data.accent && <em class="accent">{d.data.accent}</em>}</span>
+              <span class="chapo">{d.data.chapo}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 1.4rem; }
+  .dossier { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+  .dossier:hover { border-color: var(--blue); }
+  .dossier:hover .titre { color: var(--blue); }
+  .corps { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.2rem 1.3rem 1.4rem; }
+  .meta { display: flex; gap: 0.6rem; align-items: center; }
+  .titre { font-size: 1.45rem; line-height: 1.2; }
+  .titre .accent { font-size: 1.1em; }
+  .chapo { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.55; }
+</style>

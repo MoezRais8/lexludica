@@ -1,0 +1,50 @@
+---
+// Visuel d'article. Si l'article a une image (champ « image »), on l'affiche ;
+// sinon on génère une illustration aux couleurs de la rubrique, avec le motif pixel.
+import { getRubrique } from '../data/rubriques';
+
+interface Props { slug: string; rubrique: string; image?: string; alt?: string; ratio?: string; grand?: boolean }
+const { slug, rubrique, image, alt = '', ratio = '16 / 10', grand = false } = Astro.props;
+const r = getRubrique(rubrique);
+
+const palettes: Record<string, { fond: string; pix: string; texte: string }> = {
+  droit: { fond: '#0055b4', pix: '#ffbc40', texte: '#ffffff' },
+  economie: { fond: '#ffbc40', pix: '#0055b4', texte: '#2b1d00' },
+  geopolitique: { fond: '#00326b', pix: '#ffbc40', texte: '#ffffff' },
+  anatomie: { fond: '#e4e4e0', pix: '#0055b4', texte: '#161616' },
+  culture: { fond: '#1b1b1b', pix: '#ffbc40', texte: '#ffffff' },
+  histoire: { fond: '#d8d2c4', pix: '#0055b4', texte: '#161616' },
+  psychologie: { fond: '#1f2b45', pix: '#ffbc40', texte: '#ffffff' },
+  'regards-croises': { fond: '#ffbc40', pix: '#161616', texte: '#2b1d00' },
+};
+const p = palettes[rubrique] ?? palettes.droit;
+
+// Pseudo-aléatoire stable : le même article donne toujours la même illustration
+let graine = [...slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+const alea = () => ((graine = (graine * 1103515245 + 12345) >>> 0) / 4294967296);
+const W = 32, H = 20;
+const carres: { x: number; y: number }[] = [];
+const largeur = 7 + Math.floor(alea() * 5);
+for (let i = 0; i < largeur; i++) {
+  const x = W - 1 - i;
+  const hauteur = Math.max(1, Math.round((largeur - i) * (1.1 + alea() * 0.9)));
+  for (let j = 0; j < hauteur; j++) if (alea() > 0.18 || i < 2) carres.push({ x, y: H - 1 - j });
+}
+for (let k = 0; k < 6; k++) carres.push({ x: Math.floor(alea() * (W - largeur - 2)) + 2, y: Math.floor(alea() * 6) + 1 });
+---
+<div class:list={['visuel', { grand }]} style={`aspect-ratio:${ratio}`}>
+  {image ? (
+    <img src={image} alt={alt} loading="lazy" />
+  ) : (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMinYMax slice" role="img" aria-label={`Illustration de la rubrique ${r.nom}`}>
+      <rect width={W} height={H} fill={p.fond} />
+      {carres.map((c) => <rect x={c.x} y={c.y} width="1.02" height="1.02" fill={p.pix} />)}
+      <text x="1.6" y={H - 1.8} fill={p.texte} font-size="3.4" font-style="italic" style="font-family: 'Instrument Serif', Georgia, serif">{r.nom}</text>
+    </svg>
+  )}
+</div>
+
+<style>
+  .visuel { width: 100%; max-width: 100%; overflow: hidden; background: var(--card); border-radius: 2px; }
+  .visuel img, .visuel svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+</style>

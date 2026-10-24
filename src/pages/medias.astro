@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+import Pixels from '../components/Pixels.astro';
+import { medias } from '../data/site';
+---
+<Base titre="Médias" description="Vidéos, podcasts et interventions de Lex Ludica.">
+  <TitrePage titre="Lex Ludica en" accent="vidéo" sous="Podcasts, interventions et formats vidéo de la revue." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="grille">
+        {medias.map((m) => {
+          const Balise = m.url ? 'a' : 'div';
+          return (
+            <Balise class="media" href={m.url || undefined} target={m.url ? '_blank' : undefined} rel={m.url ? 'noopener' : undefined}>
+              <span class="vignette">
+                <Pixels motif="equipe" class="pix" />
+                <span class="lecture" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+              </span>
+              <span class="corps">
+                <span class="tag sombre">{m.format}</span>
+                <span class="titre">{m.titre}</span>
+                <span class="desc">{m.description}</span>
+                <span class="lien">{m.url ? 'Regarder sur YouTube' : 'Lien YouTube à renseigner'}</span>
+              </span>
+            </Balise>
+          );
+        })}
+        <div class="media chaine">
+          <span class="corps">
+            <span class="titre">La chaîne <em class="accent">Lex Ludica</em></span>
+            <span class="desc">Toutes les vidéos de la revue sont publiées sur notre chaîne YouTube. Abonnez-vous pour ne rien manquer.</span>
+            <span class="lien">Adresse de la chaîne à renseigner</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1.4rem; }
+  .media { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+  a.media:hover { border-color: var(--blue); }
+  .vignette { position: relative; aspect-ratio: 16 / 9; background: #0b1f3a; overflow: hidden; display: grid; place-items: center; }
+  .vignette :global(.pix) { position: absolute; right: 0; bottom: 0; height: 80%; width: auto; }
+  .lecture { position: relative; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: #ffffff; color: var(--blue); display: grid; place-items: center; }
+  .lecture svg { width: 1.5rem; height: 1.5rem; margin-left: 0.2rem; }
+  .corps { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.1rem 1.2rem 1.3rem; }
+  .titre { font-size: 1.2rem; font-weight: 500; }
+  .titre .accent { font-size: 1.12em; }
+  .desc { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; }
+  .lien { font-size: 0.8rem; font-weight: 500; color: var(--blue); }
+  .chaine { background: var(--yellow); border-color: var(--yellow); justify-content: flex-end; min-height: 14rem; }
+  .chaine .desc, .chaine .lien { color: var(--on-yellow); }
+</style>

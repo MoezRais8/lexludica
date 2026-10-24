@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props { titre?: string; description?: string; type?: string; langue?: 'fr' | 'en'; alternate?: string }
+const {
+  titre,
+  description = "Lex Ludica analyse le jeu vidéo au croisement du droit, de la culture, de l'économie et des sciences humaines.",
+  type = 'website',
+  langue = 'fr',
+  alternate,
+} = Astro.props;
+const titreComplet = titre ? `${titre} · Lex Ludica` : 'Lex Ludica';
+// Adresse propre, sans « .html » ni « index »
+const chemin = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
+const canonique = new URL(chemin, Astro.site);
+---
+<html lang={langue}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titreComplet}</title>
+    <meta name="claude:viewport-fit-sides" content="cover" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0055b4" />
+    <link rel="canonical" href={canonique} />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonique} />
+    <meta property="og:locale" content={langue === 'en' ? 'en_GB' : 'fr_FR'} />
+    {alternate && <link rel="alternate" hreflang={langue === 'en' ? 'fr' : 'en'} href={new URL(alternate, Astro.site)} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <slot name="head" />
+    {site.matomo.url && site.matomo.siteId && (
+      <script is:inline define:vars={{ url: site.matomo.url, id: site.matomo.siteId }}>
+        // Matomo en mode sans cookie : exempté de consentement selon les conditions de la CNIL
+        var _paq = (window._paq = window._paq || []);
+        _paq.push(['disableCookies']);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        _paq.push(['setTrackerUrl', url + 'matomo.php']);
+        _paq.push(['setSiteId', id]);
+        var g = document.createElement('script');
+        g.async = true; g.src = url + 'matomo.js';
+        document.head.appendChild(g);
+      </script>
+    )}
+    <meta property="og:site_name" content="Lex Ludica" />
+    <link rel="alternate" type="application/rss+xml" title="Lex Ludica" href="/rss.xml" />
+  </head>
+  <body>
+    <a class="evitement" href="#contenu">Aller au contenu</a>
+    <Header langue={langue} />
+    <main id="contenu"><slot /></main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .evitement { position: absolute; left: -9999px; }
+  .evitement:focus { left: 1rem; top: 1rem; z-index: 50; background: #ffffff; padding: 0.5rem 1rem; }
+</style>

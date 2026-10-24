@@ -1,0 +1,51 @@
+---
+// Champ d'inscription à la lettre. Dans la version en ligne, il sera relié à Brevo.
+interface Props { id: string; surBleu?: boolean }
+const { id, surBleu = false } = Astro.props;
+---
+<form class:list={['form-nl', { 'sur-bleu': surBleu }]} data-nl novalidate>
+  <div class="ligne">
+    <label class="champ" for={id}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span class="sr">Adresse e-mail</span>
+      <input id={id} name="email" type="email" autocomplete="email" placeholder="Adresse email…" required />
+    </label>
+    <button type="submit" class:list={['bouton', { blanc: surBleu }]}>M'abonner</button>
+  </div>
+  <p class="note" aria-live="polite">En vous inscrivant vous acceptez nos <a href="/mentions-legales">conditions d'utilisation</a>.</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-nl]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input') as HTMLInputElement;
+      const note = form.querySelector('.note') as HTMLElement;
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value.trim())) {
+        note.textContent = 'Cette adresse ne semble pas valide. Vérifiez-la puis réessayez.';
+        return;
+      }
+      note.textContent = 'Prototype : l’inscription sera reliée à Brevo dans la version en ligne.';
+    });
+  });
+</script>
+
+<style>
+  .form-nl { width: 100%; max-width: 24rem; }
+  .ligne { display: flex; gap: 0.5rem; }
+  .champ {
+    flex: 1; min-width: 0; display: flex; align-items: center; gap: 0.5rem;
+    background: #e7e8e7; color: var(--muted); border-radius: 3px; padding: 0 0.7rem;
+  }
+  .champ svg { width: 1rem; height: 1rem; flex: none; }
+  input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 0.82rem; padding: 0.6rem 0; color: var(--ink); outline: none; }
+  .champ:focus-within { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .note { font-size: 0.68rem; color: var(--muted); margin: 0.5rem 0 0; }
+  .note a { color: inherit; }
+  .sur-bleu .champ { background: rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.75); }
+  .sur-bleu input { color: #ffffff; }
+  .sur-bleu input::placeholder { color: rgba(255, 255, 255, 0.7); }
+  .sur-bleu .champ:focus-within { outline-color: #ffffff; }
+  .sur-bleu .note { color: rgba(255, 255, 255, 0.72); }
+</style>

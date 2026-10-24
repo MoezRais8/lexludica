@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import CarteArticle from './CarteArticle.astro';
+interface Props { articles: CollectionEntry<'articles'>[]; messageVide: string }
+const { articles, messageVide } = Astro.props;
+---
+<section class="bande">
+  <div class="cadre bloc">
+    {articles.length > 0 ? (
+      <div class="grille">{articles.map((a) => <CarteArticle article={a} />)}</div>
+    ) : (
+      <div class="vide">
+        <p class="v-titre">Aucun article <em class="accent">pour l'instant</em></p>
+        <p>{messageVide}</p>
+        <a class="bouton" href="/#newsletter">Être prévenu par la newsletter</a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 2rem 1.4rem; }
+  .vide { max-width: 32rem; padding: 1.8rem; background: var(--surface); border: 1px dashed var(--line); }
+  .vide p { margin: 0 0 1rem; color: var(--ink-soft); font-size: 0.92rem; }
+  .vide .v-titre { font-size: 1.4rem; color: var(--ink); margin-bottom: 0.5rem; }
+</style>

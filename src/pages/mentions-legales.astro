@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+// Gabarit : les champs entre crochets sont à compléter avec les documents définitifs.
+---
+<Base titre="Mentions légales" description="Mentions légales, conditions d'utilisation, données personnelles et droit de réponse de Lex Ludica.">
+  <TitrePage titre="Mentions" accent="légales" sous="Gabarit de démonstration : les éléments entre crochets seront remplacés par les documents définitifs." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="texte">
+        <h2>Éditeur</h2>
+        <p>Lex Ludica est édité par l'association Cercle Vidéoludique, [adresse du siège], [numéro RNA]. Contact : contact@lexludica.com.</p>
+        <h2>Directeur de la publication</h2>
+        <p>[Nom du représentant légal de l'association].</p>
+        <h2>Hébergement</h2>
+        <p>[Nom, raison sociale, adresse et téléphone de l'hébergeur].</p>
+        <h2>Conditions d'utilisation</h2>
+        <p>Les articles publiés restent soumis aux conditions de cession conclues avec leurs auteurs. Toute reproduction au-delà de la courte citation nécessite l'accord de l'éditeur. [Conditions complètes].</p>
+        <h2 id="confidentialite">Politique de confidentialité</h2>
+        <p>Le site ne dépose aucun cookie publicitaire. La fréquentation est mesurée avec Matomo, configuré sans cookie et avec anonymisation des adresses IP, dans les conditions d'exemption de consentement définies par la CNIL. Les adresses e-mail collectées pour la newsletter servent uniquement à son envoi. [Base légale, durée de conservation, sous-traitant d'envoi, droits des personnes et contact].</p>
+        <h2 id="droit-de-reponse">Droit de réponse</h2>
+        <p>Toute personne nommée ou désignée dans un article peut exercer son droit de réponse en écrivant au directeur de la publication à contact@lexludica.com. [Modalités et délais].</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .texte { max-width: var(--lecture); }
+  h2 { font-size: 1.25rem; font-weight: 500; margin: 2rem 0 0.5rem; scroll-margin-top: 5rem; }
+  h2:first-child { margin-top: 0; }
+  p { margin: 0 0 1rem; color: var(--ink-soft); line-height: 1.7; }
+</style>

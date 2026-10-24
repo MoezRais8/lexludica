@@ -1,0 +1,24 @@
+---
+import FormNewsletter from './FormNewsletter.astro';
+---
+<section class="bande-nl" id="newsletter" aria-labelledby="nl-titre">
+  <div class="cadre interieur">
+    <h2 id="nl-titre">Inscrivez-vous à notre <em class="accent">newsletter</em></h2>
+    <FormNewsletter id="nl-bande" surBleu />
+  </div>
+</section>
+
+<style>
+  .interieur {
+    background: var(--blue);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    flex-wrap: wrap;
+    padding-block: 1.9rem 1.6rem;
+  }
+  h2 { font-size: clamp(1.35rem, 2.6vw, 1.7rem); font-weight: 400; line-height: 1.15; max-width: 22ch; }
+  h2 .accent { font-size: 1.12em; }
+</style>

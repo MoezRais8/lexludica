@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import TitrePage from '../../components/TitrePage.astro';
+import ListeOuVide from '../../components/ListeOuVide.astro';
+import { rubriques, tagsEnTete, tagsPied } from '../../data/rubriques';
+import { articlesPublies, slugTag } from '../../lib/utils';
+
+// Une page par hashtag : ceux des articles, des rubriques, de l'en-tête et du pied de page
+export async function getStaticPaths() {
+  const articles = await articlesPublies();
+  const tous = new Map<string, string>();
+  [...articles.flatMap((a) => a.data.etiquettes), ...rubriques.flatMap((r) => r.tags), ...tagsEnTete, ...tagsPied]
+    .forEach((t) => tous.set(slugTag(t), t));
+  return [...tous].map(([slug, nom]) => ({
+    params: { tag: slug },
+    props: { nom, articles: articles.filter((a) => a.data.etiquettes.some((e) => slugTag(e) === slug)) },
+  }));
+}
+const { nom, articles } = Astro.props;
+---
+<Base titre={`#${nom}`} description={`Les articles de Lex Ludica sur le thème « ${nom} ».`}>
+  <TitrePage surtitre="Sujet" titre={`#${nom}`} sous={`${articles.length} ${articles.length > 1 ? 'articles' : 'article'} sur ce sujet.`} />
+  <ListeOuVide articles={articles} messageVide="Ce sujet n'a pas encore d'article publié." />
+</Base>

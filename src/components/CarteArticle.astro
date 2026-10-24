@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Visuel from './Visuel.astro';
+import { getRubrique } from '../data/rubriques';
+import { auteursDe, formatDateCourte } from '../lib/utils';
+
+interface Props { article: CollectionEntry<'articles'>; titreNiveau?: 'h2' | 'h3' }
+const { article, titreNiveau = 'h3' } = Astro.props;
+const auteurs = await auteursDe(article);
+const rubrique = getRubrique(article.data.rubrique);
+const Titre = titreNiveau;
+---
+<article class="carte">
+  <a class="lien-visuel" href={`/articles/${article.id}`} tabindex="-1" aria-hidden="true">
+    <Visuel slug={article.id} rubrique={article.data.rubrique} image={article.data.image} />
+  </a>
+  <p class="infos">
+    <a class="tag sombre" href={`/rubriques/${rubrique.slug}`}>{rubrique.nom}</a>
+    <span class="date">{formatDateCourte(article.data.date)}</span>
+  </p>
+  <Titre class="titre"><a href={`/articles/${article.id}`}>{article.data.titre}</a></Titre>
+  <p class="auteur">
+    <span class="pastille" aria-hidden="true">{auteurs[0]?.data.initiales}</span>
+    {auteurs.map((a, i) => <>{i > 0 && ', '}<a href={`/contributeurs/${a.id}`}>{a.data.nom}</a></>)}
+  </p>
+</article>
+
+<style>
+  .carte { display: flex; flex-direction: column; gap: 0.65rem; min-width: 0; }
+  .lien-visuel { display: block; }
+  .lien-visuel:hover :global(.visuel) { filter: brightness(1.04); }
+  .infos { display: flex; align-items: center; gap: 0.6rem; margin: 0.2rem 0 0; }
+  .titre { font-size: 1.02rem; font-weight: 500; line-height: 1.35; letter-spacing: -0.005em; }
+  .titre a { color: var(--ink); text-decoration: none; }
+  .titre a:hover { color: var(--blue); }
+  .auteur { display: flex; align-items: center; gap: 0.5rem; margin: auto 0 0; font-size: 0.78rem; color: var(--ink-soft); }
+  .auteur a { color: inherit; text-decoration: none; }
+  .auteur a:hover { color: var(--blue); }
+  .pastille {
+    width: 1.4rem; height: 1.4rem; display: grid; place-items: center; flex: none;
+    font-size: 0.55rem; font-weight: 600; background: #e1e1de; color: var(--ink-soft); border-radius: 2px;
+  }
+</style>

@@ -1,0 +1,224 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+import { getRubrique } from '../data/rubriques';
+import { articlesPublies, formatDateCourte } from '../lib/utils';
+
+const articles = await articlesPublies();
+// Données embarquées pour le calendrier (date au format AAAA-MM-JJ)
+const donnees = articles.map((a) => ({
+  slug: a.id,
+  titre: a.data.titre,
+  rubrique: getRubrique(a.data.rubrique).nom,
+  jour: a.data.date.toISOString().slice(0, 10),
+}));
+
+// Archives par mois, visibles même sans JavaScript
+const mois = new Map<string, typeof articles>();
+for (const a of articles) {
+  const cle = a.data.date.toISOString().slice(0, 7);
+  mois.set(cle, [...(mois.get(cle) ?? []), a]);
+}
+const nomMois = (cle: string) => {
+  const [an, m] = cle.split('-').map(Number);
+  const nom = new Date(Date.UTC(an, m - 1, 1)).toLocaleDateString('fr-FR', { month: 'long', timeZone: 'UTC' });
+  return { nom: nom[0].toUpperCase() + nom.slice(1), an };
+};
+---
+<Base titre="Calendrier" description="Retrouver les articles de Lex Ludica par date de publication.">
+  <TitrePage titre="Le" accent="calendrier" sous="Retrouvez chaque analyse par sa date de publication. Choisissez un jour marqué pour voir ce qui a paru." />
+
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="calendrier">
+        <div class="cal" id="cal" hidden>
+          <div class="cal-tete">
+            <button type="button" class="nav" id="prec" aria-label="Mois précédent">‹</button>
+            <h2 id="cal-titre" aria-live="polite"></h2>
+            <button type="button" class="nav" id="suiv" aria-label="Mois suivant">›</button>
+          </div>
+          <div class="jours-semaine" aria-hidden="true">
+            <span>lun</span><span>mar</span><span>mer</span><span>jeu</span><span>ven</span><span>sam</span><span>dim</span>
+          </div>
+          <div class="grille-jours" id="grille" role="grid" aria-labelledby="cal-titre"></div>
+          <p class="legende"><span class="puce"></span> jour de publication</p>
+        </div>
+
+        <div class="selection">
+          <p class="sel-titre" id="sel-titre">Toutes les archives</p>
+          <ul class="sel-liste" id="sel-liste"></ul>
+          <button type="button" class="tout" id="tout-mois" hidden>Voir tout le mois</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bande" aria-labelledby="archives-titre">
+    <div class="cadre bloc">
+      <div class="tete-section"><h2 id="archives-titre">Archives par mois</h2></div>
+      <div class="archives">
+        {[...mois].map(([cle, liste]) => {
+          const { nom, an } = nomMois(cle);
+          return (
+            <div class="mois-archive" id={`m-${cle}`}>
+              <p class="m-titre"><em class="accent">{nom}</em> {an} <span class="m-nb">{liste.length}</span></p>
+              <ul>
+                {liste.map((a) => (
+                  <li>
+                    <span class="date">{formatDateCourte(a.data.date)}</span>
+                    <a href={`/articles/${a.id}`}>{a.data.titre}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="donnees-cal" set:html={JSON.stringify(donnees)} />
+</Base>
+
+<script>
+  type Entree = { slug: string; titre: string; rubrique: string; jour: string };
+  const articles: Entree[] = JSON.parse(document.getElementById('donnees-cal')!.textContent || '[]');
+  const ext = location.pathname.endsWith('.html') ? '.html' : '';
+  const echap = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const parJour = new Map<string, Entree[]>();
+  articles.forEach((a) => parJour.set(a.jour, [...(parJour.get(a.jour) ?? []), a]));
+
+  const cal = document.getElementById('cal')!;
+  const titre = document.getElementById('cal-titre')!;
+  const grille = document.getElementById('grille')!;
+  const prec = document.getElementById('prec') as HTMLButtonElement;
+  const suiv = document.getElementById('suiv') as HTMLButtonElement;
+  const selTitre = document.getElementById('sel-titre')!;
+  const selListe = document.getElementById('sel-liste')!;
+  const toutMois = document.getElementById('tout-mois') as HTMLButtonElement;
+  cal.hidden = false;
+
+  const jours = [...parJour.keys()].sort();
+  const premier = jours[0] ?? new Date().toISOString().slice(0, 10);
+  const dernier = jours[jours.length - 1] ?? premier;
+  const cleMin = premier.slice(0, 7);
+  const cleMax = dernier.slice(0, 7);
+  const valide = (c: string) => /^\d{4}-\d{2}$/.test(c) && c >= cleMin && c <= cleMax;
+  const depuisHash = location.hash.slice(1);
+  let courant = valide(depuisHash) ? depuisHash : cleMax;
+  let jourChoisi: string | null = null;
+
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const decaler = (cle: string, d: number) => {
+    const [a, m] = cle.split('-').map(Number);
+    const dt = new Date(Date.UTC(a, m - 1 + d, 1));
+    return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth() + 1)}`;
+  };
+  const libelleMois = (cle: string) => {
+    const [a, m] = cle.split('-').map(Number);
+    const n = new Date(Date.UTC(a, m - 1, 1)).toLocaleDateString('fr-FR', { month: 'long', timeZone: 'UTC' });
+    return { nom: n[0].toUpperCase() + n.slice(1), an: a };
+  };
+  const libelleJour = (j: string) =>
+    new Date(j + 'T12:00:00Z').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+  function liste(entrees: Entree[], intitule: string) {
+    selTitre.innerHTML = intitule;
+    selListe.innerHTML = entrees.length
+      ? entrees.map((e) => `<li><a href="articles/${e.slug}${ext}"><span class="tag sombre">${echap(e.rubrique)}</span><span class="s-titre">${echap(e.titre)}</span></a></li>`).join('')
+      : '<li class="rien">Aucun article publié ce mois-ci.</li>';
+  }
+
+  function afficherMois() {
+    const [a, m] = courant.split('-').map(Number);
+    const { nom, an } = libelleMois(courant);
+    titre.innerHTML = `<em class="accent">${nom}</em> ${an}`;
+    prec.disabled = courant <= cleMin;
+    suiv.disabled = courant >= cleMax;
+    const debut = (new Date(Date.UTC(a, m - 1, 1)).getUTCDay() + 6) % 7; // lundi = 0
+    const nbJours = new Date(Date.UTC(a, m, 0)).getUTCDate();
+    let html = '';
+    for (let i = 0; i < debut; i++) html += '<span class="case vide"></span>';
+    for (let d = 1; d <= nbJours; d++) {
+      const j = `${courant}-${pad(d)}`;
+      const n = parJour.get(j)?.length ?? 0;
+      if (n) {
+        const choisi = j === jourChoisi ? ' choisi' : '';
+        html += `<button type="button" class="case pub${choisi}" data-jour="${j}" aria-pressed="${!!choisi}" aria-label="${libelleJour(j)}, ${n} article${n > 1 ? 's' : ''}"><span>${d}</span>${n > 1 ? `<small>${n}</small>` : ''}</button>`;
+      } else {
+        html += `<span class="case"><span>${d}</span></span>`;
+      }
+    }
+    grille.innerHTML = html;
+    const duMois = articles.filter((e) => e.jour.startsWith(courant));
+    if (jourChoisi && jourChoisi.startsWith(courant)) {
+      const lj = libelleJour(jourChoisi);
+      liste(parJour.get(jourChoisi) ?? [], lj[0].toUpperCase() + lj.slice(1));
+      toutMois.hidden = false;
+    } else {
+      liste(duMois, `<em class="accent">${nom}</em> ${an} · ${duMois.length} article${duMois.length > 1 ? 's' : ''}`);
+      toutMois.hidden = true;
+    }
+    try { history.replaceState(null, '', '#' + courant); } catch {}
+  }
+
+  grille.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest('button[data-jour]') as HTMLButtonElement | null;
+    if (!b) return;
+    jourChoisi = jourChoisi === b.dataset.jour ? null : b.dataset.jour!;
+    afficherMois();
+  });
+  prec.addEventListener('click', () => { courant = decaler(courant, -1); jourChoisi = null; afficherMois(); });
+  suiv.addEventListener('click', () => { courant = decaler(courant, 1); jourChoisi = null; afficherMois(); });
+  toutMois.addEventListener('click', () => { jourChoisi = null; afficherMois(); });
+  afficherMois();
+</script>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .calendrier { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+  .cal { background: var(--surface); border: 1px solid var(--line); padding: 1.2rem; }
+  .cal-tete { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .cal-tete h2 { font-size: 1.35rem; font-weight: 400; }
+  .cal-tete :global(.accent) { font-size: 1.15em; }
+  .nav {
+    width: 2.2rem; height: 2.2rem; border: 0; border-radius: 3px; cursor: pointer;
+    background: var(--blue); color: #ffffff; font-size: 1.3rem; line-height: 1; font-family: inherit;
+  }
+  .nav:disabled { background: var(--card); color: var(--muted); cursor: default; }
+  .jours-semaine, .grille-jours { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .jours-semaine span { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center; padding-bottom: 0.4rem; }
+  .grille-jours :global(.case) {
+    position: relative; aspect-ratio: 1; display: grid; place-items: center;
+    font: inherit; font-size: 0.85rem; color: var(--ink-soft); background: #ffffff; border: 0; border-radius: 2px; padding: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .grille-jours :global(.case.vide) { background: transparent; }
+  .grille-jours :global(.case.pub) { background: var(--yellow); color: var(--on-yellow); font-weight: 600; cursor: pointer; }
+  .grille-jours :global(.case.pub:hover) { filter: brightness(0.95); }
+  .grille-jours :global(.case.choisi) { background: var(--blue); color: #ffffff; }
+  .grille-jours :global(.case small) { position: absolute; top: 2px; right: 4px; font-size: 0.6rem; font-weight: 600; }
+  .legende { display: flex; align-items: center; gap: 0.45rem; margin: 0.9rem 0 0; font-size: 0.75rem; color: var(--muted); }
+  .puce { width: 0.75rem; height: 0.75rem; background: var(--yellow); border-radius: 1px; }
+
+  .sel-titre { margin: 0 0 1rem; font-size: 1.3rem; }
+  .sel-titre :global(.accent) { font-size: 1.15em; }
+  .sel-titre :global(.cap)::first-letter { text-transform: uppercase; }
+  .sel-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .sel-liste :global(a) { display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 0.9rem 1rem; background: var(--card); color: var(--ink); text-decoration: none; }
+  .sel-liste :global(a:hover .s-titre) { color: var(--blue); }
+  .sel-liste :global(.s-titre) { font-weight: 500; line-height: 1.4; }
+  .sel-liste :global(.rien) { color: var(--muted); font-size: 0.9rem; }
+  .tout { margin-top: 0.9rem; font: inherit; font-size: 0.8rem; background: none; border: 0; color: var(--blue); cursor: pointer; padding: 0; text-decoration: underline; }
+
+  .archives { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1.6rem 2rem; }
+  .m-titre { margin: 0 0 0.6rem; font-size: 1.15rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 0.35rem; }
+  .m-titre .accent { font-size: 1.15em; }
+  .m-nb { margin-left: auto; font-size: 0.72rem; color: var(--muted); }
+  .mois-archive ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .mois-archive li { display: grid; grid-template-columns: 5.8rem 1fr; gap: 0.6rem; font-size: 0.86rem; line-height: 1.4; }
+  .mois-archive .date { white-space: nowrap; }
+  .mois-archive a { color: var(--ink); text-decoration: none; }
+  .mois-archive a:hover { color: var(--blue); }
+  @media (max-width: 820px) { .calendrier { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,140 @@
+# Espace contributeurs de Lex Ludica (Decap CMS)
+# Chaque article est enregistré comme un fichier dans le dépôt GitHub du site.
+# Avec le flux de relecture, un contributeur crée un brouillon, le passe « en relecture »,
+# et seul un éditeur peut le publier.
+
+backend:
+  name: github
+  repo: A_RENSEIGNER/lexludica      # compte GitHub / nom du dépôt
+  branch: main
+  base_url: https://A_RENSEIGNER    # service de connexion GitHub (voir README)
+
+# Pour tester sur son ordinateur : lancer « npm run cms » puis « npm run dev », et ouvrir /admin
+local_backend: true
+
+publish_mode: editorial_workflow
+locale: fr
+site_url: https://lexludica.com
+display_url: https://lexludica.com
+logo_url: /admin/logo.svg
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: src/content/articles
+    create: true
+    slug: "{{slug}}"
+    summary: "{{titre}} ({{date | date('DD/MM/YYYY')}})"
+    sortable_fields: [date, titre]
+    fields:
+      - { label: Titre, name: titre, widget: string }
+      - { label: Chapô, name: chapo, widget: text, hint: "Deux ou trois phrases qui annoncent l'angle de l'article." }
+      - { label: Date de publication, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false }
+      - label: Rubrique
+        name: rubrique
+        widget: select
+        options:
+          - { label: Droit, value: droit }
+          - { label: Économie, value: economie }
+          - { label: (Géo)politique, value: geopolitique }
+          - { label: Anatomie du jeu, value: anatomie }
+          - { label: Culture, value: culture }
+          - { label: Histoire, value: histoire }
+          - { label: Psychologie, value: psychologie }
+          - { label: Regards croisés, value: regards-croises }
+      - { label: Auteurs, name: auteurs, widget: relation, collection: auteurs, search_fields: [nom], value_field: "{{slug}}", display_fields: [nom], multiple: true }
+      - { label: Décisions citées, name: decisions, widget: relation, collection: decisions, search_fields: [nom, numero], value_field: "{{slug}}", display_fields: [nom, juridiction], multiple: true, required: false }
+      - { label: Sujets (hashtags), name: etiquettes, widget: list, required: false, hint: "Un sujet par ligne, en minuscules : droit d'auteur, ia générative…" }
+      - { label: Image, name: image, widget: image, required: false, hint: "Uniquement une image dont la revue détient les droits ou une licence." }
+      - { label: Article en tendance, name: une, widget: boolean, default: false, required: false }
+      - { label: Rang dans « Populaire » (1 à 3), name: populaire, widget: number, value_type: int, min: 1, max: 3, required: false }
+      - { label: Date de mise à jour, name: maj, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false, required: false }
+      - { label: Ce qui a changé, name: majNote, widget: string, required: false }
+      - { label: Langue, name: langue, widget: select, options: [{ label: Français, value: fr }, { label: English, value: en }], default: fr }
+      - { label: Identifiant de la traduction, name: traduction, widget: string, required: false }
+      - { label: Texte, name: body, widget: markdown, hint: "Notes de bas de page : texte[^1] puis, en fin d'article, [^1]: référence. Glossaire : [terme](/glossaire#identifiant)." }
+
+  - name: breves
+    label: Brèves
+    label_singular: Brève
+    folder: src/content/breves
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Titre, name: titre, widget: string }
+      - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false }
+      - { label: Rubrique, name: rubrique, widget: select, options: [droit, economie, geopolitique, anatomie, culture, histoire, psychologie, regards-croises] }
+      - { label: Source, name: source, widget: string, required: false }
+      - { label: Lien de la source, name: sourceUrl, widget: string, required: false }
+      - { label: Texte, name: body, widget: markdown }
+
+  - name: decisions
+    label: Jurisprudence
+    label_singular: Décision
+    folder: src/content/decisions
+    create: true
+    slug: "{{slug}}"
+    summary: "{{nom}} · {{juridiction}}"
+    fields:
+      - { label: Nom d'usage, name: nom, widget: string, hint: "Ex. : Cryo" }
+      - { label: Juridiction, name: juridiction, widget: string, hint: "Ex. : Cass. 1re civ." }
+      - { label: Ordre juridique, name: ordre, widget: select, options: [France, Union européenne, États-Unis, Autre] }
+      - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false }
+      - { label: Numéro, name: numero, widget: string, hint: "N° de pourvoi ou d'affaire" }
+      - { label: Parties, name: parties, widget: string, required: false }
+      - { label: Apport en une phrase, name: apport, widget: text }
+      - { label: Thèmes, name: themes, widget: list, required: false }
+      - { label: Résumé, name: body, widget: markdown }
+
+  - name: dossiers
+    label: Dossiers
+    label_singular: Dossier
+    folder: src/content/dossiers
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Début du titre, name: titre, widget: string }
+      - { label: Fin du titre (en italique), name: accent, widget: string, required: false }
+      - { label: Chapô, name: chapo, widget: text }
+      - { label: Rubrique, name: rubrique, widget: select, options: [droit, economie, geopolitique, anatomie, culture, histoire, psychologie, regards-croises] }
+      - { label: Articles (dans l'ordre de lecture), name: articles, widget: relation, collection: articles, search_fields: [titre], value_field: "{{slug}}", display_fields: [titre], multiple: true }
+      - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false }
+      - { label: Introduction, name: body, widget: markdown }
+
+  - name: auteurs
+    label: Auteurs
+    label_singular: Auteur
+    folder: src/content/auteurs
+    create: true
+    slug: "{{slug}}"
+    identifier_field: nom
+    fields:
+      - { label: Nom complet, name: nom, widget: string }
+      - { label: Rôle, name: role, widget: string }
+      - { label: Disciplines, name: disciplines, widget: list }
+      - { label: Initiales, name: initiales, widget: string }
+      - { label: Profil LinkedIn, name: linkedin, widget: string, required: false }
+      - { label: Membre du comité éditorial, name: comite, widget: boolean, default: false, required: false }
+      - { label: Ordre d'affichage, name: ordre, widget: number, value_type: int, default: 99 }
+      - { label: Biographie, name: body, widget: markdown }
+
+  - name: reference
+    label: Glossaire
+    files:
+      - label: Glossaire
+        name: glossaire
+        file: src/content/glossaire.json
+        fields:
+          - label: Termes
+            name: termes
+            widget: list
+            summary: "{{fields.terme}}"
+            fields:
+              - { label: Identifiant (sans accent ni espace), name: id, widget: string }
+              - { label: Terme, name: terme, widget: string }
+              - { label: Définition, name: definition, widget: text }
+              - { label: Voir aussi, name: voir, widget: string, required: false }

@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+import { getRubrique } from '../data/rubriques';
+import { formatDate } from '../lib/utils';
+
+const breves = (await getCollection('breves')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const rendues = await Promise.all(breves.map(async (b) => ({ b, Content: (await render(b)).Content })));
+---
+<Base titre="Brèves" description="L'actualité du jeu vidéo en quelques lignes, entre deux analyses de fond.">
+  <TitrePage titre="Les" accent="brèves" sous="L'actualité du secteur en quelques lignes, entre deux analyses de fond." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <ol class="fil">
+        {rendues.map(({ b, Content }) => (
+          <li id={b.id}>
+            <time class="quand" datetime={b.data.date.toISOString()}>{formatDate(b.data.date)}</time>
+            <div class="breve">
+              <p class="meta">
+                <a class="tag sombre" href={`/rubriques/${b.data.rubrique}`}>{getRubrique(b.data.rubrique).nom}</a>
+                {b.data.demo && <span class="demo-flag">démo</span>}
+              </p>
+              <h2>{b.data.titre}</h2>
+              <div class="texte"><Content /></div>
+              {b.data.source && (b.data.sourceUrl
+                ? <p class="source">Source : <a href={b.data.sourceUrl} target="_blank" rel="noopener">{b.data.source}</a></p>
+                : <p class="source">Source : {b.data.source}</p>)}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.4rem 3rem; }
+  .fil { list-style: none; margin: 0; padding: 0; max-width: 50rem; border-left: 2px solid var(--blue); }
+  .fil li { position: relative; display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.2rem; padding: 0 0 1.8rem 1.4rem; }
+  .fil li::before { content: ''; position: absolute; left: -7px; top: 0.3rem; width: 12px; height: 12px; background: var(--yellow); }
+  .quand { font-size: 0.8rem; color: var(--muted); padding-top: 0.1rem; }
+  .meta { display: flex; gap: 0.5rem; align-items: center; margin: 0 0 0.5rem; }
+  h2 { font-size: 1.15rem; font-weight: 500; line-height: 1.35; }
+  .texte { color: var(--ink-soft); font-size: 0.94rem; line-height: 1.6; margin-top: 0.4rem; }
+  .texte :global(p) { margin: 0; }
+  .source { font-size: 0.78rem; color: var(--muted); margin: 0.5rem 0 0; }
+  @media (max-width: 560px) { .fil li { grid-template-columns: 1fr; gap: 0.3rem; } }
+</style>

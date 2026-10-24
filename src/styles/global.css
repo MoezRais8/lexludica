@@ -1,0 +1,144 @@
+/* Polices hébergées localement (aucun appel aux serveurs Google) */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-ext-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-400-italic.css';
+@import '@fontsource/instrument-serif/latin-400.css';
+@import '@fontsource/instrument-serif/latin-400-italic.css';
+@import '@fontsource/instrument-serif/latin-ext-400-italic.css';
+
+/* Charte Lex Ludica d'après la maquette :
+   bleu roi pour la structure, jaune pour l'action et le motif pixel,
+   fond gris clair encadré de filets, titres en sans-serif avec accents en serif italique. */
+:root {
+  --bg: #f4f4f3;
+  --card: #eaebea;
+  --surface: #f8f8f7;
+  --line: #e2e2df;
+  --ink: #161616;
+  --ink-soft: #4f5154;
+  --muted: #85878a;
+  --blue: #0055b4;
+  --blue-deep: #00418a;
+  --on-blue: #ffffff;
+  --yellow: #ffbc40;
+  --on-yellow: #2b1d00;
+  --tag-bg: #e3eff2;
+  --tag-fg: #2c4950;
+
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  --cadre: 1180px;
+  --lecture: 42rem;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  background: var(--blue);
+}
+::selection { background: var(--yellow); color: var(--on-yellow); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--blue); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-weight: 500; line-height: 1.2; letter-spacing: -0.015em; text-wrap: balance; margin: 0; }
+/* Accent en serif italique : <em class="accent">jeu vidéo</em> */
+.accent { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+
+/* Le cadre : colonne centrale bordée de filets verticaux */
+.cadre {
+  max-width: var(--cadre);
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.bande { border-bottom: 1px solid var(--line); }
+.bande > .cadre { border-inline: 1px solid var(--line); }
+@media (min-width: 760px) {
+  .cadre {
+    padding-left: max(40px, env(safe-area-inset-left, 0px));
+    padding-right: max(40px, env(safe-area-inset-right, 0px));
+  }
+}
+@media (max-width: 1200px) { .bande > .cadre { border-inline: 0; } }
+
+/* Pastille hashtag */
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.3;
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  padding: 0.3rem 0.55rem;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+a.tag:hover { background: #d3e6eb; }
+.tag.sombre { background: #e1e1de; color: var(--ink); }
+.date { font-size: 0.75rem; color: var(--muted); }
+
+.tete-section {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.tete-section h2 { font-size: 1.05rem; font-weight: 500; letter-spacing: 0; }
+.lien-plus { font-size: 0.82rem; color: var(--muted); text-decoration: none; display: inline-flex; gap: 0.35rem; align-items: center; }
+.lien-plus:hover { color: var(--blue); }
+.lien-plus::after { content: '›'; font-size: 1.2em; line-height: 1; }
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.6rem 1.1rem;
+  border: 0;
+  border-radius: 3px;
+  background: var(--yellow);
+  color: var(--on-yellow);
+  text-decoration: none;
+  cursor: pointer;
+}
+.bouton:hover { filter: brightness(0.95); }
+.bouton.blanc { background: #ffffff; color: var(--ink); }
+
+.demo-flag {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

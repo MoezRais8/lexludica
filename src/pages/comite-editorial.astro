@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+
+const membres = (await getCollection('auteurs', ({ data }) => data.comite)).sort((a, b) => a.data.ordre - b.data.ordre);
+---
+<Base titre="Comité éditorial" description="Qui relit les articles de Lex Ludica, selon quelle procédure, et comment nous corrigeons nos erreurs.">
+  <TitrePage titre="Le comité" accent="éditorial" sous="Chaque article publié est relu par un membre du comité issu de la discipline concernée. Voici qui nous sommes et comment nous travaillons." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="tete-section"><h2>Les membres</h2></div>
+      <ul class="membres">
+        {membres.map((m) => (
+          <li>
+            <a href={`/contributeurs/${m.id}`}>
+              <span class="pastille" aria-hidden="true">{m.data.initiales}</span>
+              <span>
+                <span class="nom">{m.data.nom} {m.data.fictif && <span class="demo-flag">démo</span>}</span>
+                <span class="role">{m.data.role}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="deux">
+        <div>
+          <h2>La <em class="accent">relecture</em></h2>
+          <p>Chaque texte est relu par au moins un membre du comité spécialiste de la discipline. Les articles juridiques font en outre l'objet d'une vérification des références citées. Les remarques sont transmises à l'auteur, qui reste maître de son texte.</p>
+          <p>Les articles n'engagent que leurs auteurs. Ils ne constituent pas une consultation juridique.</p>
+        </div>
+        <div>
+          <h2>Les <em class="accent">corrections</em></h2>
+          <p>Une erreur factuelle est corrigée dès qu'elle est signalée, et la correction est indiquée en tête d'article avec sa date. Lorsqu'une évolution du droit rend une analyse incomplète, l'article affiche une mention « Mis à jour le » et précise ce qui a changé.</p>
+          <p>Pour signaler une erreur ou exercer un droit de réponse, écrivez à la rédaction depuis la page <a href="/contact">Contact</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.4rem 2.8rem; }
+  .membres { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0.8rem; }
+  .membres a { display: flex; gap: 0.9rem; align-items: center; padding: 1rem; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+  .membres a:hover { border-color: var(--blue); }
+  .pastille { width: 2.8rem; height: 2.8rem; display: grid; place-items: center; background: var(--blue); color: #ffffff; font-weight: 600; font-size: 0.85rem; flex: none; }
+  .nom { display: flex; gap: 0.5rem; align-items: center; font-weight: 500; }
+  .role { display: block; font-size: 0.84rem; color: var(--muted); }
+  .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .deux h2 { font-size: 1.5rem; font-weight: 400; margin-bottom: 0.8rem; }
+  .deux h2 .accent { font-size: 1.12em; }
+  .deux p { margin: 0 0 1rem; line-height: 1.7; color: var(--ink-soft); max-width: 36rem; }
+  @media (max-width: 760px) { .deux { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

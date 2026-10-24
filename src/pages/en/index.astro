@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import CarteArticle from '../../components/CarteArticle.astro';
+import Pixels from '../../components/Pixels.astro';
+import { articlesPublies } from '../../lib/utils';
+const articles = await articlesPublies('en');
+---
+<Base titre="English" description="Lex Ludica in English: selected analyses of the video game industry through law, economics and the humanities." langue="en" alternate="/">
+  <section class="bande hero">
+    <div class="cadre hero-cadre">
+      <div>
+        <h1>Beyond <em class="accent">video games</em></h1>
+        <p class="sous">Lex Ludica analyses video games at the crossroads of law, culture, economics and the humanities. This section gathers English translations of selected articles. The full publication is in French.</p>
+        <a class="bouton" href="/">Lire Lex Ludica en français</a>
+      </div>
+      <Pixels motif="hero" class="pix" />
+    </div>
+  </section>
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="tete-section"><h2>Articles in English</h2></div>
+      <div class="grille">{articles.map((a) => <CarteArticle article={a} />)}</div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { background: radial-gradient(ellipse 50% 90% at 6% 0%, #ece6db 0%, transparent 70%); }
+  .hero-cadre { position: relative; padding-block: 3rem 2.4rem; overflow: hidden; }
+  .hero-cadre > div { position: relative; z-index: 1; max-width: 36rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  h1 { font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 400; letter-spacing: -0.025em; }
+  h1 .accent { font-size: 1.1em; }
+  .sous { margin: 0; font-style: italic; color: var(--ink-soft); line-height: 1.55; }
+  .hero-cadre :global(.pix) { position: absolute; right: 0; top: 0; height: 100%; width: auto; max-width: 35%; }
+  .bloc { padding-block: 2.6rem 3rem; }
+  .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 2rem 1.4rem; }
+  @media (max-width: 600px) { .hero-cadre :global(.pix) { height: 4.5rem; } .hero-cadre { padding-top: 5.5rem; } }
+</style>

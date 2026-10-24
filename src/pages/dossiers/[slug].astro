@@ -1,0 +1,52 @@
+---
+import { getCollection, getEntries, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TitrePage from '../../components/TitrePage.astro';
+import { getRubrique } from '../../data/rubriques';
+import { auteursDe, formatDateCourte } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const dossiers = await getCollection('dossiers');
+  return dossiers.map((dossier) => ({ params: { slug: dossier.id }, props: { dossier } }));
+}
+const { dossier } = Astro.props;
+const { Content } = await render(dossier);
+const articles = await getEntries(dossier.data.articles);
+const avecAuteurs = await Promise.all(articles.map(async (a) => ({ a, auteurs: await auteursDe(a) })));
+---
+<Base titre={`${dossier.data.titre} ${dossier.data.accent ?? ''}`.trim()} description={dossier.data.chapo}>
+  <TitrePage surtitre={`Dossier · ${getRubrique(dossier.data.rubrique).nom}`} titre={dossier.data.titre} accent={dossier.data.accent} sous={dossier.data.chapo} />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="intro"><Content /></div>
+      <ol class="parcours">
+        {avecAuteurs.map(({ a, auteurs }, i) => (
+          <li>
+            <span class="etape" aria-hidden="true">{i + 1}</span>
+            <a href={`/articles/${a.id}`}>
+              <span class="meta"><span class="tag sombre">{getRubrique(a.data.rubrique).nom}</span><span class="date">{formatDateCourte(a.data.date)} · {auteurs.map((x) => x.data.nom).join(', ')}</span></span>
+              <span class="titre">{a.data.titre}</span>
+              <span class="chapo">{a.data.chapo}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.4rem 3rem; }
+  .intro { max-width: var(--lecture); line-height: 1.75; color: #232425; margin-bottom: 2rem; }
+  .intro :global(p) { margin: 0 0 1rem; }
+  .parcours { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; max-width: 52rem; counter-reset: none; }
+  .parcours li { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+  .etape { font-family: var(--serif); font-style: italic; font-size: 3rem; line-height: 1; color: var(--blue); text-align: right; padding-top: 0.6rem; }
+  .parcours a { display: flex; flex-direction: column; gap: 0.45rem; padding: 1.1rem 1.2rem; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+  .parcours a:hover { border-color: var(--blue); }
+  .parcours a:hover .titre { color: var(--blue); }
+  .meta { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+  .titre { font-size: 1.1rem; font-weight: 500; line-height: 1.35; }
+  .chapo { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 520px) { .parcours li { grid-template-columns: 2.2rem minmax(0, 1fr); gap: 0.6rem; } .etape { font-size: 2.2rem; } }
+</style>

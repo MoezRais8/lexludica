@@ -1,0 +1,129 @@
+---
+import Logo from './Logo.astro';
+import { rubriques, tagsEnTete } from '../data/rubriques';
+import { slugTag } from '../lib/utils';
+interface Props { langue?: 'fr' | 'en' }
+const { langue = 'fr' } = Astro.props;
+---
+<header class="entete">
+  <div class="cadre barre">
+    <a class="marque" href="/" aria-label="Lex Ludica, accueil"><Logo couleur="#ffffff" taille="1.45rem" /></a>
+    <div class="droite">
+      <nav class="hashtags" aria-label="Sujets à la une">
+        {tagsEnTete.map((t) => <a href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}
+      </nav>
+      <a class="icone recherche" href="/recherche" aria-label="Rechercher un article">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="icone calendrier" href="/calendrier" aria-label="Calendrier des articles">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="7" y="13" width="3" height="3" fill="currentColor"/></svg>
+      </a>
+      <details class="langue">
+        <summary aria-label={langue === 'en' ? 'Language: English' : 'Langue : français'}>
+          {langue === 'en' ? (
+            <svg viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0 0l60 30M60 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30M60 0L0 30" stroke="#c8102e" stroke-width="2.4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg>
+          ) : (
+            <svg viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055b4"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg>
+          )}
+        </summary>
+        <div class="choix-langue">
+          <a href="/" aria-current={langue === 'fr' ? 'true' : undefined}>Français</a>
+          <a href="/en" aria-current={langue === 'en' ? 'true' : undefined}>English</a>
+        </div>
+      </details>
+      <details class="menu">
+        <summary aria-label="Ouvrir le menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <div class="panneau">
+          <div class="col">
+            <p class="titre-col">Rubriques</p>
+            {rubriques.map((r) => <a href={`/rubriques/${r.slug}`}>{r.nom}</a>)}
+          </div>
+          <div class="col">
+            <p class="titre-col">Lire</p>
+            <a href="/articles">Tous les articles</a>
+            <a href="/dossiers">Dossiers</a>
+            <a href="/breves">Brèves</a>
+            <a href="/calendrier">Calendrier</a>
+            <a href="/medias">Médias</a>
+            <a href="/en">English articles</a>
+            <p class="titre-col sujets">Outils</p>
+            <a href="/jurisprudence">Jurisprudence</a>
+            <a href="/glossaire">Glossaire</a>
+          </div>
+          <div class="col">
+            <p class="titre-col">La revue</p>
+            <a href="/a-propos">Notre histoire</a>
+            <a href="/contributeurs">Auteurs</a>
+            <a href="/comite-editorial">Comité éditorial</a>
+            <a href="/proposer">Proposer un article</a>
+            <a href="/contact">Contact</a>
+            <p class="titre-col sujets">Sujets</p>
+            <div class="tags-menu">{tagsEnTete.map((t) => <a class="tag" href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}</div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .entete {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: var(--blue);
+    color: var(--on-blue);
+  }
+  .barre { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; }
+  .marque { text-decoration: none; display: flex; }
+  .droite { display: flex; align-items: center; gap: 0.5rem; }
+  .hashtags { display: flex; gap: 0.4rem; }
+  .hashtags a {
+    font-size: 0.72rem; font-weight: 500; color: #ffffff; text-decoration: none;
+    background: rgba(255, 255, 255, 0.16); padding: 0.35rem 0.6rem; border-radius: 3px; white-space: nowrap;
+  }
+  .hashtags a:hover { background: rgba(255, 255, 255, 0.28); }
+  .icone, .menu summary {
+    width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 3px; cursor: pointer;
+  }
+  .icone svg, .menu summary svg { width: 1.1rem; height: 1.1rem; }
+  .recherche, .calendrier { background: #ffffff; color: var(--blue); }
+  .recherche { margin-left: 0.3rem; }
+  .langue { position: relative; }
+  .langue summary { list-style: none; width: 2rem; height: 2rem; display: grid; place-items: center; cursor: pointer; border-radius: 3px; }
+  .langue summary::-webkit-details-marker { display: none; }
+  .langue summary:hover, .langue[open] summary { background: rgba(255, 255, 255, 0.16); }
+  .langue svg { width: 1.15rem; height: auto; border-radius: 1px; display: block; }
+  .choix-langue {
+    position: absolute; right: 0; top: calc(100% + 0.6rem); min-width: 9rem;
+    background: #ffffff; border: 1px solid var(--line); border-radius: 4px; padding: 0.4rem;
+    box-shadow: 0 12px 32px rgba(0, 30, 70, 0.14); display: grid;
+  }
+  .choix-langue a { color: var(--ink); text-decoration: none; font-size: 0.88rem; padding: 0.4rem 0.6rem; border-radius: 3px; }
+  .choix-langue a:hover { background: var(--bg); }
+  .choix-langue a[aria-current] { font-weight: 600; color: var(--blue); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .menu { position: relative; }
+  .menu summary { list-style: none; color: #ffffff; }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu summary:hover, .menu[open] summary { background: rgba(255, 255, 255, 0.16); }
+  .panneau {
+    position: absolute; right: 0; top: calc(100% + 0.6rem);
+    width: min(42rem, calc(100vw - 32px));
+    background: #ffffff; color: var(--ink);
+    border: 1px solid var(--line); border-radius: 4px;
+    box-shadow: 0 12px 32px rgba(0, 30, 70, 0.14);
+    padding: 1.25rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+  }
+  .col { display: flex; flex-direction: column; gap: 0.35rem; }
+  .col > a { color: var(--ink); text-decoration: none; font-size: 0.92rem; }
+  .col > a:hover { color: var(--blue); }
+  .titre-col { margin: 0 0 0.3rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .sujets { margin-top: 0.8rem; }
+  .tags-menu { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  @media (max-width: 860px) { .hashtags { display: none; } }
+  @media (max-width: 640px) { .panneau { grid-template-columns: 1fr 1fr; max-height: 75vh; overflow-y: auto; } }
+  @media (max-width: 400px) { .panneau { grid-template-columns: 1fr; } }
+</style>

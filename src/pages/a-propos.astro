@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+import { rubriques } from '../data/rubriques';
+---
+<Base titre="Notre histoire" description="Lex Ludica, revue pluridisciplinaire consacrée à l'industrie du jeu vidéo, éditée par le Cercle Vidéoludique.">
+  <TitrePage surtitre="Notre histoire" titre="Lire le jeu vidéo avec" accent="toutes les disciplines" />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="texte">
+        <p class="intro">Lex Ludica est une revue francophone consacrée à l'industrie du jeu vidéo. Elle réunit juristes, économistes, historiens, critiques, psychologues et professionnels du secteur autour d'une même exigence : comprendre un médium devenu industrie culturelle majeure.</p>
+        <h2>Notre <em class="accent">ligne</em></h2>
+        <p>Chaque analyse part d'un fait précis, une décision de justice, un rapport, une sortie, un modèle économique, et l'éclaire avec la rigueur d'une discipline. Les articles sont sourcés, référencés et relus avant publication.</p>
+        <h2>Huit <em class="accent">rubriques</em></h2>
+        <ul class="rubs">{rubriques.map((r) => <li><a href={`/rubriques/${r.slug}`}>{r.nom}</a></li>)}</ul>
+        <h2>L'<em class="accent">éditeur</em></h2>
+        <p>La revue est éditée par l'association Cercle Vidéoludique. Elle est fondée et dirigée par Moez Rais, juriste en propriété intellectuelle et droit du numérique.</p>
+        <h2>Écrire dans <em class="accent">Lex Ludica</em></h2>
+        <p>Vous travaillez sur le jeu vidéo et souhaitez proposer un article ? Envoyez un résumé de quelques lignes et votre angle d'approche à <strong class="adresse">contact@lexludica.com</strong>.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .texte { max-width: var(--lecture); line-height: 1.75; color: #232425; }
+  .intro { font-family: var(--serif); font-style: italic; font-size: 1.45rem; line-height: 1.35; color: var(--ink); margin: 0 0 1rem; }
+  h2 { font-size: 1.5rem; font-weight: 400; margin: 2.2rem 0 0.6rem; }
+  h2 .accent { font-size: 1.12em; }
+  p { margin: 0 0 1rem; }
+  .rubs { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .rubs a { display: inline-block; font-size: 0.82rem; background: var(--card); color: var(--ink); padding: 0.35rem 0.7rem; border-radius: 3px; text-decoration: none; }
+  .rubs a:hover { background: var(--blue); color: #ffffff; }
+  .adresse { font-weight: 600; user-select: all; }
+</style>

@@ -1,0 +1,11 @@
+---
+// Logotype : « Lex » en italique, « Ludica » en romain, tous deux en serif
+interface Props { couleur?: string; taille?: string }
+const { couleur = 'var(--ink)', taille = '1.5rem' } = Astro.props;
+---
+<span class="logo" style={`color:${couleur};font-size:${taille}`}><em>Lex</em> Ludica</span>
+
+<style>
+  .logo { font-family: var(--serif); line-height: 1; white-space: nowrap; letter-spacing: 0.005em; }
+  em { font-style: italic; }
+</style>

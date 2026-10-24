@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TitrePage from '../../components/TitrePage.astro';
+import { articlesPublies } from '../../lib/utils';
+
+const auteurs = (await getCollection('auteurs')).sort((a, b) => a.data.ordre - b.data.ordre);
+const articles = await articlesPublies();
+const nb = (id: string) => articles.filter((a) => a.data.auteurs.some((r) => r.id === id)).length;
+---
+<Base titre="Notre équipe" description="Les juristes, économistes, historiens, psychologues et game designers qui écrivent dans Lex Ludica.">
+  <TitrePage titre="Notre" accent="équipe d'experts" sous="Une vingtaine d'auteurs venus du droit, de l'économie, de l'histoire, de la culture, de la psychologie et du game design." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <ul class="liste">
+        {auteurs.map((a) => (
+          <li>
+            <a href={`/contributeurs/${a.id}`}>
+              <span class="pastille" aria-hidden="true">{a.data.initiales}</span>
+              <span class="infos">
+                <span class="nom">{a.data.nom} {a.data.fictif && <span class="demo-flag">démo</span>}</span>
+                <span class="role">{a.data.role}</span>
+                <span class="disc">{a.data.disciplines.map((d) => <span class="tag">#{d.toLowerCase()}</span>)}</span>
+              </span>
+              <span class="nb">{nb(a.id)} {nb(a.id) > 1 ? 'articles' : 'article'}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
+  .liste a {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: start;
+    padding: 1.2rem; background: var(--surface); border: 1px solid var(--line);
+    color: var(--ink); text-decoration: none; height: 100%;
+  }
+  .liste a:hover { border-color: var(--blue); }
+  .pastille {
+    width: 3rem; height: 3rem; display: grid; place-items: center;
+    background: var(--blue); color: #ffffff; font-weight: 600; font-size: 0.9rem; border-radius: 2px;
+  }
+  .infos { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+  .nom { font-weight: 500; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .role { font-size: 0.84rem; color: var(--muted); }
+  .disc { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.4rem; }
+  .nb { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+</style>

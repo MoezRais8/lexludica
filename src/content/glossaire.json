@@ -1,0 +1,52 @@
+{
+  "termes": [
+    {
+      "id": "clu",
+      "terme": "Contrat de licence utilisateur (CLUF)",
+      "definition": "Contrat par lequel l'éditeur concède au joueur un droit d'utiliser le jeu, sans lui transférer la propriété de l'œuvre. Il fixe notamment ce qui est permis en matière de copie, de revente ou de modding.",
+      "voir": "En anglais : EULA"
+    },
+    {
+      "id": "epuisement-des-droits",
+      "terme": "Épuisement des droits",
+      "definition": "Règle selon laquelle, une fois un exemplaire mis sur le marché avec l'accord du titulaire des droits, celui-ci ne peut plus contrôler sa revente. Son application aux copies dématérialisées reste discutée.",
+      "voir": "CJUE, UsedSoft (2012) ; CJUE, Tom Kabinet (2019)"
+    },
+    {
+      "id": "fair-use",
+      "terme": "Fair use",
+      "definition": "Exception américaine au copyright, appréciée au cas par cas selon quatre critères, dont la finalité de l'usage et son effet sur le marché de l'œuvre. Elle n'a pas d'équivalent général en droit français.",
+      "voir": "Sony c. Connectix (2000)"
+    },
+    {
+      "id": "mesures-techniques",
+      "terme": "Mesures techniques de protection",
+      "definition": "Dispositifs destinés à empêcher les actes non autorisés sur une œuvre, comme la copie d'un jeu ou le lancement de copies non officielles sur une console. Leur contournement est en principe interdit.",
+      "voir": "CJUE, Nintendo c. PC Box (2014)"
+    },
+    {
+      "id": "oeuvre-collective",
+      "terme": "Œuvre collective",
+      "definition": "Œuvre créée à l'initiative d'une personne qui l'édite et la divulgue sous son nom, et dans laquelle les contributions des auteurs se fondent dans un ensemble. Les droits naissent directement sur la tête de cette personne.",
+      "voir": "Art. L. 113-2 et L. 113-5 CPI"
+    },
+    {
+      "id": "oeuvre-complexe",
+      "terme": "Œuvre complexe",
+      "definition": "Qualification retenue pour le jeu vidéo : une œuvre qui ne se réduit pas à sa dimension logicielle et dont chaque composante (code, musique, graphismes, scénario) suit le régime juridique qui lui est propre.",
+      "voir": "Cass. 1re civ., 25 juin 2009, Cryo"
+    },
+    {
+      "id": "oeuvre-composite",
+      "terme": "Œuvre composite",
+      "definition": "Œuvre nouvelle qui incorpore une œuvre préexistante sans la collaboration de son auteur, comme un mod. Son auteur en est titulaire, sous réserve des droits de l'auteur de l'œuvre d'origine.",
+      "voir": "Art. L. 113-2 et L. 113-4 CPI"
+    },
+    {
+      "id": "originalite",
+      "terme": "Originalité",
+      "definition": "Condition de la protection par le droit d'auteur : la création doit porter l'empreinte de la personnalité de son auteur. Pour le logiciel, elle s'apprécie comme un apport intellectuel propre.",
+      "voir": "Cass. ass. plén., 7 mars 1986, Pachot"
+    }
+  ]
+}

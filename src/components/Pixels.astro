@@ -1,0 +1,17 @@
+---
+// Motif pixel de la charte : un bloc jaune qui se délite en carrés vers la gauche.
+// Chaque « 1 » est un carré plein, chaque « . » un vide.
+interface Props { motif?: 'hero' | 'equipe'; couleur?: string; class?: string }
+const { motif = 'hero', couleur = 'var(--yellow)', class: classe = '' } = Astro.props;
+const grilles = {
+  hero: ['...111', '..1111', '...1.1', '.1.111', '1.1111', '.11111', '...111'],
+  equipe: ['.....11', '....1.1', '...1111', '..11.11', '.1.1111', '1.11111', '111.111'],
+};
+const lignes = grilles[motif];
+const cols = lignes[0].length;
+const rows = lignes.length;
+const carres = lignes.flatMap((l, y) => [...l].map((c, x) => (c === '1' ? { x, y } : null)).filter(Boolean)) as { x: number; y: number }[];
+---
+<svg class={`pixels ${classe}`} viewBox={`0 0 ${cols} ${rows}`} preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+  {carres.map((c) => <rect x={c.x} y={c.y} width="1.01" height="1.01" fill={couleur} />)}
+</svg>

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+---
+<Base titre="Contact" description="Contacter la rédaction de Lex Ludica.">
+  <TitrePage titre="Nous" accent="contacter" sous="Proposition d'article, partenariat, droit de réponse ou simple question : écrivez à la rédaction." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="cartes">
+        <div class="carte">
+          <p class="t">Rédaction</p>
+          <p class="adresse">contact@lexludica.com</p>
+          <p class="d">Propositions d'articles, questions sur un contenu publié.</p>
+        </div>
+        <div class="carte">
+          <p class="t">Droit de réponse</p>
+          <p class="adresse">contact@lexludica.com</p>
+          <p class="d">À l'attention du directeur de la publication, en précisant l'article concerné.</p>
+        </div>
+        <div class="carte jaune">
+          <p class="t">Rejoindre l'équipe</p>
+          <p class="d">Vous êtes chercheur, praticien ou professionnel du secteur ? Présentez-nous votre angle en quelques lignes.</p>
+          <a class="bouton blanc" href="/contributeurs">Voir l'équipe</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .cartes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1rem; }
+  .carte { background: var(--surface); border: 1px solid var(--line); padding: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+  .carte.jaune { background: var(--yellow); border-color: var(--yellow); color: var(--on-yellow); }
+  .carte p { margin: 0; }
+  .t { font-family: var(--serif); font-style: italic; font-size: 1.6rem; line-height: 1.1; }
+  .adresse { font-weight: 500; user-select: all; color: var(--blue); }
+  .d { font-size: 0.86rem; color: var(--ink-soft); }
+  .jaune .d { color: var(--on-yellow); }
+</style>

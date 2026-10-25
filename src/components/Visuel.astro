@@ -34,7 +34,7 @@ for (let k = 0; k < 6; k++) carres.push({ x: Math.floor(alea() * (W - largeur - 
 ---
 <div class:list={['visuel', { grand }]} style={`aspect-ratio:${ratio}`}>
   {image ? (
-    <img src={image} alt={alt} loading="lazy" />
+    <img src={image} alt={alt} loading={grand ? 'eager' : 'lazy'} decoding="async" />
   ) : (
     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMinYMax slice" role="img" aria-label={`Illustration de la rubrique ${r.nom}`}>
       <rect width={W} height={H} fill={p.fond} />

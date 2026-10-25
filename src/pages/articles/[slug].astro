@@ -89,7 +89,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
       </div>
       <div class="cadre visuel-article">
         <figure class="figure">
-          <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} alt={d.imageAlt ?? ''} ratio={d.image ? '16 / 9' : '21 / 9'} />
+          <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} alt={d.imageAlt ?? ''} ratio={d.image ? '16 / 9' : '21 / 9'} grand />
           {d.imageCredit && <figcaption>{d.imageCredit}</figcaption>}
         </figure>
       </div>

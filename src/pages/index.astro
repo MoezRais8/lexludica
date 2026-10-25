@@ -149,9 +149,12 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
     <div class="cadre bloc">
       <div class="equipe">
         <div class="equipe-texte">
-          <h2 id="equipe-titre">Rencontrez notre <em class="accent">équipe d'experts</em></h2>
-          <p>Juristes, économistes, historiens, psychologues et game designers : une vingtaine d'auteurs écrivent pour Lex Ludica.</p>
-          <a class="bouton" href="/contributeurs">Notre équipe</a>
+          <h2 id="equipe-titre">Un blog de <em class="accent">passionnés</em></h2>
+          <p class="equipe-sous">Pluridisciplinaire, consacré à l'industrie vidéoludique et à la pop-culture.</p>
+          <p>Le jeu vidéo est bien plus qu'un divertissement : c'est un miroir de notre société et un défi permanent pour le droit.</p>
+          <p>Lex Ludica est un blog dans lequel nous décryptons l'industrie sous divers angles. De la propriété intellectuelle des <em>assets</em> numériques à l'impact sociologique des mondes persistants, nous explorons les zones d'ombre du média le plus influent du XXI<sup>e</sup> siècle.</p>
+          <p>Retrouvez des articles de fond, des analyses juridiques, historiques et des réflexions sur le futur numérique de l'industrie vidéoludique.</p>
+          <a class="bouton" href="/contributeurs">Découvrir l'équipe</a>
         </div>
         <Pixels motif="equipe" class="equipe-pixels" />
       </div>
@@ -253,11 +256,13 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
     background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
     background-size: 2.5rem 2.5rem;
   }
-  .equipe-texte { position: relative; z-index: 1; max-width: 24rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+  .equipe-texte { position: relative; z-index: 1; max-width: 36rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
   .equipe h2 { font-size: clamp(1.5rem, 2.8vw, 1.9rem); font-weight: 400; line-height: 1.12; }
   .equipe h2 .accent { font-size: 1.1em; }
-  .equipe p { margin: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.85); }
-  .equipe :global(.equipe-pixels) { position: absolute; right: 0; bottom: 0; height: 88%; width: auto; max-width: 55%; }
+  .equipe p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: rgba(255, 255, 255, 0.88); }
+  .equipe .equipe-sous { font-size: 1rem; color: #ffffff; font-weight: 500; margin-top: -0.3rem; }
+  .equipe-texte .bouton { margin-top: 0.4rem; }
+  .equipe :global(.equipe-pixels) { position: absolute; right: 0; bottom: 0; height: 70%; width: auto; max-width: 34%; }
 
   @media (max-width: 900px) {
     .une { grid-template-columns: 1fr; }
@@ -273,6 +278,6 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
     .hero-liens { align-self: flex-start; margin-right: 0; }
     .grille { grid-template-columns: 1fr; }
     .equipe { padding: 1.4rem; min-height: 20rem; align-items: flex-start; }
-    .equipe :global(.equipe-pixels) { height: 50%; }
+    .equipe :global(.equipe-pixels) { display: none; }
   }
 </style>

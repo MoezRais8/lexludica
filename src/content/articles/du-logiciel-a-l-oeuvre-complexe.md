@@ -4,6 +4,8 @@ chapo: "Longtemps, le droit a vu dans le jeu vidéo un simple logiciel, dont le 
 date: 2026-05-26
 rubrique: droit
 auteurs: [baptiste-godin]
+image: /images/du-logiciel-a-l-oeuvre-complexe.jpg
+imageAlt: "Schéma : le jeu vidéo, d'abord œuvre logicielle (approche unitaire), devient après l'arrêt Cryo du 25 juin 2009 une œuvre complexe dont chaque composante (logiciel, audiovisuel, musique, graphique, scénario, gameplay) suit son propre régime"
 etiquettes: [œuvre complexe, logiciel, droit d'auteur, propriété intellectuelle]
 ---
 

@@ -1,8 +1,8 @@
 ---
 nom: Aaron Oliel
-role: Contributeur
+role: Co-fondateur, étudiant en droit
 disciplines: [Droit]
 initiales: AO
-ordre: 10
+ordre: 2
 ---
-Contributeur de Lex Ludica.
+Co-fondateur de Lex Ludica, étudiant en droit.

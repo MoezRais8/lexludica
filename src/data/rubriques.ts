@@ -50,8 +50,8 @@ export const rubriques = [
     tags: ['innovations', 'intelligence artificielle'],
   },
   {
-    slug: 'transversal',
-    nom: 'Transversal',
+    slug: 'regards-croises',
+    nom: 'Regards croisés',
     description: "Un même sujet, plusieurs disciplines autour de la table : juristes, économistes, historiens et créateurs confrontent leurs lectures.",
     tags: ['pluridisciplinaire'],
   },
@@ -62,7 +62,7 @@ export const rubriqueSlugs = rubriques.map((r) => r.slug) as [RubriqueSlug, ...R
 export const getRubrique = (slug: string) => rubriques.find((r) => r.slug === slug)!;
 
 // Rubriques mises en avant sur l'accueil (colonne gauche, colonne droite)
-export const accueilGauche: RubriqueSlug[] = ['economie', 'psychologie', 'culture', 'geopolitique', 'transversal'];
+export const accueilGauche: RubriqueSlug[] = ['economie', 'psychologie', 'culture', 'geopolitique', 'regards-croises'];
 export const accueilDroite: RubriqueSlug[] = ['droit', 'histoire', 'anatomie', 'technologies'];
 
 // Hashtags affichés dans la barre du haut et dans le pied de page

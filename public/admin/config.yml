@@ -44,7 +44,7 @@ collections:
           - { label: Histoire, value: histoire }
           - { label: Psychologie, value: psychologie }
           - { label: Technologies, value: technologies }
-          - { label: Transversal, value: transversal }
+          - { label: Regards croisés, value: regards-croises }
       - { label: Auteurs, name: auteurs, widget: relation, collection: auteurs, search_fields: [nom], value_field: "{{slug}}", display_fields: [nom], multiple: true }
       - { label: Décisions citées, name: decisions, widget: relation, collection: decisions, search_fields: [nom, numero], value_field: "{{slug}}", display_fields: [nom, juridiction], multiple: true, required: false }
       - { label: Sujets (hashtags), name: etiquettes, widget: list, required: false, hint: "Un sujet par ligne, en minuscules : droit d'auteur, ia générative…" }
@@ -68,7 +68,7 @@ collections:
     fields:
       - { label: Titre, name: titre, widget: string }
       - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false }
-      - { label: Rubrique, name: rubrique, widget: select, options: [droit, economie, geopolitique, anatomie, culture, histoire, psychologie, technologies, transversal] }
+      - { label: Rubrique, name: rubrique, widget: select, options: [droit, economie, geopolitique, anatomie, culture, histoire, psychologie, technologies, regards-croises] }
       - { label: Source, name: source, widget: string, required: false }
       - { label: Lien de la source, name: sourceUrl, widget: string, required: false }
       - { label: Texte, name: body, widget: markdown }
@@ -101,7 +101,7 @@ collections:
       - { label: Début du titre, name: titre, widget: string }
       - { label: Fin du titre (en italique), name: accent, widget: string, required: false }
       - { label: Chapô, name: chapo, widget: text }
-      - { label: Rubrique, name: rubrique, widget: select, options: [droit, economie, geopolitique, anatomie, culture, histoire, psychologie, technologies, transversal] }
+      - { label: Rubrique, name: rubrique, widget: select, options: [droit, economie, geopolitique, anatomie, culture, histoire, psychologie, technologies, regards-croises] }
       - { label: Articles (dans l'ordre de lecture), name: articles, widget: relation, collection: articles, search_fields: [titre], value_field: "{{slug}}", display_fields: [titre], multiple: true }
       - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: DD/MM/YYYY, time_format: false }
       - { label: Introduction, name: body, widget: markdown }

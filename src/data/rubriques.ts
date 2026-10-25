@@ -71,7 +71,8 @@ export const tagsPied = ['modding', "droit d'auteur", 'cluf', 'propriété intel
 
 // Réseaux sociaux : renseigner l'adresse pour activer le lien
 export const reseaux = [
-  { nom: 'LinkedIn', url: '' },
+  { nom: 'LinkedIn', url: 'https://www.linkedin.com/company/lex-ludica/' },
+  { nom: 'YouTube', url: 'https://www.youtube.com/@LexLudica3' },
   { nom: 'Instagram', url: '' },
   { nom: 'TikTok', url: '' },
   { nom: 'X', url: '' },

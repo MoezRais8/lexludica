@@ -7,7 +7,7 @@ const termes = (await getCollection('glossaire')).sort((a, b) => a.data.terme.lo
 const lettre = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '')[0].toUpperCase().replace('Œ', 'O');
 const lettres = [...new Set(termes.map((t) => lettre(t.data.terme)))];
 ---
-<Base titre="Glossaire" description="Les notions juridiques et techniques du jeu vidéo expliquées simplement.">
+<Base section="glossaire" titre="Glossaire" description="Les notions juridiques et techniques du jeu vidéo expliquées simplement.">
   <TitrePage titre="Le" accent="glossaire" sous="Les notions qui reviennent dans nos analyses, expliquées simplement. Dans les articles, les mots soulignés en pointillé affichent leur définition au survol.">
     <nav class="alphabet" aria-label="Aller à la lettre">
       {lettres.map((l) => <a href={`#lettre-${l}`}>{l}</a>)}

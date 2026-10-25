@@ -9,7 +9,7 @@ const articles = await articlesPublies();
 const nbCitations = (id: string) => articles.filter((a) => a.data.decisions.some((d) => d.id === id)).length;
 const ordres = [...new Set(decisions.map((d) => d.data.ordre))];
 ---
-<Base titre="Jurisprudence" description="Les décisions de justice qui font le droit du jeu vidéo, résumées et reliées aux analyses de Lex Ludica.">
+<Base section="jurisprudence" titre="Jurisprudence" description="Les décisions de justice qui font le droit du jeu vidéo, résumées et reliées aux analyses de Lex Ludica.">
   <TitrePage surtitre="Base de données" titre="La" accent="jurisprudence" sous="Les décisions qui font le droit du jeu vidéo, résumées et reliées aux analyses qui les citent.">
     <div class="filtres" role="group" aria-label="Filtrer par ordre juridique" id="filtres" hidden>
       <button type="button" class="filtre actif" data-ordre="">Toutes <span>{decisions.length}</span></button>

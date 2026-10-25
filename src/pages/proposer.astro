@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import TitrePage from '../components/TitrePage.astro';
 import { rubriques } from '../data/rubriques';
-import { site } from '../data/site';
+import { site, sections } from '../data/site';
 // Consignes de démonstration : à remplacer par la charte des contributeurs de la revue.
 ---
 <Base titre="Proposer un article" description="Comment proposer une analyse à Lex Ludica : formats, exigences et procédure de relecture.">
@@ -35,7 +35,7 @@ import { site } from '../data/site';
             <li><span class="n">4</span><span><strong>Relecture</strong> par un membre du comité éditorial de la discipline concernée.</span></li>
             <li><span class="n">5</span><span><strong>Publication</strong> après accord sur la version finale et signature de la cession de droits.</span></li>
           </ol>
-          <p class="lien-comite">La procédure complète est décrite sur la page <a href="/comite-editorial">Comité éditorial</a>.</p>
+          {sections.comite && <p class="lien-comite">La procédure complète est décrite sur la page <a href="/comite-editorial">Comité éditorial</a>.</p>}
         </div>
 
         <aside class="encart">

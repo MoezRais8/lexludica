@@ -7,18 +7,20 @@ import BandeNewsletter from '../components/BandeNewsletter.astro';
 import { getRubrique, accueilGauche, accueilDroite } from '../data/rubriques';
 import { articlesPublies, formatDateCourte, slugTag } from '../lib/utils';
 import { getCollection } from 'astro:content';
+import { sections } from '../data/site';
 
 const articles = await articlesPublies();
 const tendance = articles.find((a) => a.data.une) ?? articles[0];
-const populaires = articles
-  .filter((a) => a.data.populaire)
-  .sort((a, b) => (a.data.populaire ?? 9) - (b.data.populaire ?? 9))
-  .slice(0, 3);
-const recents = articles.filter((a) => a.id !== tendance.id && !populaires.includes(a)).slice(0, 6);
-const rubTendance = getRubrique(tendance.data.rubrique);
+// « Populaire » : les articles classés à la main, sinon les plus récents après celui en tendance
+const classes = articles
+  .filter((a) => a.data.populaire && a.id !== tendance?.id)
+  .sort((a, b) => (a.data.populaire ?? 9) - (b.data.populaire ?? 9));
+const populaires = (classes.length ? classes : articles.filter((a) => a.id !== tendance?.id)).slice(0, 3);
+const recents = articles.filter((a) => a.id !== tendance?.id && !populaires.includes(a)).slice(0, 6);
+const rubTendance = tendance && getRubrique(tendance.data.rubrique);
 const colonnes = [accueilGauche, accueilDroite].map((c) => c.map(getRubrique));
-const breves = (await getCollection('breves')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 4);
-const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
+const breves = sections.breves ? (await getCollection('breves')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 4) : [];
+const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0] : undefined;
 ---
 <Base>
   <section class="bande hero" aria-labelledby="hero-titre">
@@ -36,19 +38,23 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
     </div>
   </section>
 
+  {tendance && rubTendance && (
   <section class="bande">
-    <div class="cadre une">
+    <div class:list={['cadre une', { seule: populaires.length === 0 }]}>
       <div class="tendance">
-        <div class="tete-section"><h2>En tendance</h2></div>
+        <div class="tete-section"><h2>{populaires.length ? 'En tendance' : 'À la une'}</h2></div>
         <a class="lien-visuel" href={`/articles/${tendance.id}`} tabindex="-1" aria-hidden="true">
-          <Visuel slug={tendance.id} rubrique={tendance.data.rubrique} image={tendance.data.image} ratio="16 / 9" grand />
+          <Visuel slug={tendance.id} rubrique={tendance.data.rubrique} image={tendance.data.image} alt={tendance.data.imageAlt ?? ''} ratio="16 / 9" grand />
         </a>
         <p class="infos">
           <a class="tag sombre" href={`/rubriques/${rubTendance.slug}`}>#{rubTendance.nom.toLowerCase()}</a>
           <span class="date">{formatDateCourte(tendance.data.date)}</span>
         </p>
         <h3 class="titre-tendance"><a href={`/articles/${tendance.id}`}>{tendance.data.titre}</a></h3>
+        {populaires.length === 0 && <p class="chapo-une">{tendance.data.chapo}</p>}
+        {populaires.length === 0 && <a class="bouton" href={`/articles/${tendance.id}`}>Lire l'article</a>}
       </div>
+      {populaires.length > 0 && (
       <aside class="populaire" aria-labelledby="pop-titre">
         <div class="tete-section"><h2 id="pop-titre">Populaire</h2></div>
         <ol>
@@ -67,8 +73,10 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
           })}
         </ol>
       </aside>
+      )}
     </div>
   </section>
+  )}
 
   <BandeNewsletter />
 
@@ -94,6 +102,7 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
     </div>
   </section>
 
+  {recents.length > 0 && (
   <section class="bande" aria-labelledby="rec-titre">
     <div class="cadre bloc">
       <div class="tete-section">
@@ -103,9 +112,12 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
       <div class="grille">{recents.map((a) => <CarteArticle article={a} />)}</div>
     </div>
   </section>
+  )}
 
+  {(breves.length > 0 || dossier) && (
   <section class="bande" aria-labelledby="bref-titre">
     <div class="cadre bloc bref">
+      {breves.length > 0 && (
       <div class="bref-liste">
         <div class="tete-section">
           <h2 id="bref-titre">En bref</h2>
@@ -120,6 +132,7 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
           ))}
         </ul>
       </div>
+      )}
       {dossier && (
         <a class="dossier-une" href={`/dossiers/${dossier.id}`}>
           <span class="d-sur">Dossier</span>
@@ -130,6 +143,7 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
       )}
     </div>
   </section>
+  )}
 
   <section class="bande" aria-labelledby="equipe-titre">
     <div class="cadre bloc">
@@ -167,6 +181,22 @@ const dossier = (await getCollection('dossiers')).sort((a, b) => b.data.date.get
   .titre-tendance { font-size: clamp(1.3rem, 2.4vw, 1.6rem); font-weight: 500; line-height: 1.3; max-width: 30ch; }
   .titre-tendance a { color: var(--ink); text-decoration: none; }
   .titre-tendance a:hover { color: var(--blue); }
+  /* Un seul article : visuel et texte côte à côte */
+  .une.seule { grid-template-columns: 1fr; }
+  .une.seule .tendance {
+    border-right: 0; padding-right: 0;
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 2.4rem; align-items: start;
+  }
+  .une.seule .tendance > .tete-section { grid-column: 1 / -1; }
+  .une.seule .lien-visuel { grid-row: span 4; }
+  .une.seule .infos { margin-top: 0; }
+  .chapo-une { margin: 0.9rem 0 1.4rem; color: var(--ink-soft); line-height: 1.6; }
+  .une.seule .bouton { justify-self: start; }
+  @media (max-width: 900px) {
+    .une.seule .tendance { grid-template-columns: 1fr; }
+    .une.seule .lien-visuel { grid-row: auto; }
+    .une.seule .infos { margin-top: 0.9rem; }
+  }
   ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
   ol li { position: relative; overflow: hidden; background: var(--card); padding: 0.85rem 1rem 1.1rem; border-radius: 2px; min-height: 7.4rem; }
   ol .infos { margin: 0 0 0.6rem; position: relative; z-index: 1; }

@@ -2,6 +2,7 @@
 import Logo from './Logo.astro';
 import { rubriques, tagsEnTete } from '../data/rubriques';
 import { slugTag } from '../lib/utils';
+import { sections } from '../data/site';
 interface Props { langue?: 'fr' | 'en' }
 const { langue = 'fr' } = Astro.props;
 ---
@@ -18,7 +19,7 @@ const { langue = 'fr' } = Astro.props;
       <a class="icone calendrier" href="/calendrier" aria-label="Calendrier des articles">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="7" y="13" width="3" height="3" fill="currentColor"/></svg>
       </a>
-      <details class="langue">
+      {sections.anglais && (<details class="langue">
         <summary aria-label={langue === 'en' ? 'Language: English' : 'Langue : français'}>
           {langue === 'en' ? (
             <svg viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0 0l60 30M60 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30M60 0L0 30" stroke="#c8102e" stroke-width="2.4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></svg>
@@ -30,7 +31,7 @@ const { langue = 'fr' } = Astro.props;
           <a href="/" aria-current={langue === 'fr' ? 'true' : undefined}>Français</a>
           <a href="/en" aria-current={langue === 'en' ? 'true' : undefined}>English</a>
         </div>
-      </details>
+      </details>)}
       <details class="menu">
         <summary aria-label="Ouvrir le menu">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -43,20 +44,20 @@ const { langue = 'fr' } = Astro.props;
           <div class="col">
             <p class="titre-col">Lire</p>
             <a href="/articles">Tous les articles</a>
-            <a href="/dossiers">Dossiers</a>
-            <a href="/breves">Brèves</a>
+            {sections.dossiers && <a href="/dossiers">Dossiers</a>}
+            {sections.breves && <a href="/breves">Brèves</a>}
             <a href="/calendrier">Calendrier</a>
-            <a href="/medias">Médias</a>
-            <a href="/en">English articles</a>
-            <p class="titre-col sujets">Outils</p>
-            <a href="/jurisprudence">Jurisprudence</a>
-            <a href="/glossaire">Glossaire</a>
+            {sections.medias && <a href="/medias">Médias</a>}
+            {sections.anglais && <a href="/en">English articles</a>}
+            {(sections.jurisprudence || sections.glossaire) && <p class="titre-col sujets">Outils</p>}
+            {sections.jurisprudence && <a href="/jurisprudence">Jurisprudence</a>}
+            {sections.glossaire && <a href="/glossaire">Glossaire</a>}
           </div>
           <div class="col">
             <p class="titre-col">La revue</p>
             <a href="/a-propos">Notre histoire</a>
             <a href="/contributeurs">Auteurs</a>
-            <a href="/comite-editorial">Comité éditorial</a>
+            {sections.comite && <a href="/comite-editorial">Comité éditorial</a>}
             <a href="/proposer">Proposer un article</a>
             <a href="/contact">Contact</a>
             <p class="titre-col sujets">Sujets</p>

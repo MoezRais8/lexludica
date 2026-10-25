@@ -60,8 +60,8 @@ export const accueilGauche: RubriqueSlug[] = ['economie', 'psychologie'];
 export const accueilDroite: RubriqueSlug[] = ['droit', 'histoire'];
 
 // Hashtags affichés dans la barre du haut et dans le pied de page
-export const tagsEnTete = ['ia générative', 'ip', 'xbox', 'game design'];
-export const tagsPied = ['ip', 'industrie', 'ia générative', "droit d'auteur", 'rétrogaming'];
+export const tagsEnTete = ['modding', "droit d'auteur", 'cluf', 'propriété intellectuelle'];
+export const tagsPied = ['modding', "droit d'auteur", 'cluf', 'propriété intellectuelle'];
 
 // Réseaux sociaux : renseigner l'adresse pour activer le lien
 export const reseaux = [

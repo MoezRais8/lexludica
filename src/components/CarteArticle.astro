@@ -12,7 +12,7 @@ const Titre = titreNiveau;
 ---
 <article class="carte">
   <a class="lien-visuel" href={`/articles/${article.id}`} tabindex="-1" aria-hidden="true">
-    <Visuel slug={article.id} rubrique={article.data.rubrique} image={article.data.image} />
+    <Visuel slug={article.id} rubrique={article.data.rubrique} image={article.data.image} alt={article.data.imageAlt ?? ''} />
   </a>
   <p class="infos">
     <a class="tag sombre" href={`/rubriques/${rubrique.slug}`}>{rubrique.nom}</a>

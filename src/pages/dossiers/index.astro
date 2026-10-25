@@ -7,7 +7,7 @@ import { getRubrique } from '../../data/rubriques';
 
 const dossiers = (await getCollection('dossiers')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
-<Base titre="Dossiers" description="Les dossiers thématiques de Lex Ludica : des parcours de lecture en plusieurs articles.">
+<Base section="dossiers" titre="Dossiers" description="Les dossiers thématiques de Lex Ludica : des parcours de lecture en plusieurs articles.">
   <TitrePage titre="Les" accent="dossiers" sous="Des parcours de lecture : plusieurs analyses réunies autour d'une question, dans l'ordre où les lire." />
   <section class="bande">
     <div class="cadre bloc">

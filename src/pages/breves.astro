@@ -8,7 +8,7 @@ import { formatDate } from '../lib/utils';
 const breves = (await getCollection('breves')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const rendues = await Promise.all(breves.map(async (b) => ({ b, Content: (await render(b)).Content })));
 ---
-<Base titre="Brèves" description="L'actualité du jeu vidéo en quelques lignes, entre deux analyses de fond.">
+<Base section="breves" titre="Brèves" description="L'actualité du jeu vidéo en quelques lignes, entre deux analyses de fond.">
   <TitrePage titre="Les" accent="brèves" sous="L'actualité du secteur en quelques lignes, entre deux analyses de fond." />
   <section class="bande">
     <div class="cadre bloc">

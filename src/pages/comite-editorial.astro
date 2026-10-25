@@ -5,7 +5,7 @@ import TitrePage from '../components/TitrePage.astro';
 
 const membres = (await getCollection('auteurs', ({ data }) => data.comite)).sort((a, b) => a.data.ordre - b.data.ordre);
 ---
-<Base titre="Comité éditorial" description="Qui relit les articles de Lex Ludica, selon quelle procédure, et comment nous corrigeons nos erreurs.">
+<Base section="comite" titre="Comité éditorial" description="Qui relit les articles de Lex Ludica, selon quelle procédure, et comment nous corrigeons nos erreurs.">
   <TitrePage titre="Le comité" accent="éditorial" sous="Chaque article publié est relu par un membre du comité issu de la discipline concernée. Voici qui nous sommes et comment nous travaillons." />
   <section class="bande">
     <div class="cadre bloc">

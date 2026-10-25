@@ -14,7 +14,7 @@ const { Content } = await render(dossier);
 const articles = await getEntries(dossier.data.articles);
 const avecAuteurs = await Promise.all(articles.map(async (a) => ({ a, auteurs: await auteursDe(a) })));
 ---
-<Base titre={`${dossier.data.titre} ${dossier.data.accent ?? ''}`.trim()} description={dossier.data.chapo}>
+<Base section="dossiers" titre={`${dossier.data.titre} ${dossier.data.accent ?? ''}`.trim()} description={dossier.data.chapo}>
   <TitrePage surtitre={`Dossier · ${getRubrique(dossier.data.rubrique).nom}`} titre={dossier.data.titre} accent={dossier.data.accent} sous={dossier.data.chapo} />
   <section class="bande">
     <div class="cadre bloc">

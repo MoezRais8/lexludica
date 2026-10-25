@@ -12,6 +12,18 @@ export const site = {
   matomo: { url: '', siteId: '' },
 };
 
+// Rubriques affichées dans les menus, le pied de page et l'accueil.
+// Passer une valeur à true pour réactiver la rubrique dès qu'elle a du contenu.
+export const sections = {
+  jurisprudence: false,
+  glossaire: false,
+  dossiers: false,
+  breves: false,
+  medias: false,
+  anglais: false,
+  comite: false,
+};
+
 // Vidéos et podcasts de la page Médias. Renseigner l'adresse YouTube pour activer le lien.
 export const medias = [
   {

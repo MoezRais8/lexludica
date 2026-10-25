@@ -18,6 +18,8 @@ const articles = defineCollection({
     une: z.boolean().default(false),            // « En tendance » sur l'accueil
     populaire: z.number().optional(),           // rang 1, 2 ou 3 dans « Populaire »
     image: z.string().optional(),               // chemin d'une image dans /public
+    imageAlt: z.string().optional(),            // description de l'image pour l'accessibilité
+    imageCredit: z.string().optional(),         // crédit affiché sous l'image
     etiquettes: z.array(z.string()).default([]),
     langue: z.enum(['fr', 'en']).default('fr'),
     traduction: z.string().optional(),          // identifiant de l'autre version linguistique

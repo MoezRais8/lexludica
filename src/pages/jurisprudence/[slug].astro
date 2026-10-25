@@ -14,7 +14,7 @@ const d = decision.data;
 const articles = (await articlesPublies('toutes')).filter((a) => a.data.decisions.some((x) => x.id === decision.id));
 const ref = refDecision(decision);
 ---
-<Base titre={`${d.nom} (${d.date.getFullYear()})`} description={d.apport}>
+<Base section="jurisprudence" titre={`${d.nom} (${d.date.getFullYear()})`} description={d.apport}>
   <section class="bande tete">
     <div class="cadre interieur">
       <p class="fil"><a href="/jurisprudence">Jurisprudence</a> › {d.ordre}</p>

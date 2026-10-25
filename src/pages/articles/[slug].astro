@@ -5,7 +5,7 @@ import CarteArticle from '../../components/CarteArticle.astro';
 import Visuel from '../../components/Visuel.astro';
 import BandeNewsletter from '../../components/BandeNewsletter.astro';
 import { getRubrique } from '../../data/rubriques';
-import { site } from '../../data/site';
+import { site, sections } from '../../data/site';
 import { articlesPublies, auteursDe, biblio, citation, formatDate, refDecision, slugTag, tempsDeLecture } from '../../lib/utils';
 
 export async function getStaticPaths() {
@@ -29,11 +29,11 @@ const tous = await articlesPublies(d.langue);
 const memeRubrique = tous.filter((a) => a.id !== article.id && a.data.rubrique === d.rubrique);
 const lies = [...memeRubrique, ...tous.filter((a) => a.id !== article.id && !memeRubrique.includes(a))].slice(0, 3);
 const ref = citation(article, auteurs);
-const decisions = d.decisions.length ? await getEntries(d.decisions) : [];
-const dossiers = (await getCollection('dossiers')).filter((x) => x.data.articles.some((r) => r.id === article.id));
+const decisions = sections.jurisprudence && d.decisions.length ? await getEntries(d.decisions) : [];
+const dossiers = sections.dossiers ? (await getCollection('dossiers')).filter((x) => x.data.articles.some((r) => r.id === article.id)) : [];
 const url = `${site.url}/articles/${article.id}`;
 const { bibtex, noms, iso } = biblio(article, auteurs, url, site.issn);
-const glossaire = (await getCollection('glossaire')).map((g) => ({ id: g.id, terme: g.data.terme, definition: g.data.definition }));
+const glossaire = (sections.glossaire ? await getCollection('glossaire') : []).map((g) => ({ id: g.id, terme: g.data.terme, definition: g.data.definition }));
 // Métadonnée COinS : permet à Zotero de détecter l'article depuis le navigateur
 const coins = new URLSearchParams({
   ctx_ver: 'Z39.88-2004',
@@ -71,7 +71,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
             <time class="date" datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
             <span class="date">· {tempsDeLecture(article.body)} {t.min}</span>
             {d.demo && <span class="demo-flag">{t.demo}</span>}
-            {d.traduction && <a class="langue-lien" href={`/articles/${d.traduction}`} hreflang={en ? 'fr' : 'en'}>{t.autre}</a>}
+            {sections.anglais && d.traduction && <a class="langue-lien" href={`/articles/${d.traduction}`} hreflang={en ? 'fr' : 'en'}>{t.autre}</a>}
           </p>
           <h1>{d.titre}</h1>
           <p class="chapo">{d.chapo}</p>
@@ -88,7 +88,10 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
         </div>
       </div>
       <div class="cadre visuel-article">
-        <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} ratio="21 / 9" />
+        <figure class="figure">
+          <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} alt={d.imageAlt ?? ''} ratio={d.image ? '16 / 9' : '21 / 9'} />
+          {d.imageCredit && <figcaption>{d.imageCredit}</figcaption>}
+        </figure>
       </div>
     </header>
 
@@ -164,12 +167,14 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
 
   <BandeNewsletter />
 
+  {lies.length > 0 && (
   <section class="bande" aria-labelledby="lies">
     <div class="cadre bloc">
       <div class="tete-section"><h2 id="lies">{t.lies}</h2></div>
       <div class="grille">{lies.map((a) => <CarteArticle article={a} />)}</div>
     </div>
   </section>
+  )}
 </Base>
 
 <script>
@@ -235,6 +240,8 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   }
   .pastille.grand { width: 2.8rem; height: 2.8rem; font-size: 0.85rem; }
   .visuel-article { padding-bottom: 2.4rem; }
+  .figure { margin: 0; max-width: 60rem; }
+  .figure figcaption { margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted); }
 
   .corps { padding-block: 2.6rem 3.2rem; }
   .marge { grid-column: 1; display: flex; flex-direction: column; gap: 1.8rem; font-size: 0.84rem; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 5rem); align-self: start; max-height: calc(100vh - 6rem); overflow-y: auto; }

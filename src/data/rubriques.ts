@@ -1,4 +1,4 @@
-// Les huit rubriques éditoriales de Lex Ludica.
+// Les neuf rubriques éditoriales de Lex Ludica.
 // Pour en ajouter une : ajouter une ligne ici, sa page se crée toute seule.
 export const rubriques = [
   {
@@ -15,15 +15,15 @@ export const rubriques = [
   },
   {
     slug: 'geopolitique',
-    nom: '(Géo)politique',
+    nom: '(Géo-)politique',
     description: "Souveraineté numérique, politiques publiques et rapports de force internationaux autour d'une industrie devenue stratégique.",
     tags: ['souveraineté', 'politiques publiques'],
   },
   {
     slug: 'anatomie',
-    nom: 'Anatomie du jeu',
-    description: "Moteurs, machines, mécaniques et game design : ce qu'il y a sous le capot des jeux et comment ils sont construits.",
-    tags: ['game design', 'technologies'],
+    nom: 'Anatomie du jeu vidéo',
+    description: "Mécaniques, game design, level design et narration : ce qui fait qu'un jeu fonctionne, décortiqué de l'intérieur.",
+    tags: ['game design', 'mécaniques'],
   },
   {
     slug: 'culture',
@@ -44,8 +44,14 @@ export const rubriques = [
     tags: ['comportement', 'cognition', 'communautés'],
   },
   {
-    slug: 'regards-croises',
-    nom: 'Regards croisés',
+    slug: 'technologies',
+    nom: 'Technologies',
+    description: "Moteurs de jeu, intelligence artificielle, cloud gaming ou réalité virtuelle : les innovations techniques qui transforment la création, la distribution et la pratique du jeu vidéo.",
+    tags: ['innovations', 'intelligence artificielle'],
+  },
+  {
+    slug: 'transversal',
+    nom: 'Transversal',
     description: "Un même sujet, plusieurs disciplines autour de la table : juristes, économistes, historiens et créateurs confrontent leurs lectures.",
     tags: ['pluridisciplinaire'],
   },
@@ -56,8 +62,8 @@ export const rubriqueSlugs = rubriques.map((r) => r.slug) as [RubriqueSlug, ...R
 export const getRubrique = (slug: string) => rubriques.find((r) => r.slug === slug)!;
 
 // Rubriques mises en avant sur l'accueil (colonne gauche, colonne droite)
-export const accueilGauche: RubriqueSlug[] = ['economie', 'psychologie'];
-export const accueilDroite: RubriqueSlug[] = ['droit', 'histoire'];
+export const accueilGauche: RubriqueSlug[] = ['economie', 'psychologie', 'culture', 'geopolitique', 'transversal'];
+export const accueilDroite: RubriqueSlug[] = ['droit', 'histoire', 'anatomie', 'technologies'];
 
 // Hashtags affichés dans la barre du haut et dans le pied de page
 export const tagsEnTete = ['modding', "droit d'auteur", 'cluf', 'propriété intellectuelle'];

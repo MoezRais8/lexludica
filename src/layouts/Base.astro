@@ -4,13 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site, sections } from '../data/site';
 
-interface Props { titre?: string; description?: string; type?: string; langue?: 'fr' | 'en'; alternate?: string; section?: keyof typeof sections }
+interface Props { titre?: string; description?: string; type?: string; langue?: 'fr' | 'en'; alternate?: string; image?: string; section?: keyof typeof sections }
 const {
   titre,
   description = "Lex Ludica analyse le jeu vidéo au croisement du droit, de la culture, de l'économie et des sciences humaines.",
   type = 'website',
   langue = 'fr',
   alternate,
+  image = '/logo-512.png',
   section,
 } = Astro.props;
 // Une rubrique masquée reste accessible par son adresse, mais n'est pas indexée
@@ -28,12 +29,16 @@ const canonique = new URL(chemin, Astro.site);
     <meta name="claude:viewport-fit-sides" content="cover" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0055b4" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {(!site.indexation || masquee) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonique} />
     <meta property="og:title" content={titreComplet} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonique} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
     <meta property="og:locale" content={langue === 'en' ? 'en_GB' : 'fr_FR'} />
     {alternate && <link rel="alternate" hreflang={langue === 'en' ? 'fr' : 'en'} href={new URL(alternate, Astro.site)} />}
     <link rel="sitemap" href="/sitemap-index.xml" />

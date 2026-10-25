@@ -48,7 +48,7 @@ const coins = new URLSearchParams({
 });
 noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
 ---
-<Base titre={d.titre} description={d.chapo} type="article" langue={d.langue} alternate={d.traduction ? `/articles/${d.traduction}` : undefined}>
+<Base titre={d.titre} description={d.chapo} type="article" image={d.image} langue={d.langue} alternate={d.traduction ? `/articles/${d.traduction}` : undefined}>
   <Fragment slot="head">
     <meta name="citation_title" content={d.titre} />
     {noms.map((n) => <meta name="citation_author" content={`${n.nom}, ${n.prenom}`} />)}

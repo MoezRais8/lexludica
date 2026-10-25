@@ -18,7 +18,7 @@ const icones: Record<string, string> = {
   <div class="bande">
     <div class="cadre grille">
       <div class="bloc-marque">
-        <Logo taille="1.6rem" />
+        <a class="marque-pied" href="/" aria-label="Lex Ludica, accueil"><img src="/logo.png" alt="" width="64" height="64" /><Logo taille="1.6rem" /></a>
         <div class="liens">
           <ul>
             <li><a href="/">Accueil</a></li>
@@ -72,6 +72,8 @@ const icones: Record<string, string> = {
 </footer>
 
 <style>
+  .marque-pied { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+  .marque-pied img { width: 4rem; height: 4rem; flex: none; }
   .grille {
     display: grid;
     grid-template-columns: 1.5fr 1.1fr 0.8fr;

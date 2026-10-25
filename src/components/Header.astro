@@ -8,7 +8,7 @@ const { langue = 'fr' } = Astro.props;
 ---
 <header class="entete">
   <div class="cadre barre">
-    <a class="marque" href="/" aria-label="Lex Ludica, accueil"><Logo couleur="#ffffff" taille="1.45rem" /></a>
+    <a class="marque" href="/" aria-label="Lex Ludica, accueil"><img class="marque-logo" src="/logo.png" alt="" width="40" height="40" /><Logo couleur="#ffffff" taille="1.45rem" /></a>
     <div class="droite">
       <nav class="hashtags" aria-label="Sujets à la une">
         {tagsEnTete.map((t) => <a href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}
@@ -78,7 +78,8 @@ const { langue = 'fr' } = Astro.props;
     color: var(--on-blue);
   }
   .barre { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; }
-  .marque { text-decoration: none; display: flex; }
+  .marque { text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+  .marque-logo { width: 2.5rem; height: 2.5rem; flex: none; }
   .droite { display: flex; align-items: center; gap: 0.5rem; }
   .hashtags { display: flex; gap: 0.4rem; }
   .hashtags a {

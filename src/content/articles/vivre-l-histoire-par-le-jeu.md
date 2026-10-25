@@ -1,7 +1,7 @@
 ---
 titre: "Vivre l'Histoire par le jeu : immersion, apprentissage et divertissement"
 chapo: "Assassin's Creed, Civilization, Red Dead Redemption 2 : les jeux historiques reconstituent le passé avec un souci croissant d'exactitude. En faisant du joueur un acteur de l'Histoire, ils transforment son rapport au savoir, au point d'entrer dans les salles de classe."
-date: 2026-10-25
+date: 2026-06-08
 rubrique: histoire
 auteurs: [maleine-oumar-niang]
 image: /images/vivre-l-histoire-par-le-jeu.jpg

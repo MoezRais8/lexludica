@@ -1,7 +1,7 @@
 ---
 titre: "Jeux vidéo et pirates : « Je t'aime… moi non plus »"
 chapo: "Contrefaçon, menace économique, mais aussi levier de visibilité : de la disquette copiée aux émulateurs, le piratage accompagne le jeu vidéo depuis ses débuts. Le pirate est-il l'ennemi des ayants droit, ou un ennemi intime ?"
-date: 2026-10-25
+date: 2026-06-15
 rubrique: droit
 auteurs: [firah-melahi]
 image: /images/jeux-video-et-pirates.jpg

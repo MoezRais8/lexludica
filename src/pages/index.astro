@@ -23,6 +23,22 @@ const breves = sections.breves ? (await getCollection('breves')).sort((a, b) => 
 const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0] : undefined;
 ---
 <Base>
+  <section class="bande" aria-labelledby="equipe-titre">
+    <div class="cadre bloc pres-bloc">
+      <div class="equipe">
+        <div class="equipe-texte">
+          <h2 id="equipe-titre">Un blog de <em class="accent">passionnés</em></h2>
+          <p class="equipe-sous">Pluridisciplinaire, consacré à l'industrie vidéoludique et à la pop-culture.</p>
+          <p>Le jeu vidéo est bien plus qu'un divertissement : c'est un miroir de notre société et un défi permanent pour le droit.</p>
+          <p>Lex Ludica est un blog dans lequel nous décryptons l'industrie sous divers angles. De la propriété intellectuelle des <em>assets</em> numériques à l'impact sociologique des mondes persistants, nous explorons les zones d'ombre du média le plus influent du XXI<sup>e</sup> siècle.</p>
+          <p>Retrouvez des articles de fond, des analyses juridiques, historiques et des réflexions sur le futur numérique de l'industrie vidéoludique.</p>
+          <a class="bouton" href="/contributeurs">Découvrir l'équipe</a>
+        </div>
+        <Pixels motif="equipe" class="equipe-pixels" />
+      </div>
+    </div>
+  </section>
+
   <section class="bande hero" aria-labelledby="hero-titre">
     <div class="cadre hero-cadre">
       <div class="hero-texte">
@@ -145,21 +161,6 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
   </section>
   )}
 
-  <section class="bande" aria-labelledby="equipe-titre">
-    <div class="cadre bloc">
-      <div class="equipe">
-        <div class="equipe-texte">
-          <h2 id="equipe-titre">Un blog de <em class="accent">passionnés</em></h2>
-          <p class="equipe-sous">Pluridisciplinaire, consacré à l'industrie vidéoludique et à la pop-culture.</p>
-          <p>Le jeu vidéo est bien plus qu'un divertissement : c'est un miroir de notre société et un défi permanent pour le droit.</p>
-          <p>Lex Ludica est un blog dans lequel nous décryptons l'industrie sous divers angles. De la propriété intellectuelle des <em>assets</em> numériques à l'impact sociologique des mondes persistants, nous explorons les zones d'ombre du média le plus influent du XXI<sup>e</sup> siècle.</p>
-          <p>Retrouvez des articles de fond, des analyses juridiques, historiques et des réflexions sur le futur numérique de l'industrie vidéoludique.</p>
-          <a class="bouton" href="/contributeurs">Découvrir l'équipe</a>
-        </div>
-        <Pixels motif="equipe" class="equipe-pixels" />
-      </div>
-    </div>
-  </section>
 </Base>
 
 <style>
@@ -243,7 +244,9 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
   .d-lien { font-size: 0.8rem; font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; }
   .dossier-une:hover { filter: brightness(0.97); }
 
-  /* Équipe */
+  /* Présentation */
+  .pres-bloc { padding-block: 2rem 2rem; }
+  .equipe sup { line-height: 0; font-size: 0.7em; }
   .equipe {
     position: relative; overflow: hidden;
     background: linear-gradient(135deg, #00418a 0%, #0055b4 55%, #1a6fd0 100%);

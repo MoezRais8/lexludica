@@ -57,7 +57,6 @@ En définitive, le droit d'auteur permet la protection autonome du personnage de
 ### Jurisprudence
 
 - Cass. 1re civ., 25 juin 2009, *Cryo*, n° 07-20.387, publié au bulletin
-- TJ Paris, 19 décembre 2024, n° 22/13834
 - US District Court, *Capcom U.S.A. Inc. v. Data East Corp.*, 16 mars 1994
 
 ### Doctrine
@@ -74,4 +73,3 @@ En définitive, le droit d'auteur permet la protection autonome du personnage de
 
 - E. Pierrat, « [Du droit d'auteur au droit des marques : comment les personnages de fiction ont fait leur entrée à l'INPI](https://www.village-justice.com/articles/droit-auteur-droit-des-marques-comment-les-personnages-fiction-ont-fait-leur) », *Village de la Justice*
 - N. Dreyfus, « [Intellectual Property in the video game industry: The complete guide to protecting your studio](https://www.dreyfus.fr/en/2026/03/04/intellectual-property-in-the-video-game-industry-the-complete-guide-to-protecting-your-studio/) », Dreyfus, 4 mars 2026
-- N. Martinsson, « [Game Characters and IP Protection: why is proper IP creation necessary?](https://www.beyonceweekumbc.org/ip-protection) »

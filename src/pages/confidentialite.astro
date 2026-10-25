@@ -1,14 +1,108 @@
 ---
 import Base from '../layouts/Base.astro';
 import TitrePage from '../components/TitrePage.astro';
+const mail = 'contact@lexludica.com';
 ---
-<Base titre="Politique de confidentialité" description="Politique de confidentialité du site Lex Ludica.">
-  <TitrePage titre="Politique de" accent="confidentialité" sous="Document provisoire : les éléments entre crochets seront remplacés par la version définitive." />
+<Base titre="Politique de confidentialité" description="Politique de confidentialité du site Lex Ludica : données collectées, finalités, durées de conservation, droits des utilisateurs et cookies.">
+  <TitrePage titre="Politique de" accent="confidentialité" />
   <section class="bande">
     <div class="cadre bloc">
       <div class="texte">
-        <p>Le site ne dépose aucun cookie publicitaire. La fréquentation est mesurée avec Matomo, configuré sans cookie et avec anonymisation des adresses IP, dans les conditions d'exemption de consentement définies par la CNIL. Les adresses e-mail collectées pour la newsletter servent uniquement à son envoi. [Base légale, durée de conservation, sous-traitant d'envoi, droits des personnes et contact].</p>
-        <p>Voir aussi les <a href="/mentions-legales">mentions légales</a>.</p>
+        <h2 id="preambule">1. Préambule</h2>
+        <p>La présente politique de confidentialité a pour but d'informer les utilisateurs du site Lex Ludica, ci-après le Site, sur la manière dont sont collectées et traitées leurs données personnelles, sur les droits dont ils disposent concernant ces données, sur la personne responsable du traitement des données collectées, sur les destinataires de ces données, et sur la politique du Site en matière de cookies.</p>
+        <p>Cette politique complète les <a href="/mentions-legales">mentions légales</a> du Site et doit être lue conjointement avec celles-ci.</p>
+
+        <h2 id="principes">2. Principes relatifs à la collecte et au traitement</h2>
+        <p>Conformément à l'article 5 du Règlement (UE) 2016/679 (RGPD), les données à caractère personnel sont traitées de manière licite, loyale et transparente au regard de la personne concernée. Elles sont collectées pour des finalités déterminées, explicites et légitimes, décrites à l'article 4 de la présente politique. Elles sont adéquates, pertinentes et limitées à ce qui est nécessaire, exactes et tenues à jour, et conservées sous une forme permettant l'identification des personnes concernées pendant une durée n'excédant pas celle nécessaire au regard des finalités poursuivies, telle que précisée à l'article 7. Elles sont enfin traitées de façon à garantir une sécurité appropriée, y compris la protection contre le traitement non autorisé ou illicite et contre la perte, la destruction ou les dégâts d'origine accidentelle.</p>
+
+        <h2 id="base-legale">3. Base légale du traitement</h2>
+        <p>Conformément à l'article 6 du RGPD, chaque traitement mis en œuvre par le Site repose sur l'une des bases légales suivantes. Le consentement de l'utilisateur, recueilli préalablement au traitement, fonde l'inscription à la newsletter. L'intérêt légitime poursuivi par le responsable du traitement, lorsqu'il ne porte pas une atteinte disproportionnée aux droits de l'utilisateur, fonde la sécurité du Site et l'établissement de statistiques de fréquentation agrégées. Enfin, le traitement d'une demande à l'initiative de l'utilisateur fonde le traitement des messages adressés par e-mail à l'association.</p>
+        <p>Le consentement donné pour l'inscription à la newsletter peut être retiré à tout moment, sans porter atteinte à la licéité du traitement effectué avant son retrait.</p>
+
+        <h2 id="donnees">4. Données collectées et finalités</h2>
+        <h3>4.1. Données collectées</h3>
+        <p>Dans le cadre de l'utilisation du Site, les catégories de données suivantes sont susceptibles d'être collectées.</p>
+        <div class="tableau">
+          <table>
+            <thead><tr><th scope="col">Contexte</th><th scope="col">Données collectées</th></tr></thead>
+            <tbody>
+              <tr><td>Inscription à la newsletter</td><td>Adresse e-mail, date d'inscription</td></tr>
+              <tr><td>Navigation (automatique)</td><td>Adresse IP, type de navigateur, système d'exploitation, pages visitées, date et heure de la visite</td></tr>
+              <tr><td>Prise de contact par e-mail</td><td>Nom, adresse e-mail et contenu du message</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Le Site ne comporte ni espace de commentaires ni compte utilisateur : aucune autre donnée n'est collectée auprès des lecteurs.</p>
+
+        <h3>4.2. Finalités</h3>
+        <p>Les données collectées sont utilisées pour la gestion de la newsletter, afin d'envoyer les derniers articles, les actualités relatives à l'industrie du jeu vidéo et les informations relatives au Site. Elles servent également à la gestion des relations avec les utilisateurs, pour répondre aux demandes, questions ou sollicitations reçues par e-mail. Elles permettent en outre l'amélioration du Site, par l'établissement de statistiques de fréquentation sous une forme anonymisée, afin de comprendre les contenus qui intéressent le lectorat et d'améliorer l'ergonomie du Site. Enfin, elles contribuent à la sécurité et à la maintenance du Site, en prévenant les usages abusifs et en assurant sa sécurité technique, notamment la protection contre les attaques et la détection d'intrusions.</p>
+        <p>Aucune donnée collectée sur le Site ne fait l'objet d'une prise de décision automatisée produisant des effets juridiques ou affectant l'utilisateur de manière significative, au sens de l'article 22 du RGPD.</p>
+
+        <h3>4.3. Contenus embarqués depuis d'autres sites</h3>
+        <p>Les articles publiés sur le Site peuvent inclure des contenus intégrés, par exemple des vidéos YouTube ou Twitch, des publications issues de réseaux sociaux, ou des images. Ces contenus intégrés se comportent exactement comme si l'utilisateur se rendait directement sur le site tiers concerné : celui-ci peut collecter des données sur l'utilisateur, utiliser des cookies, embarquer des outils de suivi tiers et surveiller les interactions avec le contenu embarqué, y compris pour les utilisateurs disposant d'un compte et connectés sur ledit site tiers. Le Site n'exerce aucun contrôle sur ces traitements, qui relèvent de la politique de confidentialité propre à chaque plateforme tierce.</p>
+
+        <h2 id="responsable">5. Responsable du traitement</h2>
+        <p>Le responsable du traitement des données à caractère personnel collectées sur le Site est l'association Cercle Vidéoludique, association régie par la loi du 1er juillet 1901, éditrice du site Lex Ludica.</p>
+        <p class="fiche">
+          <strong>Association Cercle Vidéoludique</strong><br />
+          Siège social : 17, quai de Grenelle, 75015 Paris<br />
+          Représentée par : Moez RAIS, en qualité de Président et Directeur de la publication<br />
+          Contact : <a href={`mailto:${mail}`}>{mail}</a>
+        </p>
+        <p>L'association Cercle Vidéoludique n'a pas d'obligation légale de désigner un Délégué à la Protection des Données, le traitement de données mis en œuvre ne relevant pas des cas de désignation obligatoire prévus à l'article 37 du RGPD. Toute question relative à la protection des données peut néanmoins être adressée au contact ci-dessus.</p>
+
+        <h2 id="destinataires">6. Destinataires des données</h2>
+        <p>Les données personnelles collectées sont strictement confidentielles et ne sont transmises qu'aux seuls destinataires suivants :</p>
+        <ul>
+          <li>le personnel habilité de l'association Cercle Vidéoludique, dans la limite de ses fonctions ;</li>
+          <li>l'hébergeur, la société Cloudflare, Inc. (États-Unis), dans le cadre de l'hébergement technique et de la sécurisation du Site ;</li>
+          <li>le prestataire d'envoi de la newsletter, la société Brevo (Sendinblue SAS, France) ;</li>
+          <li>l'outil de mesure d'audience Matomo, configuré sans cookie et avec anonymisation des adresses IP.</li>
+        </ul>
+        <p>Ces prestataires agissent en qualité de sous-traitants au sens de l'article 28 du RGPD et ne sont autorisés à traiter les données que pour l'exécution des prestations qui leur sont confiées, dans le respect de la réglementation applicable.</p>
+        <p>Lorsqu'un transfert de données est susceptible d'intervenir hors de l'Union européenne, notamment vers les États-Unis du fait de la localisation de l'hébergeur, ce transfert est encadré par des garanties appropriées au sens du Chapitre V du RGPD, telles que la décision d'adéquation relative au cadre de protection des données UE-États-Unis (<em>Data Privacy Framework</em>) ou les clauses contractuelles types de la Commission européenne.</p>
+
+        <h2 id="conservation">7. Durée de conservation</h2>
+        <div class="tableau">
+          <table>
+            <thead><tr><th scope="col">Catégorie de données</th><th scope="col">Durée de conservation</th></tr></thead>
+            <tbody>
+              <tr><td>Données de newsletter</td><td>Jusqu'à désinscription via le lien présent dans chaque e-mail, ou 3 ans à compter de la dernière interaction de l'utilisateur</td></tr>
+              <tr><td>Données de mesure d'audience</td><td>13 mois maximum, sous forme anonymisée</td></tr>
+              <tr><td>Journaux techniques de connexion</td><td>Durée limitée nécessaire à la sécurité du Site, selon les paramètres de l'hébergeur</td></tr>
+              <tr><td>Échanges par e-mail</td><td>3 ans maximum à compter du dernier échange</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>À l'expiration de ces durées, les données sont supprimées ou anonymisées, sauf obligation légale de conservation plus longue.</p>
+
+        <h2 id="securite">8. Sécurité des données</h2>
+        <p>Conformément à l'article 32 du RGPD, des mesures techniques et organisationnelles appropriées sont mises en œuvre afin de protéger les données personnelles contre tout accès non autorisé, perte, destruction ou divulgation. Ces mesures comprennent notamment le chiffrement des échanges via le protocole TLS (HTTPS), un accès à l'administration du Site restreint aux seules personnes habilitées au sein de l'association, ainsi que la conservation d'un historique versionné et sauvegardé de l'ensemble des contenus. Le Site, composé de pages statiques, ne repose sur aucune base de données exposée au public.</p>
+
+        <h2 id="liens">9. Liens vers des sites tiers</h2>
+        <p>Le Site peut contenir des liens hypertextes renvoyant vers des sites web tiers. L'association Cercle Vidéoludique n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leurs pratiques en matière de protection des données. Il est recommandé à l'utilisateur de consulter la politique de confidentialité de chaque site tiers visité.</p>
+
+        <h2 id="droits">10. Droits de l'utilisateur</h2>
+        <p>Conformément au RGPD et à la loi n° 78-17 du 6 janvier 1978 modifiée, dite loi Informatique et Libertés, tout utilisateur dispose de plusieurs droits sur ses données personnelles.</p>
+        <ol>
+          <li><strong>Droit d'accès</strong> (article 15 du RGPD) : obtenir la confirmation que des données le concernant sont ou non traitées et, le cas échéant, y accéder.</li>
+          <li><strong>Droit de rectification</strong> (article 16 du RGPD) : obtenir la correction de données inexactes ou incomplètes.</li>
+          <li><strong>Droit à l'effacement</strong> (article 17 du RGPD) : demander la suppression de ses données lorsqu'elles ne sont plus nécessaires au regard des finalités poursuivies, ou en cas de retrait du consentement.</li>
+          <li><strong>Droit à la limitation du traitement</strong> (article 18 du RGPD) : demander le gel temporaire de l'utilisation de ses données, notamment en cas de contestation de leur exactitude.</li>
+          <li><strong>Droit à la portabilité</strong> (article 20 du RGPD) : recevoir les données fournies dans un format structuré, couramment utilisé et lisible par machine, et les transmettre à un autre responsable de traitement.</li>
+          <li><strong>Droit d'opposition</strong> (article 21 du RGPD) : s'opposer, pour des raisons tenant à sa situation particulière, à un traitement fondé sur l'intérêt légitime, ainsi qu'à toute prospection.</li>
+          <li><strong>Droit de définir des directives post-mortem</strong> relatives au sort de ses données après son décès, conformément à l'article 85 de la loi Informatique et Libertés.</li>
+        </ol>
+        <p>Ces droits s'exercent en écrivant à <a href={`mailto:${mail}`}>{mail}</a>, en précisant l'objet de la demande. Une réponse est apportée dans un délai maximal d'un mois à compter de la réception de la demande, ce délai pouvant être prolongé de deux mois supplémentaires en cas de demande complexe, l'utilisateur en étant alors informé.</p>
+        <p>En cas de difficulté persistante, l'utilisateur peut introduire une réclamation auprès de l'autorité de contrôle compétente, la Commission nationale de l'informatique et des libertés (CNIL), 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, <a href="https://www.cnil.fr">www.cnil.fr</a>.</p>
+
+        <h2 id="cookies">11. Cookies</h2>
+        <p>Le Site ne dépose aucun cookie publicitaire, de réseaux sociaux ou de mesure d'audience. La fréquentation est mesurée sans cookie, avec anonymisation des adresses IP, dans les conditions d'exemption de consentement définies par la CNIL. C'est pourquoi aucun bandeau de consentement n'est affiché.</p>
+        <p>Seuls des cookies strictement nécessaires au fonctionnement et à la sécurité du Site sont susceptibles d'être déposés par l'hébergeur, notamment pour la protection contre les attaques automatisées. Conformément aux recommandations de la CNIL relatives aux cookies et autres traceurs, ces cookies sont exemptés de consentement.</p>
+        <p>Les contenus embarqués depuis des sites tiers (article 4.3) peuvent déposer leurs propres cookies, selon la politique de chaque plateforme. L'utilisateur peut à tout moment configurer les paramètres de son navigateur pour refuser le dépôt de cookies, étant précisé qu'un tel refus peut affecter la lecture de certains contenus.</p>
+
+        <h2 id="modifications">12. Modifications</h2>
+        <p>L'association Cercle Vidéoludique, éditrice du Site, se réserve le droit de modifier la présente politique à tout moment afin d'assurer sa conformité avec le droit en vigueur ou de refléter une évolution des traitements mis en œuvre. L'utilisateur est invité à consulter régulièrement cette page.</p>
       </div>
     </div>
   </section>
@@ -17,6 +111,19 @@ import TitrePage from '../components/TitrePage.astro';
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .texte { max-width: var(--lecture); }
-  p { margin: 0 0 1rem; color: var(--ink-soft); line-height: 1.7; }
-  a { color: var(--blue, #0055b4); }
+  h2 { font-size: 1.25rem; font-weight: 500; margin: 2.2rem 0 0.6rem; scroll-margin-top: 5rem; }
+  h2:first-child { margin-top: 0; }
+  h3 { font-size: 1rem; font-weight: 600; margin: 1.4rem 0 0.4rem; }
+  p, li { color: var(--ink-soft); line-height: 1.7; }
+  p { margin: 0 0 1rem; }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.3rem; }
+  li { margin-bottom: 0.35rem; }
+  li strong { color: var(--ink, #1b1c1d); font-weight: 600; }
+  a { color: var(--blue); }
+  .fiche { padding: 1rem 1.2rem; border-left: 3px solid var(--blue); background: rgba(0, 85, 180, 0.04); }
+  .tableau { overflow-x: auto; margin: 0 0 1rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.6rem 0.8rem; border-bottom: 1px solid rgba(0, 0, 0, 0.1); color: var(--ink-soft); line-height: 1.55; }
+  th { font-weight: 600; color: var(--ink, #1b1c1d); background: rgba(0, 85, 180, 0.06); }
+  td:first-child { width: 38%; }
 </style>

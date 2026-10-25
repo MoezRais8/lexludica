@@ -4,7 +4,6 @@ chapo: "Shrek au volant dans GTA V, Counter-Strike né de Half-Life : le modding
 date: 2026-05-11
 rubrique: droit
 auteurs: [moez-rais]
-une: true
 image: /images/le-mod-shrek-gta5.jpg
 imageAlt: "Capture de GTA V : Shrek conduit un cabriolet sur une autoroute de Los Santos, grâce à un mod"
 imageCredit: "Illustration : mod Shrek pour Grand Theft Auto V (Rockstar Games), capture d'une vidéo YouTube."

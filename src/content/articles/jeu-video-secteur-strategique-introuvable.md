@@ -6,7 +6,7 @@ rubrique: geopolitique
 auteurs: [moez-rais]
 image: /images/jeu-video-secteur-strategique-introuvable.jpg
 imageAlt: "Capture d'un jeu de simulation géopolitique : carte de l'Europe de l'Ouest couverte d'icônes, avec un panneau de statistiques touristiques par pays centré sur la France"
-imageCredit: "Capture d'écran : Power & Revolution (Eversim)."
+imageCredit: "Capture d'écran : Geo-Political Simulator 4 (Eversim)."
 etiquettes: [souveraineté, investissements étrangers, soft power, politiques publiques, fiscalité]
 ---
 

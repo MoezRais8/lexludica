@@ -4,6 +4,8 @@ export const site = {
   editeur: 'Cercle Vidéoludique',
   url: 'https://lexludica.com',
   email: 'contact@lexludica.com',
+  // Passer à true le jour du lancement : tant que c'est false, les moteurs de recherche n'indexent pas le site
+  indexation: false,
   // ISSN attribué par la BnF : il s'affiche dans le pied de page et les métadonnées dès qu'il est renseigné
   issn: '',
   // Mesure d'audience Matomo sans cookies : adresse de l'instance et identifiant du site

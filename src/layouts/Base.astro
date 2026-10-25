@@ -25,6 +25,7 @@ const canonique = new URL(chemin, Astro.site);
     <meta name="claude:viewport-fit-sides" content="cover" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0055b4" />
+    {!site.indexation && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonique} />
     <meta property="og:title" content={titreComplet} />
     <meta property="og:description" content={description} />

@@ -1,18 +1,16 @@
-# Espace contributeurs de Lex Ludica (Decap CMS)
-# Chaque article est enregistré comme un fichier dans le dépôt GitHub du site.
-# Avec le flux de relecture, un contributeur crée un brouillon, le passe « en relecture »,
-# et seul un éditeur peut le publier.
+# Espace d'édition de Lex Ludica (Sveltia CMS)
+# Chaque modification est enregistrée dans le dépôt GitHub du site,
+# puis Cloudflare reconstruit et publie le site automatiquement en une à deux minutes.
+# Connexion : bouton « Se connecter avec un jeton » (jeton GitHub personnel, voir README).
 
 backend:
   name: github
-  repo: A_RENSEIGNER/lexludica      # compte GitHub / nom du dépôt
+  repo: MoezRais8/lexludica
   branch: main
-  base_url: https://A_RENSEIGNER    # service de connexion GitHub (voir README)
 
-# Pour tester sur son ordinateur : lancer « npm run cms » puis « npm run dev », et ouvrir /admin
+# Pour tester sur son ordinateur : lancer « npm run dev » et ouvrir /admin
 local_backend: true
 
-publish_mode: editorial_workflow
 locale: fr
 site_url: https://lexludica.com
 display_url: https://lexludica.com

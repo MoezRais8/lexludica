@@ -5,12 +5,17 @@
 2. Dans ce dossier : `npm install` puis `npm run dev`
 3. Ouvrir http://localhost:4321
 
-## Écrire et relire avec l'espace contributeurs
-L'espace contributeurs (Decap CMS) est à l'adresse `/admin`.
-- **En local** : lancer `npm run cms` dans un terminal et `npm run dev` dans un autre, puis ouvrir http://localhost:4321/admin
-- **En ligne** : renseigner le dépôt GitHub et le service de connexion dans `public/admin/config.yml`
-  (sur Cloudflare, un petit service de connexion GitHub pour Decap se déploie en quelques minutes).
-- Flux de relecture : un contributeur crée un brouillon, le passe « En relecture », un éditeur le publie.
+## Publier sans développeur : l'espace d'édition
+Adresse : **https://lexludica.com/admin**
+
+Première connexion (une fois par personne) :
+1. Avoir un compte GitHub invité sur le dépôt `MoezRais8/lexludica` (Settings › Collaborators).
+2. Créer un jeton : GitHub › Settings › Developer settings › Personal access tokens › Fine-grained tokens › Generate new token.
+   Repository access : « Only select repositories » › `lexludica`. Permissions › Contents : « Read and write ». Copier le jeton.
+3. Sur /admin, cliquer sur « Se connecter avec un jeton » (Sign In with Token) et coller le jeton.
+
+Publier : choisir une collection (Articles, Brèves…), « Nouveau », remplir, « Enregistrer ».
+Le site se met à jour tout seul en une à deux minutes.
 
 ## Ce que l'on peut créer
 | Contenu | Dossier |

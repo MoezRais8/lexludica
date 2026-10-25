@@ -1,25 +1,57 @@
 ---
 import Base from '../layouts/Base.astro';
 import TitrePage from '../components/TitrePage.astro';
-// Gabarit : les champs entre crochets sont à compléter avec les documents définitifs.
 ---
-<Base titre="Mentions légales" description="Mentions légales, conditions d'utilisation, données personnelles et droit de réponse de Lex Ludica.">
-  <TitrePage titre="Mentions" accent="légales" sous="Gabarit de démonstration : les éléments entre crochets seront remplacés par les documents définitifs." />
+<Base titre="Mentions légales" description="Mentions légales du site Lex Ludica, édité par l'association Cercle Vidéoludique.">
+  <TitrePage titre="Mentions" accent="légales" />
   <section class="bande">
     <div class="cadre bloc">
       <div class="texte">
-        <h2>Éditeur</h2>
-        <p>Lex Ludica est édité par l'association Cercle Vidéoludique, [adresse du siège], [numéro RNA]. Contact : contact@lexludica.com.</p>
-        <h2>Directeur de la publication</h2>
-        <p>[Nom du représentant légal de l'association].</p>
-        <h2>Hébergement</h2>
-        <p>[Nom, raison sociale, adresse et téléphone de l'hébergeur].</p>
-        <h2>Conditions d'utilisation</h2>
-        <p>Les articles publiés restent soumis aux conditions de cession conclues avec leurs auteurs. Toute reproduction au-delà de la courte citation nécessite l'accord de l'éditeur. [Conditions complètes].</p>
-        <h2 id="confidentialite">Politique de confidentialité</h2>
-        <p>Le site ne dépose aucun cookie publicitaire. La fréquentation est mesurée avec Matomo, configuré sans cookie et avec anonymisation des adresses IP, dans les conditions d'exemption de consentement définies par la CNIL. Les adresses e-mail collectées pour la newsletter servent uniquement à son envoi. [Base légale, durée de conservation, sous-traitant d'envoi, droits des personnes et contact].</p>
-        <h2 id="droit-de-reponse">Droit de réponse</h2>
-        <p>Toute personne nommée ou désignée dans un article peut exercer son droit de réponse en écrivant au directeur de la publication à contact@lexludica.com. [Modalités et délais].</p>
+        <p>Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), il est précisé aux utilisateurs du site Lex Ludica l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.</p>
+
+        <h2 id="edition">1. Édition du site</h2>
+        <p>Le présent site, accessible à l'URL <a href="https://lexludica.com">https://lexludica.com</a>, est édité par l'association Cercle Vidéoludique, association à but non lucratif, régie par la loi du 1er juillet 1901.</p>
+        <p class="fiche">
+          <strong>Association Cercle Vidéoludique</strong><br />
+          Siège social : 17, quai de Grenelle, 75015 Paris<br />
+          N° RNA : W751 283 134<br />
+          N° SIREN : 102 840 246<br />
+          N° SIRET : 102 840 246 00015<br />
+          Code NAF/APE : 94.99Z<br />
+          Représentée par : Moez RAIS, en qualité de Président et Directeur de la publication<br />
+          E-mail : <a href="mailto:contact@lexludica.com">contact@lexludica.com</a>
+        </p>
+
+        <h2 id="hebergement">2. Hébergement</h2>
+        <p>Le Site est hébergé par la société Cloudflare, Inc., sise 101 Townsend Street, San Francisco, CA 94107, États-Unis (téléphone : +1 650 319 8930). Ces coordonnées, ainsi que les modalités de contact de l'hébergeur, sont à vérifier périodiquement sur l'espace client, ces informations pouvant évoluer.</p>
+
+        <h2 id="directeur">3. Directeur de publication</h2>
+        <p>Le Directeur de la publication du Site est Moez RAIS. Il peut être contacté à l'adresse <a href="mailto:contact@lexludica.com">contact@lexludica.com</a>.</p>
+
+        <h2 id="propriete-intellectuelle">4. Propriété intellectuelle et contrefaçon</h2>
+        <h3>4.1. Contenu du site</h3>
+        <p>La présentation du Site ainsi que chacun des éléments qui le composent, notamment la marque, le logo, la charte graphique, les noms de domaine, les textes des articles, le code HTML et les fichiers numériques, sont protégés par les dispositions du Code de la propriété intellectuelle et, plus généralement, par les conventions internationales applicables au droit d'auteur.</p>
+        <p>Ces éléments sont la propriété exclusive de l'association Cercle Vidéoludique, éditrice du Site, sous réserve des contenus fournis par les contributeurs de Lex Ludica, qui en conservent la titularité des droits.</p>
+        <p>Toute reproduction, représentation, modification, publication, transmission ou dénaturation, totale ou partielle, du Site ou de son contenu, par quelque procédé que ce soit et sur quelque support que ce soit, est interdite sans l'autorisation écrite préalable du Directeur de la publication. Seule est autorisée la copie pour un usage strictement privé, personnel et non commercial, dans le respect des dispositions de l'article L. 122-5 du Code de la propriété intellectuelle.</p>
+        <p>Le non-respect de ces dispositions expose son auteur à des poursuites civiles et pénales sur le fondement des articles L. 335-2 et suivants du Code de la propriété intellectuelle relatifs à la contrefaçon.</p>
+        <h3>4.2. Usage du site et exception de courte citation</h3>
+        <p>Lex Ludica a pour vocation l'analyse du secteur vidéoludique au prisme, notamment, du droit, de l'économie, de l'histoire, de la culture et de la psychologie, au moyen d'articles rédigés par ses contributeurs.</p>
+        <p>Les captures d'écran, logos de jeux vidéo, noms de studios, extraits vidéo ou autres éléments appartenant à des tiers et cités sur le Site demeurent la propriété exclusive de leurs ayants droit respectifs. Leur reproduction est réalisée à titre pédagogique, informatif et illustratif, dans le cadre de l'exception de courte citation et d'analyse critique prévue à l'article L. 122-5, 3°, a) du Code de la propriété intellectuelle. Tout ayant droit souhaitant s'opposer à l'utilisation d'un élément lui appartenant peut adresser une demande motivée à l'adresse <a href="mailto:contact@lexludica.com">contact@lexludica.com</a>, à laquelle il sera répondu dans les meilleurs délais.</p>
+
+        <h2 id="responsabilite">5. Limitation de responsabilité</h2>
+        <h3>5.1. Absence de conseil juridique</h3>
+        <p>Le Site diffuse des contenus à caractère juridique, économique, historique ou culturel portant sur l'industrie du jeu vidéo. Ces contenus, rédigés à des fins d'information et d'analyse générale, sont susceptibles de comporter des inexactitudes, des omissions ou de ne plus refléter l'état du droit ou des pratiques en vigueur au jour de leur consultation.</p>
+        <p>Les informations diffusées sur le Site ne constituent en aucun cas une consultation juridique, un conseil personnalisé, un acte de démarchage ou une offre de service au sens de la réglementation applicable à la profession d'avocat. Elles ne sauraient se substituer à l'avis d'un professionnel du droit dûment habilité, seul en mesure d'apprécier une situation individuelle. L'Éditeur ne garantit ni l'exhaustivité ni l'exactitude des informations publiées et décline toute responsabilité quant à l'usage qui pourrait en être fait.</p>
+        <h3>5.2. Liens hypertextes</h3>
+        <p>Le Site peut contenir des liens hypertextes renvoyant vers des sites tiers. L'Éditeur n'exerce aucun contrôle sur le contenu de ces sites et décline toute responsabilité quant à leur contenu, leur disponibilité ou les conséquences pouvant résulter de leur consultation.</p>
+        <h3>5.3. Disponibilité du site</h3>
+        <p>L'Éditeur s'efforce d'assurer l'accessibilité du Site mais ne saurait être tenu responsable des interruptions, temporaires ou définitives, résultant notamment d'opérations de maintenance, de dysfonctionnements techniques ou d'un cas de force majeure.</p>
+
+        <h2 id="donnees-personnelles">6. Données personnelles</h2>
+        <p>Le traitement des données personnelles collectées sur le Site, notamment dans le cadre de l'inscription à la newsletter ou de la prise de contact, fait l'objet d'une <a href="/confidentialite">politique de confidentialité</a> distincte, conformément au Règlement (UE) 2016/679 (RGPD) et à la loi n° 78-17 du 6 janvier 1978 modifiée relative à l'informatique, aux fichiers et aux libertés.</p>
+
+        <h2 id="droit-applicable">7. Droit applicable</h2>
+        <p>Les présentes mentions légales sont régies par le droit français. Tout litige relatif à leur interprétation ou à leur exécution relève de la compétence des juridictions relevant de la Cour d'appel de Paris.</p>
       </div>
     </div>
   </section>
@@ -28,7 +60,9 @@ import TitrePage from '../components/TitrePage.astro';
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .texte { max-width: var(--lecture); }
-  h2 { font-size: 1.25rem; font-weight: 500; margin: 2rem 0 0.5rem; scroll-margin-top: 5rem; }
-  h2:first-child { margin-top: 0; }
+  h2 { font-size: 1.25rem; font-weight: 500; margin: 2.2rem 0 0.6rem; scroll-margin-top: 5rem; }
+  h3 { font-size: 1rem; font-weight: 600; margin: 1.4rem 0 0.4rem; }
   p { margin: 0 0 1rem; color: var(--ink-soft); line-height: 1.7; }
+  .fiche { padding: 1rem 1.2rem; border-left: 3px solid var(--blue, #0055b4); background: rgba(0, 85, 180, 0.04); }
+  a { color: var(--blue, #0055b4); }
 </style>

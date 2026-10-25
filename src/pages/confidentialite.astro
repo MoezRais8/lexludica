@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+---
+<Base titre="Politique de confidentialité" description="Politique de confidentialité du site Lex Ludica.">
+  <TitrePage titre="Politique de" accent="confidentialité" sous="Document provisoire : les éléments entre crochets seront remplacés par la version définitive." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <div class="texte">
+        <p>Le site ne dépose aucun cookie publicitaire. La fréquentation est mesurée avec Matomo, configuré sans cookie et avec anonymisation des adresses IP, dans les conditions d'exemption de consentement définies par la CNIL. Les adresses e-mail collectées pour la newsletter servent uniquement à son envoi. [Base légale, durée de conservation, sous-traitant d'envoi, droits des personnes et contact].</p>
+        <p>Voir aussi les <a href="/mentions-legales">mentions légales</a>.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.6rem 3rem; }
+  .texte { max-width: var(--lecture); }
+  p { margin: 0 0 1rem; color: var(--ink-soft); line-height: 1.7; }
+  a { color: var(--blue, #0055b4); }
+</style>

@@ -75,6 +75,6 @@ export const reseaux = [
   { nom: 'YouTube', url: 'https://www.youtube.com/@LexLudica3' },
   // { nom: 'Instagram', url: '' },
   // { nom: 'TikTok', url: '' },
-  { nom: 'X', url: '' },
+  // { nom: 'X', url: '' },
   // { nom: 'Discord', url: '' },
 ];

@@ -7,12 +7,12 @@ const articles = await articlesPublies();
 const nb = (s: string) => articles.filter((a) => a.data.rubrique === s).length;
 ---
 <Base titre="Catégories" description="Les huit rubriques de Lex Ludica.">
-  <TitrePage titre="Toutes les" accent="catégories" sous="Huit portes d'entrée pour lire le jeu vidéo, du droit à la psychologie." />
+  <TitrePage titre="Toutes les" accent="catégories" sous="Neuf portes d'entrée pour lire le jeu vidéo, du droit à la psychologie." />
   <section class="bande">
     <div class="cadre bloc">
       <div class="categories">
         {rubriques.map((r) => (
-          <article class="cat">
+          <article class="cat" style={`--rub:${r.couleur}`}>
             <div class="haut">
               <h2><a href={`/rubriques/${r.slug}`} class="accent">{r.nom}</a></h2>
               <span class="nb">{nb(r.slug)} {nb(r.slug) > 1 ? 'articles' : 'article'}</span>
@@ -29,7 +29,7 @@ const nb = (s: string) => articles.filter((a) => a.data.rubrique === s).length;
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
-  .cat { background: var(--surface); border: 1px solid var(--line); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .cat { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--rub, var(--line)); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
   .haut { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
   h2 { font-size: 1.85rem; line-height: 1; }
   h2 a { color: var(--ink); text-decoration: none; }

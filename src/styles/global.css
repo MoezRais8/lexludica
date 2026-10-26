@@ -142,3 +142,6 @@ a.tag:hover { background: #d3e6eb; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* Couleur de rubrique : pastille sur les étiquettes, liseré sur les cartes */
+.tag-rub::before { content: ''; display: inline-block; width: 0.5em; height: 0.5em; border-radius: 50%; background: var(--rub, var(--blue)); margin-right: 0.45em; vertical-align: 0.06em; }

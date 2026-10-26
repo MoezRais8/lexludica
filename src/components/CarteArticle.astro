@@ -15,7 +15,7 @@ const Titre = titreNiveau;
     <Visuel slug={article.id} rubrique={article.data.rubrique} image={article.data.image} alt={article.data.imageAlt ?? ''} />
   </a>
   <p class="infos">
-    <a class="tag sombre" href={`/rubriques/${rubrique.slug}`}>{rubrique.nom}</a>
+    <a class="tag sombre tag-rub" style={`--rub:${rubrique.couleur}`} href={`/rubriques/${rubrique.slug}`}>{rubrique.nom}</a>
     <span class="date">{formatDateCourte(article.data.date)}</span>
   </p>
   <Titre class="titre"><a href={`/articles/${article.id}`}>{article.data.titre}</a></Titre>

@@ -12,7 +12,7 @@ const { rubrique } = Astro.props;
 const articles = (await articlesPublies()).filter((a) => a.data.rubrique === rubrique.slug);
 ---
 <Base titre={rubrique.nom} description={rubrique.description}>
-  <TitrePage surtitre="Catégorie" titre="" accent={rubrique.nom} sous={rubrique.description}>
+  <TitrePage couleur={rubrique.couleur} surtitre="Catégorie" titre="" accent={rubrique.nom} sous={rubrique.description}>
     <div class="tags">{rubrique.tags.map((t) => <a class="tag" href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}</div>
   </TitrePage>
   <ListeOuVide articles={articles} messageVide="Les premières analyses de cette rubrique arrivent bientôt." />

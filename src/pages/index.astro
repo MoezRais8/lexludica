@@ -63,7 +63,7 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
           <Visuel slug={tendance.id} rubrique={tendance.data.rubrique} image={tendance.data.image} alt={tendance.data.imageAlt ?? ''} ratio="16 / 9" grand />
         </a>
         <p class="infos">
-          <a class="tag sombre" href={`/rubriques/${rubTendance.slug}`}>#{rubTendance.nom.toLowerCase()}</a>
+          <a class="tag sombre tag-rub" style={`--rub:${rubTendance.couleur}`} href={`/rubriques/${rubTendance.slug}`}>#{rubTendance.nom.toLowerCase()}</a>
           <span class="date">{formatDateCourte(tendance.data.date)}</span>
         </p>
         <h3 class="titre-tendance"><a href={`/articles/${tendance.id}`}>{tendance.data.titre}</a></h3>
@@ -80,7 +80,7 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
               <li>
                 <span class="rang" aria-hidden="true">{i + 1}</span>
                 <p class="infos">
-                  <a class="tag" href={`/rubriques/${r.slug}`}>#{r.nom.toLowerCase()}</a>
+                  <a class="tag tag-rub" style={`--rub:${r.couleur}`} href={`/rubriques/${r.slug}`}>#{r.nom.toLowerCase()}</a>
                   <span class="date">{formatDateCourte(a.data.date)}</span>
                 </p>
                 <a class="titre-pop" href={`/articles/${a.id}`}>{a.data.titre}</a>
@@ -106,7 +106,7 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
         {colonnes.map((col, ci) => (
           <div class:list={['col-cat', ci === 0 ? 'large' : 'etroite']}>
             {col.map((r) => (
-              <article class="cat">
+              <article class="cat" style={`--rub:${r.couleur}`}>
                 <h3><a href={`/rubriques/${r.slug}`} class="accent">{r.nom}</a></h3>
                 <p>{r.description}</p>
                 <div class="cat-tags">{r.tags.map((t) => <a class="tag" href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}</div>
@@ -218,7 +218,7 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
   /* Catégories */
   .categories { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
   .col-cat { display: grid; gap: 1rem; }
-  .cat { background: var(--surface); border: 1px solid var(--line); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .cat { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--rub, var(--line)); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
   .large .cat { min-height: 11.5rem; }
   .etroite .cat:last-child { min-height: 14.5rem; }
   .cat h3 { font-size: 1.85rem; line-height: 1; }

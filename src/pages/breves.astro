@@ -18,7 +18,7 @@ const rendues = await Promise.all(breves.map(async (b) => ({ b, Content: (await 
             <time class="quand" datetime={b.data.date.toISOString()}>{formatDate(b.data.date)}</time>
             <div class="breve">
               <p class="meta">
-                <a class="tag sombre" href={`/rubriques/${b.data.rubrique}`}>{getRubrique(b.data.rubrique).nom}</a>
+                <a class="tag sombre tag-rub" style={`--rub:${getRubrique(b.data.rubrique).couleur}`} href={`/rubriques/${b.data.rubrique}`}>{getRubrique(b.data.rubrique).nom}</a>
                 {b.data.demo && <span class="demo-flag">démo</span>}
               </p>
               <h2>{b.data.titre}</h2>

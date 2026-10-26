@@ -1,10 +1,11 @@
 ---
 // En-tête des pages intérieures : surtitre, titre (avec un mot en serif italique), sous-titre
-interface Props { surtitre?: string; titre: string; accent?: string; sous?: string }
-const { surtitre, titre, accent, sous } = Astro.props;
+interface Props { couleur?: string; surtitre?: string; titre: string; accent?: string; sous?: string }
+const { couleur, surtitre, titre, accent, sous } = Astro.props;
 ---
 <section class="bande titre-page">
   <div class="cadre interieur">
+    {couleur && <span class="lisere" style={`background:${couleur}`} aria-hidden="true"></span>}
     {surtitre && <p class="surtitre">{surtitre}</p>}
     <h1>{titre}{accent && <> <em class="accent">{accent}</em></>}</h1>
     {sous && <p class="sous">{sous}</p>}
@@ -15,6 +16,7 @@ const { surtitre, titre, accent, sous } = Astro.props;
 <style>
   .titre-page { background: radial-gradient(ellipse 50% 100% at 6% 0%, #ece6db 0%, transparent 70%); }
   .interieur { padding-block: 2.8rem 2.2rem; }
+  .lisere { display: block; width: 3rem; height: 4px; margin-bottom: 0.9rem; }
   .surtitre { margin: 0 0 0.6rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
   h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 400; letter-spacing: -0.025em; max-width: 24ch; }
   h1 .accent { font-size: 1.1em; }

@@ -9,7 +9,7 @@ const articles = await articlesPublies();
 <Base titre="Tous les articles" description="Toutes les analyses publiées par Lex Ludica.">
   <TitrePage titre="Tous les" accent="articles" sous={`${articles.length} analyses publiées, de la plus récente à la plus ancienne.`}>
     <nav class="filtres" aria-label="Catégories">
-      {rubriques.map((r) => <a class="tag sombre" href={`/rubriques/${r.slug}`}>{r.nom}</a>)}
+      {rubriques.map((r) => <a class="tag sombre tag-rub" style={`--rub:${r.couleur}`} href={`/rubriques/${r.slug}`}>{r.nom}</a>)}
       <a class="tag cal-lien" href="/calendrier">Parcourir par date</a>
     </nav>
   </TitrePage>

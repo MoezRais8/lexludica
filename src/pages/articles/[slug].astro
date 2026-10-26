@@ -67,7 +67,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
       <div class="cadre grille-article">
         <div class="col-texte">
           <p class="infos">
-            <a class="tag sombre" href={`/rubriques/${rubrique.slug}`}>#{rubrique.nom.toLowerCase()}</a>
+            <a class="tag sombre tag-rub" style={`--rub:${rubrique.couleur}`} href={`/rubriques/${rubrique.slug}`}>#{rubrique.nom.toLowerCase()}</a>
             <time class="date" datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
             <span class="date">· {tempsDeLecture(article.body)} {t.min}</span>
             {d.demo && <span class="demo-flag">{t.demo}</span>}

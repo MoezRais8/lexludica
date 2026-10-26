@@ -36,11 +36,21 @@ Le premier, « Dark Cosmic » (13 juin 2019), est la première cosmétique de cl
 
 Le second, « Mythmaker » (23 janvier 2025), est commercialisé en tant que nouveau *skin* « Légendaire » du personnage, l'habillant d'une tenue fantaisiste inspirée du mythe du Nouvel An lunaire, à la croisée d'une esthétique puriste du papier découpé. « Mythmaker Jhin » est affiché au même prix, soit 1 820 RP, avec donc la promesse d'une qualité digne du rang « Légendaire ». Cependant, à l'observation de son exécution artistique, force est de constater l'inverse. Au-delà de l'ajustement et de l'ajout de nombreuses textures et particules en corrélation avec la thématique retenue, toutes les animations du squelette (*rig*) restent recyclées, inchangées par rapport au modèle « par défaut ». On note aussi un manque de contenu sur les compétences, ne laissant comme nouveauté qu'une couleur vive pour les sorts. Une claire dégradation qualitative, et une déception supplémentaire pour les joueurs fidèles, qui voient l'exigence de qualité du studio en déroute.
 
+<figure>
+  <img src="/images/lol-jhin-comparaison.jpg" alt="Le personnage Jhin dans trois apparences côte à côte : par défaut, Dark Cosmic et Mythmaker" width="2048" height="684" loading="lazy" />
+  <figcaption>Comparaison des rendus en jeu des cosmétiques « par défaut », « Dark Cosmic » et « Mythmaker » du personnage de Jhin.</figcaption>
+</figure>
+
 ## Morgana : une cosmétique « Exaltée » à 250 €
 
 Courant juin 2025, sur la page Reddit des joueurs du personnage Morgana, des interrogations émergent au lendemain de la commercialisation du *skin* « Spirit Blossom Morgana », le 25 juin 2025. Ce dernier, de rareté « Exalté », appartient à une classe supérieure à celle des cosmétiques précédemment citées. Affichée à une valeur réelle de 32 000 RP, soit environ 250 €, cette haute cosmétique est présentée comme justifiée. Cependant, une voix s'élève le jour même de la publication et décrit un ensemble de graves insuffisances techniques et graphiques au regard de son prix. Une alerte qui discrédite la cosmétique « Spirit Blossom ».
 
 Cette même voix, lasse d'être ignorée par le service client de Riot Games, décide ainsi de publier ses observations. L'internaute, surnommé LoveForNuWa, décrit les insuffisances suivantes : la cosmétique « exaltée » présente de nombreux défauts, *bugs* et manques de fluidité, notamment des animations de jambes « cassées » et tremblantes, des déplacements rigides en décalage avec l'inertie des ailes et d'autres particules, ou encore un manque de design entre les deux formes de transformation, qui se rapprochent davantage d'un changement de couleur que de la moindre variation de modélisation 3D. Une forme secondaire qui, de surcroît, disparaît soudainement lors de certaines attaques. Un ensemble d'autres interactions semble manquer, alors que des cosmétiques de rang « Légendaire » en proposent d'inédites, et plus lisses.
+
+<figure>
+  <img src="/images/lol-morgana-spirit-blossom.jpg" alt="Le personnage Morgana dans les deux formes de la cosmétique Spirit Blossom, côte à côte" width="1536" height="753" loading="lazy" />
+  <figcaption>Comparaison des rendus en jeu de la cosmétique « Spirit Blossom » du personnage de Morgana.</figcaption>
+</figure>
 
 L'internaute annonce également vouloir lancer un véritable rappel à l'ordre. LoveForNuWa cherche alors à alerter les autorités sur les pratiques du studio, et adresse en ce sens un courriel à la Commission européenne. Il décrit la situation en ces termes : fatigué de la disparité entre les promesses du studio et la réalité commerciale, il constate que Riot Games ne tient ni ses engagements sur sa politique de microtransactions, ni sa garantie qualitative sur les nouveaux contenus de personnalisation, dont les plus chers de la boutique de *League of Legends*. Un manque sérieux, artistique, qui se traduit selon lui par un non-respect des normes applicables aux produits numériques et aux microtransactions, et qui devrait être entendu et étudié par les autorités compétentes. Dans le même temps, l'internaute rappelle ses réelles intentions : elles sont dénuées de motivation financière et ne prennent ni la forme d'une attaque, ni celle d'une froide critique du studio ; sa démarche est celle « d'un client fidèle et de longue date ne cherchant qu'à entretenir un standard des cosmétiques ».
 

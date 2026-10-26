@@ -311,6 +311,9 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .prose :global(blockquote p) { margin: 0; }
   .prose :global(ul), .prose :global(ol) { padding-left: 1.3rem; margin: 0 0 1.25rem; }
   .prose :global(li) { margin-bottom: 0.35rem; }
+  .prose :global(figure) { margin: 2rem 0; }
+  .prose :global(figure img) { display: block; width: 100%; height: auto; }
+  .prose :global(figcaption) { margin-top: 0.5rem; font-size: 0.78rem; line-height: 1.5; color: var(--muted); }
   .prose :global(strong) { font-weight: 600; color: var(--ink); }
   .prose :global(code) { font-family: var(--sans); font-size: 0.82em; font-weight: 500; background: var(--tag-bg); color: var(--tag-fg); padding: 0.15em 0.45em; border-radius: 3px; }
   .prose :global(sup a) { text-decoration: none; font-size: 0.8em; font-weight: 600; padding-inline: 0.1em; }

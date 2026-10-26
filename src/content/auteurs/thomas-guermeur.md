@@ -1,5 +1,5 @@
 ---
-nom: Thomas Guermeur
+nom: Thomas GUERMEUR
 role: Traducteur, scénariste, diffuseur et formateur
 disciplines: [Culture]
 initiales: TG

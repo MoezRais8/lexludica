@@ -1,5 +1,5 @@
 ---
-nom: Dina Abdellah
+nom: Dina ABDELLAH
 role: Étudiante en droit
 disciplines: [Droit]
 initiales: DA

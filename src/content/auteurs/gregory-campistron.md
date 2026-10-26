@@ -1,5 +1,5 @@
 ---
-nom: Grégory Campistron
+nom: Grégory CAMPISTRON
 role: Moddeur, directeur de Project Conquerors VSF, co-directeur de Frogbit
 disciplines: [Culture]
 initiales: GC

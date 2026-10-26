@@ -1,5 +1,5 @@
 ---
-nom: Maleine Oumar Niang
+nom: Maleine Oumar NIANG
 role: Co-fondateur, étudiant en droit
 disciplines: [Droit, Histoire]
 initiales: MN

@@ -28,12 +28,21 @@ export async function auteursDe(article: CollectionEntry<'articles'>) {
     .filter(Boolean) as CollectionEntry<'auteurs'>[];
 }
 
+// Sépare prénom et nom de famille : le nom de famille est écrit en majuscules (« Moez RAIS », « YAO Baba Ange Emmanuel »)
+export function decouperNom(complet: string) {
+  const mots = complet.split(' ');
+  const estNom = (m: string) => m.length > 1 && m === m.toLocaleUpperCase('fr') && m !== m.toLocaleLowerCase('fr');
+  const nom = mots.filter(estNom);
+  if (!nom.length) return { prenom: mots[0], nom: mots.slice(1).join(' ') };
+  return { prenom: mots.filter((m) => !estNom(m)).join(' '), nom: nom.join(' ') };
+}
+
 // Référence à la manière d'une citation de doctrine
 export function citation(article: CollectionEntry<'articles'>, auteurs: CollectionEntry<'auteurs'>[]) {
   const noms = auteurs
     .map((a) => {
-      const parts = a.data.nom.split(' ');
-      return `${parts[0][0]}. ${parts.slice(1).join(' ')}`;
+      const { prenom, nom } = decouperNom(a.data.nom);
+      return `${prenom[0]}. ${nom}`;
     })
     .join(' et ');
   return `${noms}, « ${article.data.titre} », Lex Ludica, ${formatDate(article.data.date)}`;
@@ -49,8 +58,7 @@ export function biblio(article: CollectionEntry<'articles'>, auteurs: Collection
   const an = d.getFullYear();
   const iso = d.toISOString().slice(0, 10);
   const noms = auteurs.map((a) => {
-    const p = a.data.nom.split(' ');
-    return { prenom: p[0], nom: p.slice(1).join(' ') };
+    return decouperNom(a.data.nom);
   });
   const cle = `${(noms[0]?.nom ?? 'lexludica').toLowerCase().replace(/[^a-z]/g, '')}${an}${article.id.split('-')[0]}`;
   const bibtex = [

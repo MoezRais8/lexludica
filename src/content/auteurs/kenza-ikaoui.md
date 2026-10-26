@@ -1,5 +1,5 @@
 ---
-nom: Kenza Ikaoui
+nom: Kenza IKAOUI
 role: Juriste en propriété intellectuelle et en droit de l'audiovisuel
 disciplines: [Droit]
 initiales: KI

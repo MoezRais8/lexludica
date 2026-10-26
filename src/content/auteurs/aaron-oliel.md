@@ -1,5 +1,5 @@
 ---
-nom: Aaron Oliel
+nom: Aaron OLIEL
 role: Co-fondateur, étudiant en droit
 disciplines: [Droit]
 initiales: AO

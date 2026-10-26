@@ -1,5 +1,5 @@
 ---
-nom: Alexandre Godinot
+nom: Alexandre GODINOT
 role: Étudiant en informatique
 disciplines: [Technologies]
 initiales: AG

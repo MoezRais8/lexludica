@@ -1,5 +1,5 @@
 ---
-nom: Yao Baba Ange Emmanuel
+nom: YAO Baba Ange Emmanuel
 role: Fondateur de Kweni Studio
 disciplines: [Économie]
 initiales: YE

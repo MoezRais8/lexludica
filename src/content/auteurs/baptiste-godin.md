@@ -1,5 +1,5 @@
 ---
-nom: Baptiste Godin
+nom: Baptiste GODIN
 role: Étudiant en droit
 disciplines: [Droit]
 initiales: BG

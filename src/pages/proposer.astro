@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import TitrePage from '../components/TitrePage.astro';
 import { rubriques } from '../data/rubriques';
 import { site, sections } from '../data/site';
-// Consignes de démonstration : à remplacer par la charte des contributeurs de la revue.
 ---
 <Base titre="Proposer un article" description="Comment proposer une analyse à Lex Ludica : formats, exigences et procédure de relecture.">
   <TitrePage titre="Proposer un" accent="article" sous="Lex Ludica accueille les analyses de chercheurs, praticiens et professionnels du jeu vidéo. Voici ce que nous attendons et comment se déroule la relecture." />
@@ -15,8 +14,7 @@ import { site, sections } from '../data/site';
           <ul class="formats">
             <li><strong>Analyse</strong> : 1 200 à 2 500 mots, une question précise traitée avec la rigueur d'une discipline.</li>
             <li><strong>Regards croisés</strong> : deux auteurs de disciplines différentes sur un même sujet.</li>
-            <li><strong>Commentaire de décision</strong> : 800 à 1 500 mots, relié à la base de jurisprudence.</li>
-            <li><strong>Brève</strong> : quelques lignes sur une actualité, avec sa source.</li>
+            <li><strong>Commentaire de décision</strong> : 800 à 1 500 mots, sur une décision récente intéressant le jeu vidéo.</li>
           </ul>
 
           <h2>Nos <em class="accent">exigences</em></h2>
@@ -31,8 +29,8 @@ import { site, sections } from '../data/site';
           <ol class="etapes">
             <li><span class="n">1</span><span><strong>Proposition</strong> : un résumé de quelques lignes, la rubrique visée et votre parcours.</span></li>
             <li><span class="n">2</span><span><strong>Validation de l'angle</strong> par la rédaction, sous une semaine environ.</span></li>
-            <li><span class="n">3</span><span><strong>Rédaction</strong> dans l'espace contributeur, à votre rythme.</span></li>
-            <li><span class="n">4</span><span><strong>Relecture</strong> par un membre du comité éditorial de la discipline concernée.</span></li>
+            <li><span class="n">3</span><span><strong>Rédaction</strong>, à votre rythme.</span></li>
+            <li><span class="n">4</span><span><strong>Relecture</strong> par la rédaction.</span></li>
             <li><span class="n">5</span><span><strong>Publication</strong> après accord sur la version finale et signature de la cession de droits.</span></li>
           </ol>
           {sections.comite && <p class="lien-comite">La procédure complète est décrite sur la page <a href="/comite-editorial">Comité éditorial</a>.</p>}

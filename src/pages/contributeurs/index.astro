@@ -8,8 +8,8 @@ const auteurs = (await getCollection('auteurs')).sort((a, b) => a.data.ordre - b
 const articles = await articlesPublies();
 const nb = (id: string) => articles.filter((a) => a.data.auteurs.some((r) => r.id === id)).length;
 ---
-<Base titre="Notre équipe" description="Les juristes, économistes, historiens, psychologues et game designers qui écrivent dans Lex Ludica.">
-  <TitrePage titre="Notre" accent="équipe d'experts" sous="Une vingtaine d'auteurs venus du droit, de l'économie, de l'histoire, de la culture, de la psychologie et du game design." />
+<Base titre="Notre équipe" description="Juristes, avocats, étudiants, développeurs et créateurs : les auteurs qui écrivent dans Lex Ludica.">
+  <TitrePage titre="Notre" accent="équipe" sous="Juristes, avocats, étudiants, développeurs et créateurs : les auteurs qui font vivre Lex Ludica." />
   <section class="bande">
     <div class="cadre bloc">
       <ul class="liste">

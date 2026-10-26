@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://lexludica.com',
   trailingSlash: 'never',
-  integrations: [sitemap({ filter: (page) => !page.includes('/admin') })],
+  integrations: [sitemap({ filter: (page) => !['/admin', '/jurisprudence', '/glossaire', '/dossiers', '/breves', '/medias', '/en', '/comite-editorial'].some((m) => { const p = new URL(page).pathname; return p === m || p.startsWith(m + '/') || p.startsWith(m + '.'); }) })],
   build: {
     // Génère /articles/mon-article.html, servi comme /articles/mon-article
     format: 'file',

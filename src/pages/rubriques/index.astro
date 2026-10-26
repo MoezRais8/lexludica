@@ -6,7 +6,7 @@ import { articlesPublies, slugTag } from '../../lib/utils';
 const articles = await articlesPublies();
 const nb = (s: string) => articles.filter((a) => a.data.rubrique === s).length;
 ---
-<Base titre="Catégories" description="Les huit rubriques de Lex Ludica.">
+<Base titre="Catégories" description="Les neuf rubriques de Lex Ludica.">
   <TitrePage titre="Toutes les" accent="catégories" sous="Neuf portes d'entrée pour lire le jeu vidéo, du droit à la psychologie." />
   <section class="bande">
     <div class="cadre bloc">

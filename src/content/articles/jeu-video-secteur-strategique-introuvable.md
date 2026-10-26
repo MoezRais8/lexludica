@@ -98,7 +98,7 @@ Deuxième argument, le jeu vidéo est médiatique et vecteur d'influence. La lis
 
 Trois vecteurs s'y superposent : le narratif explicite du scénario, qui désigne alliés et adversaires ; le narratif environnemental, influence non verbale par imprégnation, où des dizaines d'heures dans un monde virtuel propre et sûr modifient la perception inconsciente d'un modèle de société ; le narratif systémique enfin, le plus subtil, où les règles portent une idéologie, un jeu de gestion codant la délibération démocratique comme lente et coûteuse et la décision autoritaire comme rapide et récompensée faisant apprendre l'autoritarisme par la pratique. À quoi s'ajoutent les communautés de joueurs, devenues des viviers documentés de recrutement politique.
 
-La France ne défendrait donc pas un simple loisir : elle défendrait un média de masse touchant 39 millions de joueurs nationaux et façonnant les imaginaires bien au-delà.
+La France ne défendrait donc pas un simple loisir : elle défendrait un média de masse touchant plus de 40 millions de joueurs nationaux et façonnant les imaginaires bien au-delà.
 
 Troisième argument, le jeu vidéo affecte la souveraineté nationale. L'objection classique voudrait que le jeu vidéo ne touche ni à l'ordre public ni à la défense nationale, et sorte du champ d'habilitation de L. 151-3. C'est l'inverse que les faits établissent. Un secteur dont un État conditionne l'export à la valorisation de sa culture, dont les acquisitions sont pilotées par des fonds souverains exécutant un plan national, qui sert de support à des campagnes de désinformation et de vivier au recrutement extrémiste, ne se situe pas à la marge de cette définition : il en occupe le cœur.
 

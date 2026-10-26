@@ -3,7 +3,7 @@ titre: "Jeux vidéo et pirates : « Je t'aime… moi non plus »"
 chapo: "Contrefaçon, menace économique, mais aussi levier de visibilité : de la disquette copiée aux émulateurs, le piratage accompagne le jeu vidéo depuis ses débuts. Le pirate est-il l'ennemi des ayants droit, ou un ennemi intime ?"
 date: 2026-06-15
 rubrique: droit
-auteurs: [firah-melahi]
+auteurs: [faris-melahi]
 image: /images/jeux-video-et-pirates.jpg
 imageAlt: "Illustration d'un assassin encapuchonné debout sur la vergue d'un voilier, une lame à la main, au milieu des voiles et de la brume"
 imageCredit: "Illustration : Edward Kenway, Assassin's Creed IV: Black Flag (Ubisoft), droits réservés."

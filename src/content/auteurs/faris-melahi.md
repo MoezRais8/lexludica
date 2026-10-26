@@ -1,5 +1,5 @@
 ---
-nom: Firah Melahi
+nom: Faris Melahi
 role: Juriste en propriété intellectuelle et droit du numérique
 disciplines: [Droit]
 initiales: FM

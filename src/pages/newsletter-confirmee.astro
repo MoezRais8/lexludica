@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import TitrePage from '../components/TitrePage.astro';
+---
+<Base titre="Inscription confirmée" description="Votre inscription à la newsletter de Lex Ludica est confirmée.">
+  <meta slot="head" name="robots" content="noindex" />
+  <TitrePage surtitre="Newsletter" titre="Bienvenue dans" accent="l'équipe !" sous="Votre inscription est confirmée : vous recevrez chaque nouvel article de Lex Ludica dès sa publication." />
+  <section class="bande">
+    <div class="cadre bloc">
+      <p class="texte">En attendant le prochain envoi, découvrez nos dernières analyses.</p>
+      <div class="liens">
+        <a class="bouton" href="/articles">Lire les articles</a>
+        <a class="lien" href="/">Retour à l'accueil</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bloc { padding-block: 2.4rem 3rem; }
+  .texte { margin: 0 0 1.4rem; color: var(--ink-soft); }
+  .liens { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
+  .lien { color: var(--blue); }
+</style>

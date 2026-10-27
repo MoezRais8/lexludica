@@ -1,5 +1,6 @@
 ---
-// Champ d'inscription à la lettre. Dans la version en ligne, il sera relié à Brevo.
+// Champ d'inscription à la newsletter, relié au formulaire Brevo « Inscription site »
+// (liste Newsletter Lex Ludica, double opt-in). Pour changer de formulaire, remplacer BREVO_ACTION.
 interface Props { id: string; surBleu?: boolean }
 const { id, surBleu = false } = Astro.props;
 ---
@@ -16,16 +17,41 @@ const { id, surBleu = false } = Astro.props;
 </form>
 
 <script>
+  const BREVO_ACTION = 'https://9576b5de.sibforms.com/serve/MUIFACQwY2wsAYnmvSZGV0NDVBu7DQFLj9ATysImpgpLODn1m32_dae2hnJb34sURs8YJJor0RH6TuCfVUlVnuM1Q3X51BvCW7JIrRUtmxfG7FQQWN4hlqXnaZHWH4A89pM333p9RqzExHxbbv2WoVZnbctcbRPFzImOFYrBdZkCtmrvM4VmLwdIRc9YUKNq6xo_RWKm6M8SR-uoJA==';
+
   document.querySelectorAll<HTMLFormElement>('form[data-nl]').forEach((form) => {
-    form.addEventListener('submit', (e) => {
+    const input = form.querySelector('input') as HTMLInputElement;
+    const bouton = form.querySelector('button') as HTMLButtonElement;
+    const note = form.querySelector('.note') as HTMLElement;
+    const noteInitiale = note.innerHTML;
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const input = form.querySelector('input') as HTMLInputElement;
-      const note = form.querySelector('.note') as HTMLElement;
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value.trim())) {
-        note.textContent = 'Cette adresse ne semble pas valide. Vérifiez-la puis réessayez.';
+      const email = input.value.trim();
+      if (!email) {
+        note.textContent = "Merci d'indiquer votre adresse e-mail.";
+        input.focus();
         return;
       }
-      note.textContent = 'Merci ! Les inscriptions à la newsletter ouvriront très prochainement.';
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        note.textContent = 'Cette adresse e-mail ne semble pas valide. Vérifiez-la et réessayez.';
+        input.focus();
+        return;
+      }
+      bouton.disabled = true;
+      note.textContent = 'Inscription en cours…';
+      try {
+        const donnees = new URLSearchParams({ EMAIL: email, email_address_check: '', locale: 'fr', html_type: 'simple' });
+        // Envoi direct au formulaire Brevo ; la réponse n'est pas lisible depuis le site (mode no-cors)
+        await fetch(BREVO_ACTION, { method: 'POST', mode: 'no-cors', body: donnees });
+        form.reset();
+        note.textContent = 'Presque fini ! Un e-mail de confirmation vient de vous être envoyé : cliquez sur le lien pour valider votre inscription.';
+      } catch {
+        note.textContent = "Oups, l'inscription n'a pas pu aboutir. Merci de réessayer dans quelques instants.";
+        setTimeout(() => { note.innerHTML = noteInitiale; }, 8000);
+      } finally {
+        bouton.disabled = false;
+      }
     });
   });
 </script>

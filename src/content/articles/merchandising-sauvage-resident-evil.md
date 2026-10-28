@@ -1,5 +1,5 @@
 ---
-titre: "Merchandising sauvage : Capcom, Resident Evil et la riposte des ayants droit"
+titre: "Resident Evil contre le merchandising sauvage"
 chapo: "Sweats Nemesis, bonnets Umbrella Corporation : dopé par l'IA générative et les marketplaces, le merchandising sauvage explose. Pour y répondre, Capcom a assigné 68 vendeurs d'un coup aux États-Unis, avant de se heurter aux nouvelles limites posées aux « Schedule A lawsuits »."
 date: 2026-10-28
 rubrique: droit
@@ -78,7 +78,7 @@ Le mouvement dépasse d’ailleurs largement cette seule affaire. Le 11 août 20
 
 Le juge John Kness avait résumé quelques mois plus tôt toute la difficulté : les coûts de la contrefaçon sont réels et celle-ci est extrêmement difficile à combattre avec les instruments judiciaires traditionnels, mais cela ne justifie pas pour autant de « tordre » les règles de procédure et les principes du *due process* pour rendre les poursuites plus commodes.
 
-C’est tout le paradoxe du *merchandising* sauvage à l’heure des *marketplaces*. Internet a permis de fragmenter la contrefaçon entre une multitude de petites boutiques ; les ayants droit ont répondu en cherchant à regrouper ces vendeurs dans des contentieux de masse. L’affaire *Resident Evil* montre aujourd’hui les limites de cette course à l’efficacité : lutter à grande échelle, oui, mais sans transformer pour autant 68 défendeurs en une seule masse indistincte.
+C’est tout le paradoxe du *merchandising* sauvage à l’heure des *marketplaces*. Internet a permis de fragmenter la contrefaçon entre une multitude de petites boutiques ; les ayants droit ont répondu en cherchant à regrouper ces vendeurs dans des contentieux de masse. L’affaire *Resident Evil* montre aujourd’hui les limites de cette course à l’efficacité : lutter à grande échelle, oui, mais sans transformer pour autant 68 défendeurs en un seul.
 
 [^1]: Direction générale des douanes et droits indirects, Bilan de la Douane française 2025, 19 févr. 2026, rubrique « La douane lutte contre les contrefaçons »
 [^2]: Article L. 122-4 du code de la propriété intellectuelle

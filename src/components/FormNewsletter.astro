@@ -82,4 +82,6 @@ const { id, surBleu = false } = Astro.props;
   .sur-bleu input::placeholder { color: rgba(255, 255, 255, 0.7); }
   .sur-bleu .champ:focus-within { outline-color: #ffffff; }
   .sur-bleu .note { color: rgba(255, 255, 255, 0.72); }
+  .sur-bleu .note.ok, .sur-bleu .note.ko { background: rgba(255, 255, 255, 0.12); color: #ffffff; border-left: 3px solid var(--yellow); }
+  .sur-bleu .note.ko { border-left-color: #ff9b9b; }
 </style>

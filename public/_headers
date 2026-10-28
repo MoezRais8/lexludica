@@ -1,0 +1,14 @@
+# En-têtes de sécurité appliqués par Cloudflare à toutes les pages
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://9576b5de.sibforms.com; form-action 'self' https://9576b5de.sibforms.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# L'espace d'édition charge Sveltia CMS et dialogue avec GitHub : pas de CSP stricte ici
+/admin/*
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow

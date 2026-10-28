@@ -1,5 +1,5 @@
 ---
-titre: "Du logiciel à l'œuvre complexe : la qualification distributive du jeu vidéo"
+titre: "Du logiciel à l'œuvre complexe : la qualification distributive du jeu vidéo"
 chapo: "Longtemps, le droit a vu dans le jeu vidéo un simple logiciel, dont le régime s'étendait à tout le reste. Depuis l'arrêt Cryo, chaque composante (code, graphismes, musique, scénario) suit son propre régime. Retour sur une bascule aux effets très concrets."
 date: 2026-05-26
 rubrique: droit

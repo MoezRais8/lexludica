@@ -1,5 +1,5 @@
 ---
-titre: "GTA VI et l'impossible secret : une analyse du séisme d'août 2026"
+titre: "GTA VI et l'impossible secret : une analyse du séisme d'août 2026"
 chapo: "À trois mois de sa sortie, GTA VI a de nouveau été piraté. Quatre ans après la fuite de 2022, un leaker se réclamant de la défense du format physique a diffusé des séquences inédites du jeu. Retour sur un séisme qui n'a finalement fait qu'aiguiser l'impatience des joueurs."
 date: 2026-09-07
 rubrique: technologies

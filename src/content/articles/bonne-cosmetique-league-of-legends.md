@@ -1,5 +1,5 @@
 ---
-titre: "Reconnaître une bonne cosmétique de jeu vidéo : l'exemple de League of Legends"
+titre: "Reconnaître une bonne cosmétique de jeu vidéo : l'exemple de League of Legends"
 chapo: "Un skin « Légendaire » à 1 820 RP, une cosmétique « Exaltée » à 250 € : que paie réellement le joueur ? En relisant La Leçon d'anatomie de Rembrandt, le joueur se fait chirurgien pour disséquer le travail graphique que les studios lui vendent."
 date: 2026-09-01
 rubrique: anatomie

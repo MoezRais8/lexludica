@@ -1,5 +1,5 @@
 ---
-titre: "Le jeu vidéo : un secteur stratégique introuvable"
+titre: "Le jeu vidéo : un secteur stratégique introuvable"
 chapo: "Pourquoi l'industrie vidéoludique française est-elle célébrée et aidée comme un secteur stratégique sans être juridiquement protégée comme tel ? Crédits d'impôt, aides directes, discours de souveraineté : la France fait éclore ses pépites, mais n'a aucun moyen de les retenir face aux capitaux étrangers."
 date: 2026-07-17
 rubrique: geopolitique

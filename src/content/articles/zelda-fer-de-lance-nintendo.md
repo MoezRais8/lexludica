@@ -1,5 +1,5 @@
 ---
-titre: "The Legend of Zelda : fer de lance de Nintendo"
+titre: "The Legend of Zelda : fer de lance de Nintendo"
 chapo: "Quarante ans après sa naissance, Zelda reste la vitrine de prestige de Nintendo : un laboratoire de game design, un imaginaire devenu écosystème et une propriété intellectuelle que l'éditeur protège jalousement, des fan games aux fuites précommerciales."
 date: 2026-09-09
 rubrique: culture

@@ -1,5 +1,5 @@
 ---
-titre: "« Geek » : vingt ans d'évolution à travers le jeu vidéo"
+titre: "« Geek » : vingt ans d'évolution à travers le jeu vidéo"
 chapo: "Insulte, identité revendiquée, catégorie marketing : le mot « geek » a changé de sens à mesure que le jeu vidéo se généralisait. Des LAN des années 2000 à Twitch et Animal Crossing, retour sur vingt ans de stéréotypes, de communautés et de récupération commerciale."
 date: 2026-10-19
 rubrique: culture

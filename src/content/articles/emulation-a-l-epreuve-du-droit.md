@@ -1,5 +1,5 @@
 ---
-titre: "L'émulation de jeux vidéo à l'épreuve du droit : anatomie d'un paradoxe"
+titre: "L'émulation de jeux vidéo à l'épreuve du droit : anatomie d'un paradoxe"
 chapo: "Yuzu, Ryujinx, Citra : en quelques mois, Nintendo a fait disparaître les principaux émulateurs de ses consoles sans obtenir le moindre jugement de principe. L'émulation est-elle légale ? Oui et non : licite dans sa conception, elle est presque toujours illicite dans son usage."
 date: 2026-06-26
 rubrique: droit

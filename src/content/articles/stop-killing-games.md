@@ -1,5 +1,5 @@
 ---
-titre: "Stop Killing Games : la destruction programmée de l'art"
+titre: "Stop Killing Games : la destruction programmée de l'art"
 chapo: "Plus d'un million de citoyens européens ont demandé que les jeux achetés ne puissent plus être rendus injouables du jour au lendemain. Le 16 juin 2026, la Commission européenne a refusé de légiférer. Retour sur une fracture entre ceux qui vendent les jeux et ceux qui pensent les posséder."
 date: 2026-06-29
 rubrique: droit

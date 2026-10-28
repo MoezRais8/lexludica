@@ -1,5 +1,5 @@
 ---
-titre: "Le modding, une étrange façon « du faire-cinéma » du jeu vidéo"
+titre: "Le modding, une étrange façon « du faire-cinéma » du jeu vidéo"
 chapo: "Avec Ghost of Tsushima et Ghost of Yōtei, Sucker Punch Productions a fait du jeu en monde ouvert une expérience de cinéma. Les moddeurs ont prolongé ce geste, au point que leurs détournements de caméra et de filtres se retrouvent, sous forme de modes officiels, dans le menu du second opus."
 date: 2026-08-24
 rubrique: culture

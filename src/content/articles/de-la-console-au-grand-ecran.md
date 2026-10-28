@@ -1,5 +1,5 @@
 ---
-titre: "De la console au grand écran : pourquoi adapter un jeu vidéo au cinéma ?"
+titre: "De la console au grand écran : pourquoi adapter un jeu vidéo au cinéma ?"
 chapo: "Super Mario Bros., Sonic, The Last of Us : derrière chaque adaptation d'un jeu vidéo se cache une stratégie de valorisation de la propriété intellectuelle. Un pari rentable, mais risqué, entre fidélité à l'œuvre et conquête d'un nouveau public."
 date: 2026-06-17
 rubrique: culture

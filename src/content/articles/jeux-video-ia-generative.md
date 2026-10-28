@@ -1,5 +1,5 @@
 ---
-titre: "Jeux vidéo et intelligence artificielle générative : quelle protection juridique pour les jeux de demain ?"
+titre: "Jeux vidéo et intelligence artificielle générative : quelle protection juridique pour les jeux de demain ?"
 chapo: "Dialogues générés, décors procéduraux, voix synthétiques : l'IA générative transforme la fabrication des jeux vidéo. Mais qui est l'auteur d'un contenu produit par une machine ? Le studio peut-il encore protéger son jeu ? Et l'IA a-t-elle été entraînée légalement ?"
 date: 2026-09-14
 rubrique: droit

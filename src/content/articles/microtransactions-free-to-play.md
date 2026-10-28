@@ -1,5 +1,5 @@
 ---
-titre: "Microtransactions et free-to-play : une nouvelle réalité économique dans les jeux vidéo"
+titre: "Microtransactions et free-to-play : une nouvelle réalité économique dans les jeux vidéo"
 chapo: "Jeu gratuit, dépenses répétées : avec le free-to-play, les microtransactions et les loot boxes, l'accès au jeu vidéo peut mobiliser durablement le pouvoir d'achat du joueur. Le droit de la consommation suffit-il à le protéger, et que peut changer le futur Digital Fairness Act ?"
 date: 2026-09-28
 rubrique: economie

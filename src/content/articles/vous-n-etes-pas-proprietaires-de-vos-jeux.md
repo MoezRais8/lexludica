@@ -1,5 +1,5 @@
 ---
-titre: "Non, vous n'êtes pas propriétaires de vos jeux vidéo… et le droit le confirme !"
+titre: "Non, vous n'êtes pas propriétaires de vos jeux vidéo… et le droit le confirme !"
 chapo: "Sur Steam ou le PlayStation Store, pas de bouton « revendre » : ce que l'on « achète » en ligne n'est qu'une licence d'accès. Avec l'arrêt Valve / UFC-Que Choisir, la Cour de cassation l'a confirmé : l'épuisement des droits ne joue pas pour le jeu vidéo dématérialisé."
 date: 2026-07-06
 rubrique: droit

@@ -1,5 +1,5 @@
 ---
-titre: "Le mod : une création sous contraintes"
+titre: "Le mod : une création sous contraintes"
 chapo: "Shrek au volant dans GTA V, Counter-Strike né de Half-Life : le modding est partout. Mais derrière cette créativité foisonnante se cache un écheveau juridique, à la croisée du droit d'auteur et du droit des contrats. Si cette pratique est très répandue, est-elle pour autant légale ?"
 date: 2026-05-11
 rubrique: droit

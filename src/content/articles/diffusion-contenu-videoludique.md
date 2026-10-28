@@ -1,5 +1,5 @@
 ---
-titre: "La diffusion de contenu vidéoludique : entre monopole de l'éditeur et reconnaissance du joueur-interprète"
+titre: "La diffusion de contenu vidéoludique : entre monopole de l'éditeur et reconnaissance du joueur-interprète"
 chapo: "Let's play, streaming, speedrun, esport : diffuser sa partie est devenu une pratique de masse. En droit, l'éditeur conserve pourtant un monopole entier sur son œuvre. Le joueur qui apporte une prestation personnelle pourrait-il être reconnu comme artiste-interprète ?"
 date: 2026-05-18
 rubrique: droit

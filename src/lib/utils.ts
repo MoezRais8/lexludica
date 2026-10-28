@@ -8,8 +8,15 @@ export const formatDateCourte = (d: Date) =>
   d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
 
 // Environ 230 mots par minute pour un texte d'analyse
-export const tempsDeLecture = (texte = '') =>
-  Math.max(1, Math.round(texte.split(/\s+/).filter(Boolean).length / 230));
+// Temps de lecture du corps de l'article seul : sans sources, bibliographie ni notes de bas de page
+export const tempsDeLecture = (texte = '') => {
+  const corps = texte
+    .split(/^#{2,3}\s*(?:Sources|Bibliographie|Références|Notes)\b.*$/im)[0]
+    .replace(/^\[\^[^\]]+\]:.*$/gm, '')
+    .replace(/\[\^[^\]]+\]/g, '')
+    .replace(/<[^>]+>/g, ' ');
+  return Math.max(1, Math.round(corps.split(/\s+/).filter(Boolean).length / 230));
+};
 
 // « droit d'auteur » → « droit-dauteur »
 export const slugTag = (t: string) =>

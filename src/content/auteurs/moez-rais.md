@@ -1,6 +1,6 @@
 ---
 nom: Moez RAIS
-role: Fondateur et directeur de la publication
+role: Co-fondateur, directeur de la publication et juriste en propriété intellectuelle et en droit du numérique
 disciplines: [Droit, Propriété intellectuelle, Numérique]
 initiales: MR
 ordre: 1

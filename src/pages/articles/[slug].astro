@@ -18,8 +18,8 @@ const d = article.data;
 const en = d.langue === 'en';
 // Libellés de l'interface selon la langue de l'article
 const t = en
-  ? { min: 'min read', par: 'By', et: 'and', maj: 'Updated', demo: 'Demo text', sommaire: 'Contents', citer: 'Cite this article', copier: 'Copy citation', bibtex: 'Copy BibTeX', ris: 'Download RIS (Zotero, EndNote)', imprimer: 'Print or save as PDF', decisions: 'Cases cited', dossier: 'Part of the series', autre: 'Lire en français', lies: 'Further reading', sujets: 'Topics' }
-  : { min: 'min de lecture', par: 'Par', et: 'et', maj: 'Mis à jour le', demo: 'Texte de démonstration', sommaire: 'Sommaire', citer: 'Citer cet article', copier: 'Copier la référence', bibtex: 'Copier en BibTeX', ris: 'Télécharger en RIS (Zotero, EndNote)', imprimer: 'Imprimer ou enregistrer en PDF', decisions: 'Décisions citées', dossier: 'Cet article fait partie du dossier', autre: 'Read in English', lies: 'À lire aussi', sujets: 'Sujets' };
+  ? { min: 'min read', par: 'By', et: 'and', maj: 'Updated', demo: 'Demo text', sommaire: 'Contents', citer: 'Cite this article', copier: 'Copy citation', bibtex: 'Copy BibTeX', ris: 'Download RIS (Zotero, EndNote)', imprimer: 'Print or save as PDF', decisions: 'Cases cited', dossier: 'Part of the series', autre: 'Lire en français', lies: 'Further reading', sujets: 'Topics', publie: 'Published', lecture: 'Reading time', partager: 'Share', copierLien: 'Copy link', lienCopie: 'Link copied', email: 'Email' }
+  : { min: 'min de lecture', par: 'Par', et: 'et', maj: 'Mis à jour le', demo: 'Texte de démonstration', sommaire: 'Sommaire', citer: 'Citer cet article', copier: 'Copier la référence', bibtex: 'Copier en BibTeX', ris: 'Télécharger en RIS (Zotero, EndNote)', imprimer: 'Imprimer ou enregistrer en PDF', decisions: 'Décisions citées', dossier: 'Cet article fait partie du dossier', autre: 'Read in English', lies: 'À lire aussi', sujets: 'Sujets', publie: 'Publié le', lecture: 'Lecture', partager: 'Partager', copierLien: 'Copier le lien', lienCopie: 'Lien copié !', email: 'E-mail' };
 
 const { Content, headings } = await render(article);
 const auteurs = await auteursDe(article);
@@ -65,6 +65,41 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   <article>
     <header class="bande tete">
       <div class="cadre grille-article">
+        <aside class="fiche" aria-label="Informations sur l'article" style={`--rub:${rubrique.couleur}`}>
+          <div class="fiche-meta">
+            <span class="fiche-trait" aria-hidden="true"></span>
+            <a class="fiche-rub" href={`/rubriques/${rubrique.slug}`}>{rubrique.nom}</a>
+            <dl>
+              <div><dt>{t.publie}</dt><dd><time datetime={d.date.toISOString()}>{formatDate(d.date)}</time></dd></div>
+              <div><dt>{t.lecture}</dt><dd>{tempsDeLecture(article.body)} min</dd></div>
+            </dl>
+            <div class="fiche-auteurs">
+              {auteurs.map((a) => (
+                <a class="fiche-auteur" href={`/contributeurs/${a.id}`}>
+                  <span class="pastille" aria-hidden="true">{a.data.initiales}</span>
+                  <span><span class="fa-nom">{a.data.nom}</span><span class="fa-role">{a.data.role}</span></span>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div class="partage">
+            <p class="marge-titre">{t.partager}</p>
+            <div class="partage-liens">
+              <a class="partage-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.8"/><path d="M10 9h3v1.6c.6-1 1.8-1.9 3.6-1.9 2.6 0 3.4 1.7 3.4 4.3V20h-3v-6.2c0-1.4-.4-2.4-1.8-2.4-1.5 0-2.2 1-2.2 2.5V20h-3z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+              <a class="partage-btn" href={`mailto:?subject=${encodeURIComponent(d.titre)}&body=${encodeURIComponent(d.titre + ' : ' + url)}`} aria-label={t.email}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <span>{t.email}</span>
+              </a>
+              <button type="button" class="partage-btn" id="copier-lien" data-url={url} data-ok={t.lienCopie}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                <span>{t.copierLien}</span>
+              </button>
+            </div>
+          </div>
+        </aside>
         <div class="col-texte">
           <p class="infos">
             <a class="tag sombre tag-rub" style={`--rub:${rubrique.couleur}`} href={`/rubriques/${rubrique.slug}`}>#{rubrique.nom.toLowerCase()}</a>
@@ -201,6 +236,16 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   });
   document.getElementById('imprimer')?.addEventListener('click', () => window.print());
 
+  // Partage : copier l'adresse de l'article
+  const btnLien = document.getElementById('copier-lien') as HTMLButtonElement | null;
+  btnLien?.addEventListener('click', async () => {
+    const libelle = btnLien.querySelector('span')!;
+    const initial = libelle.textContent;
+    try { await navigator.clipboard.writeText(btnLien.dataset.url || location.href); libelle.textContent = btnLien.dataset.ok || 'OK'; }
+    catch { libelle.textContent = btnLien.dataset.url || location.href; }
+    setTimeout(() => (libelle.textContent = initial), 2500);
+  });
+
   // Infobulles du glossaire : tout lien vers /glossaire#terme affiche sa définition
   type Def = { id: string; terme: string; definition: string };
   const defs: Def[] = JSON.parse(document.getElementById('donnees-glossaire')?.textContent || '[]');
@@ -240,6 +285,31 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   }
   .pastille.grand { width: 2.8rem; height: 2.8rem; font-size: 0.85rem; }
   .visuel-article { padding-bottom: 2.4rem; }
+
+  /* Fiche de l'article (colonne de gauche de l'en-tête) */
+  .fiche { grid-column: 1; grid-row: 1; padding-block: 2.8rem 2rem; display: flex; flex-direction: column; gap: 1.8rem; font-size: 0.84rem; }
+  .fiche-trait { display: block; width: 2.6rem; height: 4px; background: var(--rub); margin-bottom: 0.8rem; }
+  .fiche-rub { font-family: var(--serif); font-style: italic; font-size: 1.7rem; line-height: 1.1; color: var(--ink); text-decoration: none; }
+  .fiche-rub:hover { color: var(--blue); }
+  .fiche dl { margin: 1rem 0 0; display: grid; gap: 0.45rem; }
+  .fiche dl div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.45rem; }
+  .fiche dt { color: var(--muted); }
+  .fiche dd { margin: 0; color: var(--ink); font-weight: 500; text-align: right; }
+  .fiche-auteurs { margin-top: 1.1rem; display: grid; gap: 0.7rem; }
+  .fiche-auteur { display: flex; align-items: flex-start; gap: 0.6rem; text-decoration: none; color: inherit; }
+  .fiche-auteur .pastille { margin-top: 0.1rem; }
+  .fa-nom { display: block; color: var(--ink); font-weight: 600; }
+  .fa-role { display: block; color: var(--muted); font-size: 0.78rem; line-height: 1.4; margin-top: 0.1rem; }
+  .fiche-auteur:hover .fa-nom { color: var(--blue); }
+  .partage-liens { display: flex; flex-direction: column; gap: 0.4rem; }
+  .partage-btn { display: flex; align-items: center; gap: 0.55rem; width: 100%; padding: 0.5rem 0.7rem; font: inherit; font-size: 0.8rem; color: var(--ink); background: var(--surface, #ffffff); border: 1px solid var(--line); border-radius: 3px; text-decoration: none; cursor: pointer; text-align: left; }
+  .partage-btn svg { width: 1rem; height: 1rem; flex: none; color: var(--blue); }
+  .partage-btn:hover { border-color: var(--blue); color: var(--blue); }
+  /* Sur grand écran, la fiche remplace la ligne d'infos et la signature au-dessus du titre */
+  @media (min-width: 1061px) {
+    .col-texte .infos .tag-rub, .col-texte .infos .date, .col-texte .signature { display: none; }
+    .col-texte .infos:not(:has(.demo-flag, .langue-lien)) { display: none; }
+  }
   .figure { margin: 0; max-width: 60rem; }
   .figure figcaption { margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted); }
 
@@ -284,7 +354,9 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
 
   /* Version imprimable : le texte, les notes et l'adresse de l'article */
   @media print {
-    :global(.entete), :global(.pied), :global(.bande-nl), .marge, .visuel-article, .auteurs, .etiquettes, #lies, :global(section[aria-labelledby="lies"]), .langue-lien, .encart-dossier { display: none !important; }
+    :global(.entete), :global(.pied), :global(.bande-nl), .marge, .visuel-article, .auteurs, .etiquettes, #lies, :global(section[aria-labelledby="lies"]), .langue-lien, .encart-dossier, .fiche { display: none !important; }
+    .col-texte .infos, .col-texte .signature { display: flex !important; }
+    .col-texte .infos > * { display: inline !important; }
     :global(body) { background: #ffffff; font-size: 11pt; }
     :global(.bande), :global(.bande > .cadre) { border: 0 !important; }
     .tete { background: none; }
@@ -335,6 +407,10 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   @media (max-width: 1060px) {
     .grille-article { grid-template-columns: minmax(0, 1fr); max-width: calc(var(--lecture) + 5rem); }
     .col-texte, .marge, .prose { grid-column: 1; }
+    .fiche { grid-row: 2; padding-block: 0 1.6rem; gap: 1rem; }
+    .fiche-meta { display: none; }
+    .partage-liens { flex-direction: row; flex-wrap: wrap; }
+    .partage-btn { width: auto; }
     .marge { order: 2; position: static; max-height: none; overflow: visible; }
     .sommaire { display: none; }
     .visuel-article { max-width: calc(var(--lecture) + 5rem); }

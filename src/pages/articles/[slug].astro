@@ -121,12 +121,12 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
             <span>{t.par} {auteurs.map((a, i) => <>{i > 0 && ` ${t.et} `}<a href={`/contributeurs/${a.id}`}>{a.data.nom}</a></>)}</span>
           </p>
         </div>
-      </div>
-      <div class="cadre visuel-article">
-        <figure class="figure">
-          <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} alt={d.imageAlt ?? ''} ratio={d.image ? '16 / 9' : '21 / 9'} grand />
-          {d.imageCredit && <figcaption>{d.imageCredit}</figcaption>}
-        </figure>
+        <div class="visuel-article">
+          <figure class="figure">
+            <Visuel slug={article.id} rubrique={d.rubrique} image={d.image} alt={d.imageAlt ?? ''} ratio={d.image ? '16 / 9' : '21 / 9'} grand />
+            {d.imageCredit && <figcaption>{d.imageCredit}</figcaption>}
+          </figure>
+        </div>
       </div>
     </header>
 
@@ -284,10 +284,11 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
     font-size: 0.68rem; font-weight: 600; background: var(--blue); color: #ffffff; border-radius: 2px;
   }
   .pastille.grand { width: 2.8rem; height: 2.8rem; font-size: 0.85rem; }
-  .visuel-article { padding-bottom: 2.4rem; }
+  .tete .grille-article { row-gap: 0; }
+  .visuel-article { grid-column: 2 / -1; grid-row: 2; padding-bottom: 2.4rem; min-width: 0; }
 
   /* Fiche de l'article (colonne de gauche de l'en-tête) */
-  .fiche { grid-column: 1; grid-row: 1; padding-block: 2.8rem 2rem; display: flex; flex-direction: column; gap: 1.8rem; font-size: 0.84rem; }
+  .fiche { grid-column: 1; grid-row: 1 / span 2; align-self: start; padding-block: 2.8rem 2rem; display: flex; flex-direction: column; gap: 1.8rem; font-size: 0.84rem; }
   .fiche-trait { display: block; width: 2.6rem; height: 4px; background: var(--rub); margin-bottom: 0.8rem; }
   .fiche-rub { font-family: var(--serif); font-style: italic; font-size: 1.7rem; line-height: 1.1; color: var(--ink); text-decoration: none; }
   .fiche-rub:hover { color: var(--blue); }
@@ -415,7 +416,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
     .partage-btn { width: auto; }
     .marge { order: 2; position: static; max-height: none; overflow: visible; }
     .sommaire { display: none; }
-    .visuel-article { max-width: calc(var(--lecture) + 5rem); }
+    .visuel-article { grid-column: 1; grid-row: 3; }
   }
   @media (max-width: 900px) { .grille { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 600px) { .grille { grid-template-columns: 1fr; } }

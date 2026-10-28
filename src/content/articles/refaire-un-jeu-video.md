@@ -1,7 +1,7 @@
 ---
 titre: "Refaire un jeu vidéo : pourquoi faire ?"
 chapo: "Remasters, remakes, reboots : l'industrie n'a jamais autant refait ses propres jeux. Entre valeur refuge économique, enjeu patrimonial et cadre juridique exigeant, refaire un jeu n'est jamais un geste neutre."
-date: 2026-10-28T14:00:00
+date: 2026-10-12
 rubrique: droit
 auteurs: [gregory-campistron, faris-melahi, moez-rais]
 image: /images/refaire-un-jeu-video.jpg

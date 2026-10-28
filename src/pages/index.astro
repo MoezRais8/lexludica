@@ -10,7 +10,8 @@ import { getCollection } from 'astro:content';
 import { sections } from '../data/site';
 
 const articles = await articlesPublies();
-const tendance = articles.find((a) => a.data.une) ?? articles[0];
+// « En tendance » : toujours l'article le plus récent
+const tendance = articles[0];
 // « Populaire » : les articles classés à la main, sinon les plus récents après celui en tendance
 const classes = articles
   .filter((a) => a.data.populaire && a.id !== tendance?.id)

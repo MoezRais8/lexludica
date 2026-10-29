@@ -25,8 +25,9 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
 ---
 <Base>
   <section class="bande" aria-labelledby="equipe-titre">
-    <div class="cadre bloc pres-bloc">
+    <div class="pres-bloc">
       <div class="equipe">
+        <div class="cadre equipe-cadre">
         <div class="equipe-texte">
           <h2 id="equipe-titre">Un blog de <em class="accent">passionnés</em></h2>
           <p class="equipe-sous">Pluridisciplinaire, consacré à l'industrie vidéoludique et à la pop-culture.</p>
@@ -34,6 +35,7 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
           <p>Lex Ludica est un blog dans lequel nous décryptons l'industrie sous divers angles. De la propriété intellectuelle des <em>assets</em> numériques à l'impact sociologique des mondes persistants, nous explorons les zones d'ombre du média le plus influent du XXI<sup>e</sup> siècle.</p>
           <p>Retrouvez des articles de fond, des analyses juridiques, historiques et des réflexions sur le futur numérique de l'industrie vidéoludique.</p>
           <a class="bouton" href="/contributeurs">Découvrir l'équipe</a>
+        </div>
         </div>
         <Pixels motif="equipe" class="equipe-pixels" />
       </div>
@@ -51,8 +53,8 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
         <a href="/a-propos">Notre histoire</a>
         <a href="/contact">Contact</a>
       </nav>
-      <Pixels motif="hero" class="hero-pixels" />
     </div>
+    <Pixels motif="hero" class="hero-pixels" />
   </section>
 
   {tendance && rubTendance && (
@@ -165,16 +167,16 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
 
 <style>
   /* Hero */
-  .hero { background: radial-gradient(ellipse 50% 90% at 6% 0%, #ece6db 0%, transparent 70%); }
+  .hero { position: relative; overflow: hidden; background: radial-gradient(ellipse 50% 90% at 6% 0%, #ece6db 0%, transparent 70%); }
   .hero-cadre { position: relative; min-height: 15rem; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; padding-block: 3.2rem 1.2rem; overflow: hidden; }
   .hero-texte { position: relative; z-index: 1; max-width: 36rem; }
   h1 { font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 400; letter-spacing: -0.025em; }
   h1 .accent { font-size: 1.1em; }
   .hero-sous { margin: 1rem 0 0; font-style: italic; color: var(--ink-soft); max-width: 30rem; line-height: 1.5; }
   .hero-liens { position: relative; z-index: 1; display: flex; gap: 1.1rem; align-self: flex-end; margin-right: min(22%, 15rem); }
-  .hero-liens a { font-size: 0.75rem; color: var(--muted); text-decoration: none; }
+  .hero-liens a { font-size: 0.95rem; font-weight: 600; color: var(--ink-soft); text-decoration: none; }
   .hero-liens a:hover { color: var(--blue); }
-  .hero-cadre :global(.hero-pixels) { position: absolute; right: 0; top: 0; height: 100%; width: auto; max-width: 40%; }
+  .hero :global(.hero-pixels) { position: absolute; right: 0; top: 0; height: 100%; width: auto; max-width: 40%; }
 
   /* En tendance + Populaire */
   .une { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 0; padding-block: 0; }
@@ -248,13 +250,14 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
 
   /* Présentation */
   .pres-bloc { padding-block: 2rem 2rem; }
+  .equipe-cadre { width: 100%; position: relative; z-index: 1; }
   .equipe sup { line-height: 0; font-size: 0.7em; }
   .equipe {
     position: relative; overflow: hidden;
     background: linear-gradient(135deg, #00418a 0%, #0055b4 55%, #1a6fd0 100%);
     color: #ffffff; min-height: 18rem;
     display: flex; align-items: flex-end;
-    padding: 2rem;
+    padding-block: 2rem;
   }
   .equipe::before {
     content: ''; position: absolute; inset: 0;
@@ -279,10 +282,10 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
   }
   @media (max-width: 600px) {
     .hero-cadre { padding-top: 6.5rem; }
-    .hero-cadre :global(.hero-pixels) { height: 5.5rem; max-width: none; }
+    .hero :global(.hero-pixels) { height: 5.5rem; max-width: none; }
     .hero-liens { align-self: flex-start; margin-right: 0; }
     .grille { grid-template-columns: 1fr; }
-    .equipe { padding: 1.4rem; min-height: 20rem; align-items: flex-start; }
+    .equipe { padding-block: 1.4rem; min-height: 20rem; align-items: flex-start; }
     .equipe :global(.equipe-pixels) { display: none; }
   }
 </style>

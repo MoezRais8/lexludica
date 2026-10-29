@@ -281,7 +281,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .signature a:hover { color: var(--blue); }
   .pastille {
     width: 1.9rem; height: 1.9rem; display: grid; place-items: center; flex: none;
-    font-size: 0.68rem; font-weight: 600; background: var(--blue); color: #ffffff; border-radius: 2px;
+    font-size: 0.68rem; font-weight: 600; background: var(--blue); color: #ffffff; border-radius: 8px;
   }
   .pastille.grand { width: 2.8rem; height: 2.8rem; font-size: 0.85rem; }
   .tete .grille-article { row-gap: 0; }
@@ -303,7 +303,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .fa-role { display: block; color: var(--muted); font-size: 0.78rem; line-height: 1.4; margin-top: 0.1rem; }
   .fiche-auteur:hover .fa-nom { color: var(--blue); }
   .partage-liens { display: flex; flex-direction: column; gap: 0.4rem; }
-  .partage-btn { display: flex; align-items: center; gap: 0.55rem; width: 100%; padding: 0.5rem 0.7rem; font: inherit; font-size: 0.8rem; color: var(--ink); background: var(--surface, #ffffff); border: 1px solid var(--line); border-radius: 3px; text-decoration: none; cursor: pointer; text-align: left; }
+  .partage-btn { display: flex; align-items: center; gap: 0.55rem; width: 100%; padding: 0.5rem 0.7rem; font: inherit; font-size: 0.8rem; color: var(--ink); background: var(--surface, #ffffff); border: 1px solid var(--line); border-radius: 8px; text-decoration: none; cursor: pointer; text-align: left; }
   .partage-btn svg { width: 1rem; height: 1rem; flex: none; color: var(--blue); }
   .partage-btn:hover { border-color: var(--blue); color: var(--blue); }
   /* Sur grand écran, la fiche remplace la ligne d'infos et la signature au-dessus du titre */
@@ -321,12 +321,12 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .sommaire ol { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.45rem; }
   .sommaire a { color: var(--ink-soft); text-decoration: none; }
   .sommaire a:hover { color: var(--blue); }
-  .citer { padding: 1rem; background: var(--surface); border: 1px solid var(--line); }
+  .citer { border-radius: 12px; padding: 1rem; background: var(--surface); border: 1px solid var(--line); }
   .ref { margin: 0 0 0.8rem; line-height: 1.5; color: var(--ink-soft); font-size: 0.8rem; }
   .actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; }
   .action-sec { font: inherit; font-size: 0.75rem; background: none; border: 0; padding: 0; color: var(--blue); cursor: pointer; text-align: left; text-decoration: underline; text-underline-offset: 0.2em; }
-  .bibtex { white-space: pre-wrap; font-size: 0.68rem; background: #ffffff; border: 1px solid var(--line); padding: 0.5rem; margin: 0 0 0.6rem; overflow-x: auto; }
-  .encart-dossier { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; align-items: end; padding: 1rem 1.2rem; margin: 0 0 2rem; background: var(--yellow); color: var(--on-yellow); text-decoration: none; }
+  .bibtex { border-radius: 12px; white-space: pre-wrap; font-size: 0.68rem; background: #ffffff; border: 1px solid var(--line); padding: 0.5rem; margin: 0 0 0.6rem; overflow-x: auto; }
+  .encart-dossier { border-radius: 12px; display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; align-items: end; padding: 1rem 1.2rem; margin: 0 0 2rem; background: var(--yellow); color: var(--on-yellow); text-decoration: none; }
   .encart-dossier:hover { filter: brightness(0.97); }
   .ed-sur { grid-column: 1 / -1; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
   .ed-titre { font-size: 1.15rem; line-height: 1.25; }
@@ -335,7 +335,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .decisions { margin-top: 2.4rem; }
   .decisions ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
   .decisions li { margin: 0; }
-  .decisions a { display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.8rem; padding: 0.8rem 1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--blue); text-decoration: none; color: var(--ink); }
+  .decisions a { border-radius: 10px; display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.8rem; padding: 0.8rem 1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--blue); text-decoration: none; color: var(--ink); }
   .decisions a:hover { border-color: var(--blue); }
   .dec-nom { font-size: 1.3rem; line-height: 1.1; }
   .dec-ref { font-size: 0.78rem; color: var(--ink-soft); align-self: center; }
@@ -343,7 +343,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .prose :global(a.glossaire) { position: relative; color: inherit; text-decoration: underline dotted var(--blue); text-decoration-thickness: 2px; text-underline-offset: 0.25em; cursor: help; }
   .prose :global(.bulle) {
     position: absolute; left: 0; bottom: calc(100% + 0.5rem); z-index: 5; width: min(20rem, 80vw);
-    background: var(--ink); color: #ffffff; padding: 0.8rem 0.9rem; border-radius: 3px;
+    background: var(--ink); color: #ffffff; padding: 0.8rem 0.9rem; border-radius: 8px;
     font-family: var(--sans); font-style: normal; font-weight: 400; font-size: 0.82rem; line-height: 1.5;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18); display: none; pointer-events: none;
   }
@@ -369,16 +369,17 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
     .url-impression { display: block; margin-top: 2rem; font-size: 9pt; color: #555555; }
   }
 
-  .copier { font: inherit; font-size: 0.75rem; font-weight: 500; cursor: pointer; background: var(--yellow); color: var(--on-yellow); border: 0; border-radius: 3px; padding: 0.45rem 0.8rem; }
+  .copier { font: inherit; font-size: 0.75rem; font-weight: 500; cursor: pointer; background: var(--yellow); color: var(--on-yellow); border: 0; border-radius: 8px; padding: 0.45rem 0.8rem; }
   .copier:hover { filter: brightness(0.95); }
 
   .prose { font-size: 1.05rem; line-height: 1.75; color: #232425; }
   .prose :global(p) { margin: 0 0 1.25rem; }
+  .prose :global(img) { border-radius: 12px; }
   .prose :global(h2) { font-size: 1.55rem; font-weight: 500; margin: 2.4rem 0 0.9rem; scroll-margin-top: 5rem; color: var(--ink); }
   .prose :global(h3) { font-size: 1.2rem; font-weight: 500; margin: 1.8rem 0 0.7rem; }
   .prose :global(h4) { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; }
   .prose :global(h5) { font-size: 1rem; font-weight: 500; font-style: italic; margin: 1.3rem 0 0.5rem; }
-  .prose :global(blockquote) {
+  .prose :global(blockquote) { border-radius: 12px;
     margin: 2rem 0; padding: 1.2rem 1.4rem;
     background: var(--surface); border-left: 4px solid var(--yellow);
     font-family: var(--serif); font-style: italic; font-size: 1.55rem; line-height: 1.3; color: var(--ink);
@@ -390,7 +391,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .prose :global(figure img) { display: block; width: 100%; height: auto; }
   .prose :global(figcaption) { margin-top: 0.5rem; font-size: 0.78rem; line-height: 1.5; color: var(--muted); }
   .prose :global(strong) { font-weight: 600; color: var(--ink); }
-  .prose :global(code) { font-family: var(--sans); font-size: 0.82em; font-weight: 500; background: var(--tag-bg); color: var(--tag-fg); padding: 0.15em 0.45em; border-radius: 3px; }
+  .prose :global(code) { font-family: var(--sans); font-size: 0.82em; font-weight: 500; background: var(--tag-bg); color: var(--tag-fg); padding: 0.15em 0.45em; border-radius: 8px; }
   .prose :global(sup a) { text-decoration: none; font-size: 0.8em; font-weight: 600; padding-inline: 0.1em; }
   .prose :global(.footnotes) { margin-top: 2.6rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.86rem; line-height: 1.6; color: var(--ink-soft); }
   .prose :global(.footnotes h2) { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.8rem; }
@@ -400,7 +401,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
   .etiquettes { list-style: none; padding: 0; margin: 2.4rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .etiquettes li { margin: 0; }
   .auteurs { margin-top: 2rem; display: grid; gap: 0.8rem; }
-  .auteur { display: flex; gap: 0.9rem; align-items: center; padding: 1rem 1.1rem; background: var(--card); text-decoration: none; color: var(--ink); }
+  .auteur { border-radius: 12px; display: flex; gap: 0.9rem; align-items: center; padding: 1rem 1.1rem; background: var(--card); text-decoration: none; color: var(--ink); }
   .auteur:hover .a-nom { color: var(--blue); }
   .a-nom { display: block; font-weight: 500; }
   .a-role { display: block; font-size: 0.84rem; color: var(--muted); }

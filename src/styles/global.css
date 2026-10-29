@@ -57,7 +57,7 @@ body::before {
 ::selection { background: var(--yellow); color: var(--on-yellow); }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--blue); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
 h1, h2, h3 { font-weight: 500; line-height: 1.2; letter-spacing: -0.015em; text-wrap: balance; margin: 0; }
 /* Accent en serif italique : <em class="accent">jeu vidéo</em> */
 .accent { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
@@ -85,7 +85,7 @@ h1, h2, h3 { font-weight: 500; line-height: 1.2; letter-spacing: -0.015em; text-
   background: var(--tag-bg);
   color: var(--tag-fg);
   padding: 0.3rem 0.55rem;
-  border-radius: 3px;
+  border-radius: 8px;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -115,7 +115,7 @@ a.tag:hover { background: #d3e6eb; }
   font-weight: 500;
   padding: 0.6rem 1.1rem;
   border: 0;
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--yellow);
   color: var(--on-yellow);
   text-decoration: none;
@@ -132,7 +132,7 @@ a.tag:hover { background: #d3e6eb; }
   text-transform: uppercase;
   color: var(--muted);
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 0.1rem 0.4rem;
 }
 

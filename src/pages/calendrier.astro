@@ -177,12 +177,12 @@ const nomMois = (cle: string) => {
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .calendrier { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
-  .cal { background: var(--surface); border: 1px solid var(--line); padding: 1.2rem; }
+  .cal { border-radius: 12px; background: var(--surface); border: 1px solid var(--line); padding: 1.2rem; }
   .cal-tete { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
   .cal-tete h2 { font-size: 1.35rem; font-weight: 400; }
   .cal-tete :global(.accent) { font-size: 1.15em; }
   .nav {
-    width: 2.2rem; height: 2.2rem; border: 0; border-radius: 3px; cursor: pointer;
+    width: 2.2rem; height: 2.2rem; border: 0; border-radius: 8px; cursor: pointer;
     background: var(--blue); color: #ffffff; font-size: 1.3rem; line-height: 1; font-family: inherit;
   }
   .nav:disabled { background: var(--card); color: var(--muted); cursor: default; }
@@ -190,7 +190,7 @@ const nomMois = (cle: string) => {
   .jours-semaine span { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center; padding-bottom: 0.4rem; }
   .grille-jours :global(.case) {
     position: relative; aspect-ratio: 1; display: grid; place-items: center;
-    font: inherit; font-size: 0.85rem; color: var(--ink-soft); background: #ffffff; border: 0; border-radius: 2px; padding: 0;
+    font: inherit; font-size: 0.85rem; color: var(--ink-soft); background: #ffffff; border: 0; border-radius: 8px; padding: 0;
     font-variant-numeric: tabular-nums;
   }
   .grille-jours :global(.case.vide) { background: transparent; }
@@ -199,13 +199,13 @@ const nomMois = (cle: string) => {
   .grille-jours :global(.case.choisi) { background: var(--blue); color: #ffffff; }
   .grille-jours :global(.case small) { position: absolute; top: 2px; right: 4px; font-size: 0.6rem; font-weight: 600; }
   .legende { display: flex; align-items: center; gap: 0.45rem; margin: 0.9rem 0 0; font-size: 0.75rem; color: var(--muted); }
-  .puce { width: 0.75rem; height: 0.75rem; background: var(--yellow); border-radius: 1px; }
+  .puce { width: 0.75rem; height: 0.75rem; background: var(--yellow); border-radius: 3px; }
 
   .sel-titre { margin: 0 0 1rem; font-size: 1.3rem; }
   .sel-titre :global(.accent) { font-size: 1.15em; }
   .sel-titre :global(.cap)::first-letter { text-transform: uppercase; }
   .sel-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-  .sel-liste :global(a) { display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 0.9rem 1rem; background: var(--card); color: var(--ink); text-decoration: none; }
+  .sel-liste :global(a) { border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 0.9rem 1rem; background: var(--card); color: var(--ink); text-decoration: none; }
   .sel-liste :global(a:hover .s-titre) { color: var(--blue); }
   .sel-liste :global(.s-titre) { font-weight: 500; line-height: 1.4; }
   .sel-liste :global(.rien) { color: var(--muted); font-size: 0.9rem; }

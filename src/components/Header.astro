@@ -84,26 +84,26 @@ const { langue = 'fr' } = Astro.props;
   .hashtags { display: flex; gap: 0.4rem; }
   .hashtags a {
     font-size: 0.72rem; font-weight: 500; color: #ffffff; text-decoration: none;
-    background: rgba(255, 255, 255, 0.16); padding: 0.35rem 0.6rem; border-radius: 3px; white-space: nowrap;
+    background: rgba(255, 255, 255, 0.16); padding: 0.35rem 0.6rem; border-radius: 8px; white-space: nowrap;
   }
   .hashtags a:hover { background: rgba(255, 255, 255, 0.28); }
   .icone, .menu summary {
-    width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 3px; cursor: pointer;
+    width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 8px; cursor: pointer;
   }
   .icone svg, .menu summary svg { width: 1.1rem; height: 1.1rem; }
   .recherche, .calendrier { background: #ffffff; color: var(--blue); }
   .recherche { margin-left: 0.3rem; }
   .langue { position: relative; }
-  .langue summary { list-style: none; width: 2rem; height: 2rem; display: grid; place-items: center; cursor: pointer; border-radius: 3px; }
+  .langue summary { list-style: none; width: 2rem; height: 2rem; display: grid; place-items: center; cursor: pointer; border-radius: 8px; }
   .langue summary::-webkit-details-marker { display: none; }
   .langue summary:hover, .langue[open] summary { background: rgba(255, 255, 255, 0.16); }
-  .langue svg { width: 1.15rem; height: auto; border-radius: 1px; display: block; }
+  .langue svg { width: 1.15rem; height: auto; border-radius: 8px; display: block; }
   .choix-langue {
     position: absolute; right: 0; top: calc(100% + 0.6rem); min-width: 9rem;
-    background: #ffffff; border: 1px solid var(--line); border-radius: 4px; padding: 0.4rem;
+    background: #ffffff; border: 1px solid var(--line); border-radius: 8px; padding: 0.4rem;
     box-shadow: 0 12px 32px rgba(0, 30, 70, 0.14); display: grid;
   }
-  .choix-langue a { color: var(--ink); text-decoration: none; font-size: 0.88rem; padding: 0.4rem 0.6rem; border-radius: 3px; }
+  .choix-langue a { color: var(--ink); text-decoration: none; font-size: 0.88rem; padding: 0.4rem 0.6rem; border-radius: 8px; }
   .choix-langue a:hover { background: var(--bg); }
   .choix-langue a[aria-current] { font-weight: 600; color: var(--blue); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
@@ -115,7 +115,7 @@ const { langue = 'fr' } = Astro.props;
     position: absolute; right: 0; top: calc(100% + 0.6rem);
     width: min(42rem, calc(100vw - 32px));
     background: #ffffff; color: var(--ink);
-    border: 1px solid var(--line); border-radius: 4px;
+    border: 1px solid var(--line); border-radius: 8px;
     box-shadow: 0 12px 32px rgba(0, 30, 70, 0.14);
     padding: 1.25rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
   }

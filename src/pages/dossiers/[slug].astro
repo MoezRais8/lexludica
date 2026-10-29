@@ -42,7 +42,7 @@ const avecAuteurs = await Promise.all(articles.map(async (a) => ({ a, auteurs: a
   .parcours { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; max-width: 52rem; counter-reset: none; }
   .parcours li { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1rem; align-items: start; }
   .etape { font-family: var(--serif); font-style: italic; font-size: 3rem; line-height: 1; color: var(--blue); text-align: right; padding-top: 0.6rem; }
-  .parcours a { display: flex; flex-direction: column; gap: 0.45rem; padding: 1.1rem 1.2rem; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+  .parcours a { border-radius: 12px; display: flex; flex-direction: column; gap: 0.45rem; padding: 1.1rem 1.2rem; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
   .parcours a:hover { border-color: var(--blue); }
   .parcours a:hover .titre { color: var(--blue); }
   .meta { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }

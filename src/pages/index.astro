@@ -4,7 +4,7 @@ import CarteArticle from '../components/CarteArticle.astro';
 import Visuel from '../components/Visuel.astro';
 import Pixels from '../components/Pixels.astro';
 import BandeNewsletter from '../components/BandeNewsletter.astro';
-import { getRubrique, accueilGauche, accueilDroite } from '../data/rubriques';
+import { getRubrique, rubriques } from '../data/rubriques';
 import { articlesPublies, formatDateCourte, slugTag } from '../lib/utils';
 import { getCollection } from 'astro:content';
 import { sections } from '../data/site';
@@ -19,7 +19,6 @@ const classes = articles
 const populaires = (classes.length ? classes : articles.filter((a) => a.id !== tendance?.id)).slice(0, 3);
 const recents = articles.filter((a) => a.id !== tendance?.id && !populaires.includes(a)).slice(0, 6);
 const rubTendance = tendance && getRubrique(tendance.data.rubrique);
-const colonnes = [accueilGauche, accueilDroite].map((c) => c.map(getRubrique));
 const breves = sections.breves ? (await getCollection('breves')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 4) : [];
 const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0] : undefined;
 ---
@@ -120,16 +119,11 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
         <a class="lien-plus" href="/rubriques">Toutes les catégories</a>
       </div>
       <div class="categories">
-        {colonnes.map((col, ci) => (
-          <div class:list={['col-cat', ci === 0 ? 'large' : 'etroite']}>
-            {col.map((r) => (
-              <article class="cat" style={`--rub:${r.couleur}`}>
-                <h3><a href={`/rubriques/${r.slug}`} class="accent">{r.nom}</a></h3>
-                <p>{r.description}</p>
-                <div class="cat-tags">{r.tags.map((t) => <a class="tag" href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}</div>
-              </article>
-            ))}
-          </div>
+        {rubriques.map((r) => (
+          <a class="cat" style={`--rub:${r.couleur}`} href={`/rubriques/${r.slug}`}>
+            <span class="cat-trait" aria-hidden="true"></span>
+            <span class="cat-nom">{r.nom}</span>
+          </a>
         ))}
       </div>
     </div>
@@ -235,16 +229,12 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
   .bloc { padding-block: 2.6rem 3rem; }
 
   /* Catégories */
-  .categories { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
-  .col-cat { display: grid; gap: 1rem; }
-  .cat { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--rub, var(--line)); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
-  .large .cat { min-height: 11.5rem; }
-  .etroite .cat:last-child { min-height: 14.5rem; }
-  .cat h3 { font-size: 1.85rem; line-height: 1; }
-  .cat h3 a { color: var(--ink); text-decoration: none; }
-  .cat h3 a:hover { color: var(--blue); }
-  .cat p { margin: 0; font-size: 0.78rem; line-height: 1.55; color: var(--muted); max-width: 46ch; }
-  .cat-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.6rem; }
+  .categories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
+  .cat { display: flex; flex-direction: column; justify-content: space-between; gap: 1.4rem; min-height: 7rem; padding: 1.2rem 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+  .cat:hover { border-color: var(--rub); transform: translateY(-2px); }
+  .cat-trait { display: block; width: 2.4rem; height: 4px; border-radius: 8px; background: var(--rub); }
+  .cat-nom { font-family: var(--serif); font-style: italic; font-size: 1.7rem; line-height: 1.1; }
+  .cat:hover .cat-nom { color: var(--blue); }
 
   /* Articles récents */
   .grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 1.4rem; }
@@ -290,7 +280,7 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
     .une { grid-template-columns: 1fr; }
     .tendance { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--line); }
     .populaire { padding-left: 0; }
-    .categories { grid-template-columns: 1fr; }
+    .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .bref { grid-template-columns: 1fr; }
   }

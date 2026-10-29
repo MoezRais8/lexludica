@@ -66,7 +66,7 @@ const { id, surBleu = false } = Astro.props;
   .ligne { display: flex; gap: 0.5rem; }
   .champ {
     flex: 1; min-width: 0; display: flex; align-items: center; gap: 0.5rem;
-    background: #e7e8e7; color: var(--muted); border-radius: 3px; padding: 0 0.7rem;
+    background: #e7e8e7; color: var(--muted); border-radius: 8px; padding: 0 0.7rem;
   }
   .champ svg { width: 1rem; height: 1rem; flex: none; }
   input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 0.82rem; padding: 0.6rem 0; color: var(--ink); outline: none; }
@@ -74,7 +74,7 @@ const { id, surBleu = false } = Astro.props;
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .note { font-size: 0.68rem; color: var(--muted); margin: 0.5rem 0 0; }
   .note a { color: inherit; }
-  .note.ok, .note.ko { font-size: 0.85rem; font-weight: 600; line-height: 1.45; padding: 0.55rem 0.7rem; border-radius: 3px; margin-top: 0.7rem; }
+  .note.ok, .note.ko { font-size: 0.85rem; font-weight: 600; line-height: 1.45; padding: 0.55rem 0.7rem; border-radius: 8px; margin-top: 0.7rem; }
   .note.ok { background: #e3f3e8; color: #1d6b3a; }
   .note.ko { background: #fdeaea; color: #9b2121; }
   .sur-bleu .champ { background: rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.75); }

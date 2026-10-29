@@ -29,7 +29,7 @@ const nb = (s: string) => articles.filter((a) => a.data.rubrique === s).length;
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
-  .cat { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--rub, var(--line)); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .cat { border-radius: 12px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--rub, var(--line)); padding: 1.4rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
   .haut { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
   h2 { font-size: 1.85rem; line-height: 1; }
   h2 a { color: var(--ink); text-decoration: none; }

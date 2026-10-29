@@ -60,7 +60,7 @@ const ordres = [...new Set(decisions.map((d) => d.data.ordre))];
 
 <style>
   .filtres { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.4rem; }
-  .filtre { font: inherit; font-size: 0.8rem; font-weight: 500; padding: 0.4rem 0.75rem; border: 1px solid var(--line); background: #ffffff; color: var(--ink); border-radius: 3px; cursor: pointer; }
+  .filtre { font: inherit; font-size: 0.8rem; font-weight: 500; padding: 0.4rem 0.75rem; border: 1px solid var(--line); background: #ffffff; color: var(--ink); border-radius: 8px; cursor: pointer; }
   .filtre span { color: var(--muted); margin-left: 0.2rem; }
   .filtre.actif { background: var(--blue); border-color: var(--blue); color: #ffffff; }
   .filtre.actif span { color: rgba(255, 255, 255, 0.75); }
@@ -68,7 +68,7 @@ const ordres = [...new Set(decisions.map((d) => d.data.ordre))];
   .decisions { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
   .decisions li { border-bottom: 1px solid var(--line); }
   .decisions a { display: grid; grid-template-columns: 7rem minmax(0, 1fr) 6rem; gap: 1.5rem; padding: 1.3rem 0.4rem; color: var(--ink); text-decoration: none; align-items: start; }
-  .decisions a:hover { background: var(--surface); }
+  .decisions a:hover { border-radius: 12px; background: var(--surface); }
   .decisions a:hover .nom { color: var(--blue); }
   .col-date { display: flex; flex-direction: column; }
   .annee { font-family: var(--serif); font-size: 2rem; line-height: 1; font-variant-numeric: tabular-nums; }

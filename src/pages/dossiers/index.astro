@@ -30,7 +30,7 @@ const dossiers = (await getCollection('dossiers')).sort((a, b) => b.data.date.ge
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 1.4rem; }
-  .dossier { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+  .dossier { border-radius: 12px; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
   .dossier:hover { border-color: var(--blue); }
   .dossier:hover .titre { color: var(--blue); }
   .corps { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.2rem 1.3rem 1.4rem; }

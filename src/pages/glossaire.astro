@@ -37,13 +37,13 @@ const lettres = [...new Set(termes.map((t) => lettre(t.data.terme)))];
 
 <style>
   .alphabet { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 1.4rem; }
-  .alphabet a { width: 2rem; height: 2rem; display: grid; place-items: center; background: var(--blue); color: #ffffff; text-decoration: none; font-weight: 500; font-size: 0.85rem; border-radius: 2px; }
+  .alphabet a { width: 2rem; height: 2rem; display: grid; place-items: center; background: var(--blue); color: #ffffff; text-decoration: none; font-weight: 500; font-size: 0.85rem; border-radius: 8px; }
   .alphabet a:hover { background: var(--yellow); color: var(--on-yellow); }
   .bloc { padding-block: 2.4rem 3rem; display: grid; gap: 2rem; }
   .groupe { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; scroll-margin-top: 5rem; }
   .lettre { font-size: 3.2rem; line-height: 1; margin: 0; color: var(--blue); }
   dl { margin: 0; display: grid; gap: 0.8rem; max-width: 50rem; }
-  .entree { background: var(--surface); border: 1px solid var(--line); padding: 1rem 1.2rem; scroll-margin-top: 5rem; }
+  .entree { border-radius: 12px; background: var(--surface); border: 1px solid var(--line); padding: 1rem 1.2rem; scroll-margin-top: 5rem; }
   .entree:target { border-color: var(--yellow); box-shadow: 0 0 0 3px var(--yellow); }
   dt { font-weight: 600; font-size: 1.02rem; }
   dd { margin: 0.4rem 0 0; }

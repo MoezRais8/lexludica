@@ -34,7 +34,7 @@ const nb = (id: string) => articles.filter((a) => a.data.auteurs.some((r) => r.i
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
-  .liste a {
+  .liste a { border-radius: 12px;
     display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: start;
     padding: 1.2rem; background: var(--surface); border: 1px solid var(--line);
     color: var(--ink); text-decoration: none; height: 100%;
@@ -42,7 +42,7 @@ const nb = (id: string) => articles.filter((a) => a.data.auteurs.some((r) => r.i
   .liste a:hover { border-color: var(--blue); }
   .pastille {
     width: 3rem; height: 3rem; display: grid; place-items: center;
-    background: var(--blue); color: #ffffff; font-weight: 600; font-size: 0.9rem; border-radius: 2px;
+    background: var(--blue); color: #ffffff; font-weight: 600; font-size: 0.9rem; border-radius: 8px;
   }
   .infos { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
   .nom { font-weight: 500; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }

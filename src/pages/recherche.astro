@@ -70,12 +70,12 @@ for (const g of sections.glossaire ? await getCollection('glossaire') : []) {
 <style>
   .recherche { margin-top: 1.4rem; max-width: 34rem; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  input { width: 100%; font: inherit; font-size: 1rem; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 3px; background: #ffffff; color: var(--ink); }
+  input { width: 100%; font: inherit; font-size: 1rem; padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 8px; background: #ffffff; color: var(--ink); }
   input:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
   .bloc { padding-block: 2rem 3rem; }
   .compte { margin: 0 0 1.2rem; font-size: 0.85rem; color: var(--muted); }
   .resultats { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; max-width: 46rem; }
-  .resultats :global(a) { display: grid; gap: 0.35rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); }
+  .resultats :global(a) { border-radius: 12px; display: grid; gap: 0.35rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: var(--ink); }
   .resultats :global(a:hover) { border-color: var(--blue); }
   .resultats :global(.r-meta) { display: flex; gap: 0.6rem; align-items: center; }
   .resultats :global(.r-titre) { font-weight: 500; }

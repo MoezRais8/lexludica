@@ -50,8 +50,21 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
         <span class="px b" style="left:56%;top:3.6rem;background:#065bbb"></span>
         <span class="px j" style="left:67%;top:1.6rem"></span>
         <span class="px b" style="left:74%;top:0;background:#0f64c4"></span>
-        <span class="px j" style="left:80%;top:0"></span>
-        <span class="px j" style="left:calc(80% + 2.3rem);top:2.3rem"></span>
+        <!-- Raccord à droite : le bloc jaune du bandeau descend vers celui de la section suivante -->
+        <span class="px j" style="right:0.0rem;top:0.0rem"></span>
+        <span class="px j" style="right:2.3rem;top:0.0rem"></span>
+        <span class="px j" style="right:4.6rem;top:0.0rem"></span>
+        <span class="px j" style="right:6.9rem;top:0.0rem"></span>
+        <span class="px j" style="right:9.2rem;top:0.0rem"></span>
+        <span class="px j" style="right:13.8rem;top:0.0rem"></span>
+        <span class="px j" style="right:9.2rem;top:2.3rem"></span>
+        <span class="px b" style="right:13.8rem;top:2.3rem;background:#1569cb"></span>
+        <span class="px j" style="right:11.5rem;top:4.6rem"></span>
+        <!-- Pixels isolés plus bas, dans le blanc -->
+        <span class="px j" style="left:1.5%;top:8.5rem"></span>
+        <span class="px b" style="left:46%;top:7.5rem;background:#055ab9"></span>
+        <span class="px j" style="left:66%;top:9.5rem"></span>
+        <span class="px b" style="left:78%;top:8rem;background:#0f64c4"></span>
       </div>
     </div>
   </section>
@@ -254,8 +267,8 @@ const dossier = sections.dossiers ? (await getCollection('dossiers')).sort((a, b
   .dossier-une:hover { filter: brightness(0.97); }
 
   /* Présentation */
-  .pres-bloc { position: relative; padding-block: 2rem 2rem; }
-  .pixels-transition { position: absolute; left: 0; right: 0; bottom: -4.9rem; height: 6.9rem; pointer-events: none; z-index: 2; }
+  .pres-bloc { position: relative; padding-block: 2rem 2.3rem; }
+  .pixels-transition { position: absolute; left: 0; right: 0; bottom: -4.6rem; height: 6.9rem; pointer-events: none; z-index: 2; }
   .pixels-transition .px { position: absolute; width: 2.3rem; height: 2.3rem; }
   .pixels-transition .b { background: #0055b4; }
   .pixels-transition .j { background: var(--yellow); }

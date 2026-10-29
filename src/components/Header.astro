@@ -11,11 +11,27 @@ const cle = (d: Date) => `${d.getUTCFullYear()}-${d.getUTCMonth()}`;
 const maintenant = new Date();
 const moisRef = tous.some((a) => cle(a.data.date) === cle(maintenant)) ? cle(maintenant) : (tous[0] ? cle(tous[0].data.date) : '');
 const duMois = tous.filter((a) => cle(a.data.date) === moisRef).slice(0, 6);
+const onglets = [
+  { titre: 'Rubriques', liens: rubriques.map((r) => ({ nom: r.nom, url: `/rubriques/${r.slug}` })) },
+  { titre: 'Articles du mois', large: true, liens: [...duMois.map((a) => ({ nom: a.data.titre, url: `/articles/${a.id}` })), { nom: 'Tous les articles ›', url: '/articles', plus: true }] },
+  { titre: 'Qui sommes-nous ?', liens: [{ nom: 'Notre histoire', url: '/a-propos' }, { nom: 'Les contributeurs', url: '/contributeurs' }] },
+  { titre: 'Nous contacter', liens: [{ nom: 'Écrire à la rédaction', url: '/contact' }, { nom: 'Proposer un article', url: '/proposer' }] },
+];
 ---
 <header class="entete">
   <div class="cadre barre">
     <a class="marque" href="/" aria-label="Lex Ludica, accueil"><img class="marque-logo" src="/logo.png" alt="" width="40" height="40" /><Logo couleur="#ffffff" taille="1.45rem" /></a>
     <div class="droite">
+      <nav class="onglets" aria-label="Navigation principale">
+        {onglets.map((o) => (
+          <details class="onglet">
+            <summary>{o.titre}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+            <div class:list={['deroulant', { large: o.large }]}>
+              {o.liens.map((l) => <a class:list={{ plus: l.plus }} href={l.url}>{l.nom}</a>)}
+            </div>
+          </details>
+        ))}
+      </nav>
       <a class="icone recherche" href="/recherche" aria-label="Rechercher un article">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </a>
@@ -114,5 +130,45 @@ const duMois = tous.filter((a) => cle(a.data.date) === moisRef).slice(0, 6);
   .col-mois > a:not(.tous) { font-size: 0.86rem; line-height: 1.35; padding-block: 0.15rem; }
   .col > a.tous { margin-top: 0.4rem; font-size: 0.8rem; font-weight: 600; color: var(--blue); }
   .titre-col.suite { margin-top: 1rem; }
+  /* Onglets affichés directement dans la barre (grand écran) */
+  .onglets { display: flex; align-items: center; gap: 0.15rem; margin-right: 0.4rem; }
+  .onglet { position: relative; }
+  .onglet summary {
+    list-style: none; display: flex; align-items: center; gap: 0.3rem; cursor: pointer;
+    font-size: 0.86rem; font-weight: 600; color: #ffffff; padding: 0.45rem 0.7rem; border-radius: 8px; white-space: nowrap;
+  }
+  .onglet summary::-webkit-details-marker { display: none; }
+  .onglet summary svg { width: 0.7rem; height: 0.7rem; transition: transform 0.15s; }
+  .onglet[open] summary svg { transform: rotate(180deg); }
+  .onglet summary:hover, .onglet[open] summary { background: rgba(255, 255, 255, 0.16); }
+  .deroulant {
+    position: absolute; left: 0; top: calc(100% + 0.55rem); min-width: 13rem;
+    background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 0.5rem;
+    box-shadow: 0 12px 32px rgba(0, 30, 70, 0.14); display: grid;
+  }
+  .deroulant.large { width: 22rem; }
+  .deroulant a { color: var(--ink); text-decoration: none; font-size: 0.9rem; line-height: 1.35; padding: 0.45rem 0.65rem; border-radius: 8px; }
+  .deroulant a:hover { background: var(--bg); color: var(--blue); }
+  .deroulant a.plus { color: var(--blue); font-weight: 600; font-size: 0.82rem; }
+  .onglet:last-child .deroulant { left: auto; right: 0; }
+  .menu { display: none; }
+  @media (max-width: 1060px) {
+    .onglets { display: none; }
+    .menu { display: block; }
+  }
   @media (max-width: 640px) { .panneau { grid-template-columns: 1fr; max-height: 75vh; overflow-y: auto; } }
 </style>
+
+<script>
+  // Un seul onglet ouvert à la fois ; fermeture au clic à l'extérieur ou avec Échap
+  const onglets = [...document.querySelectorAll<HTMLDetailsElement>('.entete details')];
+  onglets.forEach((d) => d.addEventListener('toggle', () => {
+    if (d.open) onglets.forEach((o) => { if (o !== d) o.open = false; });
+  }));
+  document.addEventListener('click', (e) => {
+    onglets.forEach((d) => { if (d.open && !d.contains(e.target as Node)) d.open = false; });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') onglets.forEach((d) => (d.open = false));
+  });
+</script>

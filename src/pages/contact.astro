@@ -9,12 +9,24 @@ import TitrePage from '../components/TitrePage.astro';
       <div class="cartes">
         <div class="carte">
           <p class="t">Rédaction</p>
-          <p class="adresse">contact@lexludica.com</p>
+          <div class="ligne-adresse">
+            <a class="adresse" href="mailto:contact@lexludica.com">contact@lexludica.com</a>
+            <button type="button" class="copier-adresse" data-adresse="contact@lexludica.com">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+              <span>Copier</span>
+            </button>
+          </div>
           <p class="d">Propositions d'articles, questions sur un contenu publié.</p>
         </div>
         <div class="carte">
           <p class="t">Droit de réponse</p>
-          <p class="adresse">contact@lexludica.com</p>
+          <div class="ligne-adresse">
+            <a class="adresse" href="mailto:contact@lexludica.com">contact@lexludica.com</a>
+            <button type="button" class="copier-adresse" data-adresse="contact@lexludica.com">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+              <span>Copier</span>
+            </button>
+          </div>
           <p class="d">À l'attention du directeur de la publication, en précisant l'article concerné.</p>
         </div>
         <div class="carte jaune">
@@ -27,6 +39,22 @@ import TitrePage from '../components/TitrePage.astro';
   </section>
 </Base>
 
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copier-adresse').forEach((b) => {
+    const libelle = b.querySelector('span')!;
+    b.addEventListener('click', async () => {
+      const adresse = b.dataset.adresse ?? '';
+      try { await navigator.clipboard.writeText(adresse); }
+      catch {
+        const t = document.createElement('textarea'); t.value = adresse; document.body.appendChild(t); t.select();
+        document.execCommand('copy'); t.remove();
+      }
+      libelle.textContent = 'Copiée !'; b.classList.add('ok');
+      setTimeout(() => { libelle.textContent = 'Copier'; b.classList.remove('ok'); }, 2000);
+    });
+  });
+</script>
+
 <style>
   .bloc { padding-block: 2.6rem 3rem; }
   .cartes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1rem; }
@@ -34,7 +62,13 @@ import TitrePage from '../components/TitrePage.astro';
   .carte.jaune { background: var(--yellow); border-color: var(--yellow); color: var(--on-yellow); }
   .carte p { margin: 0; }
   .t { font-family: var(--serif); font-style: italic; font-size: 1.6rem; line-height: 1.1; }
-  .adresse { font-weight: 500; user-select: all; color: var(--blue); }
+  .ligne-adresse { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .adresse { font-weight: 600; user-select: all; color: var(--blue); text-decoration: none; }
+  .adresse:hover { text-decoration: underline; }
+  .copier-adresse { display: inline-flex; align-items: center; gap: 0.35rem; font: inherit; font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.65rem; border: 1px solid var(--line); border-radius: 8px; background: #ffffff; color: var(--ink); cursor: pointer; }
+  .copier-adresse svg { width: 0.95rem; height: 0.95rem; }
+  .copier-adresse:hover { border-color: var(--blue); color: var(--blue); }
+  .copier-adresse.ok { background: #e3f3e8; border-color: #1d6b3a; color: #1d6b3a; }
   .d { font-size: 0.86rem; color: var(--ink-soft); }
   .jaune .d { color: var(--on-yellow); }
 </style>

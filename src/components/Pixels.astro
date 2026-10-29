@@ -12,6 +12,6 @@ const cols = lignes[0].length;
 const rows = lignes.length;
 const carres = lignes.flatMap((l, y) => [...l].map((c, x) => (c === '1' ? { x, y } : null)).filter(Boolean)) as { x: number; y: number }[];
 ---
-<svg class={`pixels ${classe}`} viewBox={`0 0 ${cols} ${rows}`} preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
-  {carres.map((c) => <rect x={c.x} y={c.y} width="1.01" height="1.01" fill={couleur} />)}
+<svg class={`pixels ${classe}`} viewBox={`0 0 ${cols} ${rows}`} preserveAspectRatio="xMaxYMax meet" shape-rendering="crispEdges" aria-hidden="true">
+  {carres.map((c) => <rect x={c.x} y={c.y} width="1.04" height="1.04" fill={couleur} />)}
 </svg>

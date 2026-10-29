@@ -20,7 +20,7 @@ const Titre = titreNiveau;
   </p>
   <Titre class="titre"><a href={`/articles/${article.id}`}>{article.data.titre}</a></Titre>
   <p class="auteur">
-    <span class="pastille" aria-hidden="true">{auteurs[0]?.data.initiales}</span>
+    <span class="pastille" aria-hidden="true">{auteurs[0]?.data.photo ? <img src={auteurs[0]?.data.photo} alt="" loading="lazy" /> : auteurs[0]?.data.initiales}</span>
     {auteurs.map((a, i) => <>{i > 0 && ', '}<a href={`/contributeurs/${a.id}`}>{a.data.nom}</a></>)}
   </p>
 </article>

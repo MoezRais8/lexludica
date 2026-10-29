@@ -14,7 +14,7 @@ const membres = (await getCollection('auteurs', ({ data }) => data.comite)).sort
         {membres.map((m) => (
           <li>
             <a href={`/contributeurs/${m.id}`}>
-              <span class="pastille" aria-hidden="true">{m.data.initiales}</span>
+              <span class="pastille" aria-hidden="true">{m.data.photo ? <img src={m.data.photo} alt="" loading="lazy" /> : m.data.initiales}</span>
               <span>
                 <span class="nom">{m.data.nom} {m.data.fictif && <span class="demo-flag">démo</span>}</span>
                 <span class="role">{m.data.role}</span>

@@ -76,7 +76,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
             <div class="fiche-auteurs">
               {auteurs.map((a) => (
                 <a class="fiche-auteur" href={`/contributeurs/${a.id}`}>
-                  <span class="pastille" aria-hidden="true">{a.data.initiales}</span>
+                  <span class="pastille" aria-hidden="true">{a.data.photo ? <img src={a.data.photo} alt="" loading="lazy" /> : a.data.initiales}</span>
                   <span><span class="fa-nom">{a.data.nom}</span><span class="fa-role">{a.data.role}</span></span>
                 </a>
               ))}
@@ -117,7 +117,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
             </p>
           )}
           <p class="signature">
-            <span class="pastille" aria-hidden="true">{auteurs[0]?.data.initiales}</span>
+            <span class="pastille" aria-hidden="true">{auteurs[0]?.data.photo ? <img src={auteurs[0]?.data.photo} alt="" loading="lazy" /> : auteurs[0]?.data.initiales}</span>
             <span>{t.par} {auteurs.map((a, i) => <>{i > 0 && ` ${t.et} `}<a href={`/contributeurs/${a.id}`}>{a.data.nom}</a></>)}</span>
           </p>
         </div>
@@ -185,7 +185,7 @@ noms.forEach((n) => coins.append('rft.au', `${n.nom}, ${n.prenom}`));
           <section class="auteurs" aria-label="Auteurs">
             {auteurs.map((a) => (
               <a class="auteur" href={`/contributeurs/${a.id}`}>
-                <span class="pastille grand" aria-hidden="true">{a.data.initiales}</span>
+                <span class="pastille grand" aria-hidden="true">{a.data.photo ? <img src={a.data.photo} alt="" loading="lazy" /> : a.data.initiales}</span>
                 <span>
                   <span class="a-nom">{a.data.nom}</span>
                   <span class="a-role">{a.data.role}</span>

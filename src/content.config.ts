@@ -37,6 +37,7 @@ const auteurs = defineCollection({
     disciplines: z.array(z.string()).default([]),
     initiales: z.string(),
     linkedin: z.string().optional(),
+    photo: z.string().optional(),               // chemin d'une photo carrée dans /public
     comite: z.boolean().default(false),         // membre du comité éditorial
     ordre: z.number().default(99),
     fictif: z.boolean().default(false),

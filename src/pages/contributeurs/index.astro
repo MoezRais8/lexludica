@@ -16,7 +16,7 @@ const nb = (id: string) => articles.filter((a) => a.data.auteurs.some((r) => r.i
         {auteurs.map((a) => (
           <li>
             <a href={`/contributeurs/${a.id}`}>
-              <span class="pastille" aria-hidden="true">{a.data.initiales}</span>
+              <span class="pastille" aria-hidden="true">{a.data.photo ? <img src={a.data.photo} alt="" loading="lazy" /> : a.data.initiales}</span>
               <span class="infos">
                 <span class="nom">{a.data.nom} {a.data.fictif && <span class="demo-flag">démo</span>}</span>
                 <span class="role">{a.data.role}</span>

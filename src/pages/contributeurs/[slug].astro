@@ -15,7 +15,7 @@ const articles = (await articlesPublies()).filter((a) => a.data.auteurs.some((r)
 <Base titre={auteur.data.nom} description={`${auteur.data.nom}, ${auteur.data.role}. Ses analyses dans Lex Ludica.`}>
   <section class="bande tete">
     <div class="cadre interieur">
-      <span class="pastille" aria-hidden="true">{auteur.data.initiales}</span>
+      <span class="pastille" aria-hidden="true">{auteur.data.photo ? <img src={auteur.data.photo} alt="" loading="lazy" /> : auteur.data.initiales}</span>
       <div class="infos">
         <p class="surtitre">Auteur {auteur.data.fictif && <span class="demo-flag">démo</span>}</p>
         <h1>{auteur.data.nom}</h1>

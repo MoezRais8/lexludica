@@ -3,6 +3,7 @@ nom: Moez RAIS
 role: Co-fondateur, directeur de la publication et juriste en propriété intellectuelle et en droit du numérique
 disciplines: [Droit, Propriété intellectuelle, Numérique]
 initiales: MR
+linkedin: https://www.linkedin.com/in/moez-rais/
 ordre: 1
 comite: true
 ---

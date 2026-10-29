@@ -1,18 +1,22 @@
 ---
 import Logo from './Logo.astro';
-import { rubriques, tagsEnTete } from '../data/rubriques';
-import { slugTag } from '../lib/utils';
+import { rubriques } from '../data/rubriques';
+import { articlesPublies } from '../lib/utils';
 import { sections } from '../data/site';
 interface Props { langue?: 'fr' | 'en' }
 const { langue = 'fr' } = Astro.props;
+// Articles du mois : ceux du mois en cours, sinon ceux du dernier mois où un article a été publié
+const tous = await articlesPublies('fr');
+const cle = (d: Date) => `${d.getUTCFullYear()}-${d.getUTCMonth()}`;
+const maintenant = new Date();
+const moisRef = tous.some((a) => cle(a.data.date) === cle(maintenant)) ? cle(maintenant) : (tous[0] ? cle(tous[0].data.date) : '');
+const duMois = tous.filter((a) => cle(a.data.date) === moisRef).slice(0, 6);
+const nomMois = duMois[0] ? duMois[0].data.date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' }) : '';
 ---
 <header class="entete">
   <div class="cadre barre">
     <a class="marque" href="/" aria-label="Lex Ludica, accueil"><img class="marque-logo" src="/logo.png" alt="" width="40" height="40" /><Logo couleur="#ffffff" taille="1.45rem" /></a>
     <div class="droite">
-      <nav class="hashtags" aria-label="Sujets à la une">
-        {tagsEnTete.map((t) => <a href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}
-      </nav>
       <a class="icone recherche" href="/recherche" aria-label="Rechercher un article">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </a>
@@ -41,27 +45,14 @@ const { langue = 'fr' } = Astro.props;
             <p class="titre-col">Rubriques</p>
             {rubriques.map((r) => <a href={`/rubriques/${r.slug}`}>{r.nom}</a>)}
           </div>
-          <div class="col">
-            <p class="titre-col">Lire</p>
-            <a href="/articles">Tous les articles</a>
-            {sections.dossiers && <a href="/dossiers">Dossiers</a>}
-            {sections.breves && <a href="/breves">Brèves</a>}
-            <a href="/calendrier">Calendrier</a>
-            {sections.medias && <a href="/medias">Médias</a>}
-            {sections.anglais && <a href="/en">English articles</a>}
-            {(sections.jurisprudence || sections.glossaire) && <p class="titre-col sujets">Outils</p>}
-            {sections.jurisprudence && <a href="/jurisprudence">Jurisprudence</a>}
-            {sections.glossaire && <a href="/glossaire">Glossaire</a>}
+          <div class="col col-mois">
+            <p class="titre-col">Articles du mois{nomMois && <span class="mois"> · {nomMois}</span>}</p>
+            {duMois.map((a) => <a href={`/articles/${a.id}`}>{a.data.titre}</a>)}
+            <a class="tous" href="/articles">Tous les articles ›</a>
           </div>
           <div class="col">
-            <p class="titre-col">La revue</p>
-            <a href="/a-propos">Notre histoire</a>
-            <a href="/contributeurs">Auteurs</a>
-            {sections.comite && <a href="/comite-editorial">Comité éditorial</a>}
-            <a href="/proposer">Proposer un article</a>
-            <a href="/contact">Contact</a>
-            <p class="titre-col sujets">Sujets</p>
-            <div class="tags-menu">{tagsEnTete.map((t) => <a class="tag" href={`/etiquettes/${slugTag(t)}`}>#{t}</a>)}</div>
+            <a class="lien-titre" href="/a-propos">Qui sommes-nous ?</a>
+            <a class="lien-titre" href="/contact">Nous contacter</a>
           </div>
         </div>
       </details>
@@ -81,12 +72,6 @@ const { langue = 'fr' } = Astro.props;
   .marque { text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
   .marque-logo { width: 2.5rem; height: 2.5rem; flex: none; }
   .droite { display: flex; align-items: center; gap: 0.5rem; }
-  .hashtags { display: flex; gap: 0.4rem; }
-  .hashtags a {
-    font-size: 0.72rem; font-weight: 500; color: #ffffff; text-decoration: none;
-    background: rgba(255, 255, 255, 0.16); padding: 0.35rem 0.6rem; border-radius: 8px; white-space: nowrap;
-  }
-  .hashtags a:hover { background: rgba(255, 255, 255, 0.28); }
   .icone, .menu summary {
     width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 8px; cursor: pointer;
   }
@@ -117,15 +102,15 @@ const { langue = 'fr' } = Astro.props;
     background: #ffffff; color: var(--ink);
     border: 1px solid var(--line); border-radius: 8px;
     box-shadow: 0 12px 32px rgba(0, 30, 70, 0.14);
-    padding: 1.25rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    padding: 1.25rem; display: grid; grid-template-columns: 0.9fr 1.5fr 0.9fr; gap: 1.5rem;
   }
   .col { display: flex; flex-direction: column; gap: 0.35rem; }
   .col > a { color: var(--ink); text-decoration: none; font-size: 0.92rem; }
   .col > a:hover { color: var(--blue); }
   .titre-col { margin: 0 0 0.3rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .sujets { margin-top: 0.8rem; }
-  .tags-menu { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  @media (max-width: 860px) { .hashtags { display: none; } }
-  @media (max-width: 640px) { .panneau { grid-template-columns: 1fr 1fr; max-height: 75vh; overflow-y: auto; } }
-  @media (max-width: 400px) { .panneau { grid-template-columns: 1fr; } }
+  .mois { text-transform: none; letter-spacing: 0; font-weight: 500; }
+  .col-mois > a:not(.tous) { font-size: 0.86rem; line-height: 1.35; padding-block: 0.15rem; }
+  .col > a.tous { margin-top: 0.4rem; font-size: 0.8rem; font-weight: 600; color: var(--blue); }
+  .col > a.lien-titre { font-size: 0.98rem; font-weight: 600; }
+  @media (max-width: 640px) { .panneau { grid-template-columns: 1fr; max-height: 75vh; overflow-y: auto; } }
 </style>

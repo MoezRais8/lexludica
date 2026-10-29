@@ -11,7 +11,6 @@ const cle = (d: Date) => `${d.getUTCFullYear()}-${d.getUTCMonth()}`;
 const maintenant = new Date();
 const moisRef = tous.some((a) => cle(a.data.date) === cle(maintenant)) ? cle(maintenant) : (tous[0] ? cle(tous[0].data.date) : '');
 const duMois = tous.filter((a) => cle(a.data.date) === moisRef).slice(0, 6);
-const nomMois = duMois[0] ? duMois[0].data.date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' }) : '';
 ---
 <header class="entete">
   <div class="cadre barre">
@@ -46,13 +45,17 @@ const nomMois = duMois[0] ? duMois[0].data.date.toLocaleDateString('fr-FR', { mo
             {rubriques.map((r) => <a href={`/rubriques/${r.slug}`}>{r.nom}</a>)}
           </div>
           <div class="col col-mois">
-            <p class="titre-col">Articles du mois{nomMois && <span class="mois"> · {nomMois}</span>}</p>
+            <p class="titre-col">Articles du mois</p>
             {duMois.map((a) => <a href={`/articles/${a.id}`}>{a.data.titre}</a>)}
             <a class="tous" href="/articles">Tous les articles ›</a>
           </div>
           <div class="col">
-            <a class="lien-titre" href="/a-propos">Qui sommes-nous ?</a>
-            <a class="lien-titre" href="/contact">Nous contacter</a>
+            <p class="titre-col">Qui sommes-nous ?</p>
+            <a href="/a-propos">Notre histoire</a>
+            <a href="/contributeurs">Les contributeurs</a>
+            <p class="titre-col suite">Nous contacter</p>
+            <a href="/contact">Écrire à la rédaction</a>
+            <a href="/proposer">Proposer un article</a>
           </div>
         </div>
       </details>
@@ -108,9 +111,8 @@ const nomMois = duMois[0] ? duMois[0].data.date.toLocaleDateString('fr-FR', { mo
   .col > a { color: var(--ink); text-decoration: none; font-size: 0.92rem; }
   .col > a:hover { color: var(--blue); }
   .titre-col { margin: 0 0 0.3rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .mois { text-transform: none; letter-spacing: 0; font-weight: 500; }
   .col-mois > a:not(.tous) { font-size: 0.86rem; line-height: 1.35; padding-block: 0.15rem; }
   .col > a.tous { margin-top: 0.4rem; font-size: 0.8rem; font-weight: 600; color: var(--blue); }
-  .col > a.lien-titre { font-size: 0.98rem; font-weight: 600; }
+  .titre-col.suite { margin-top: 1rem; }
   @media (max-width: 640px) { .panneau { grid-template-columns: 1fr; max-height: 75vh; overflow-y: auto; } }
 </style>

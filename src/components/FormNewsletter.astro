@@ -49,7 +49,7 @@ const { id, surBleu = false } = Astro.props;
         await fetch(BREVO_ACTION, { method: 'POST', mode: 'no-cors', body: donnees });
         form.reset();
         note.classList.add('ok');
-        note.textContent = 'Presque fini ! Un e-mail de confirmation vient de vous être envoyé : cliquez sur le lien pour valider votre inscription.';
+        note.textContent = "C'est fait ! Vous êtes inscrit à la newsletter de Lex Ludica. Un e-mail de bienvenue vient de vous être envoyé.";
       } catch {
         note.classList.add('ko');
         note.textContent = "Oups, l'inscription n'a pas pu aboutir. Merci de réessayer dans quelques instants.";

@@ -2,11 +2,19 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import TitrePage from '../../components/TitrePage.astro';
-import { articlesPublies } from '../../lib/utils';
+import { articlesPublies, decouperNom } from '../../lib/utils';
 
-const auteurs = (await getCollection('auteurs')).sort((a, b) => a.data.ordre - b.data.ordre);
+// Classement : les co-fondateurs d'abord (Moez, Maleine, Aaron), puis par nombre d'articles publiés,
+// puis par ordre alphabétique du nom de famille (y compris pour ceux qui n'ont encore rien publié)
+const fondateurs = ['moez-rais', 'maleine-oumar-niang', 'aaron-oliel'];
 const articles = await articlesPublies();
 const nb = (id: string) => articles.filter((a) => a.data.auteurs.some((r) => r.id === id)).length;
+const nomFamille = (n: string) => decouperNom(n).nom.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const auteurs = (await getCollection('auteurs')).sort((a, b) => {
+  const fa = fondateurs.indexOf(a.id), fb = fondateurs.indexOf(b.id);
+  if (fa !== -1 || fb !== -1) return (fa === -1 ? 99 : fa) - (fb === -1 ? 99 : fb);
+  return nb(b.id) - nb(a.id) || nomFamille(a.data.nom).localeCompare(nomFamille(b.data.nom), 'fr');
+});
 ---
 <Base titre="Notre équipe" description="Juristes, avocats, étudiants, développeurs et créateurs : les auteurs qui écrivent dans Lex Ludica.">
   <TitrePage titre="Notre" accent="équipe" sous="Juristes, avocats, étudiants, développeurs et créateurs : les auteurs qui font vivre Lex Ludica." />

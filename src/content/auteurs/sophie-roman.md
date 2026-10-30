@@ -4,6 +4,7 @@ role: Élève-avocate en propriété intellectuelle et numérique, jeux vidéo e
 disciplines: [Droit]
 initiales: SR
 linkedin: https://www.linkedin.com/in/sophie-roman-a001452a1/
+photo: /images/auteurs/sophie-roman.jpg
 ordre: 15
 ---
 Élève-avocate en propriété intellectuelle et droit du numérique, spécialisée dans les jeux vidéo et l'esport.

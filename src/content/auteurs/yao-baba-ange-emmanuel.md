@@ -4,6 +4,7 @@ role: Fondateur de Kweni Studio
 disciplines: [Économie]
 initiales: YE
 linkedin: https://www.linkedin.com/in/yao-baba-ange-emmanuel/
+photo: /images/auteurs/yao-baba-ange-emmanuel.jpg
 ordre: 9
 ---
 Fondateur de [Kweni Studio](https://kwenistudio.vercel.app/), un studio basé en Côte d'Ivoire et spécialisé dans le développement de jeux vidéo et l'architecture de solutions en intelligence artificielle. Le studio conçoit des expériences interactives, des systèmes intelligents et des produits numériques pour des projets locaux et internationaux.

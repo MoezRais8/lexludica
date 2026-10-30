@@ -6,4 +6,4 @@ initiales: YE
 linkedin: https://www.linkedin.com/in/yao-baba-ange-emmanuel/
 ordre: 9
 ---
-Fondateur du studio de jeux vidéo Kweni Studio.
+Fondateur du studio de jeux vidéo [Kweni Studio](https://www.linkedin.com/company/kweni-studio/).

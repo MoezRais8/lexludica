@@ -1,7 +1,7 @@
 ---
 titre: "Mécaniques d'engagement et monétisation prédatrice à l'heure du Digital Fairness Act"
 chapo: "Loot boxes, battle pass, séries de connexion : la Commission européenne prépare un Digital Fairness Act contre les pratiques commerciales déloyales du numérique. Sans attendre, la réforme du PEGI classe déjà les jeux selon leurs mécaniques de monétisation. Mais l'exemple belge montre les limites de la régulation."
-date: 2026-09-02
+date: 2026-09-03
 rubrique: droit
 auteurs: [maxime-kubiak]
 image: /images/monetisation-predatrice-digital-fairness-act.jpg
